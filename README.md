@@ -1,6 +1,16 @@
 
 <div align="center">
-  <h1>sb-lab</h1>
-<h2>FRONTEND</h2>
-<h2>BACKEND</h2>
+  <h1>SB-LAB</h1>
+  </br>
+<h2>Frontend</h2>
+<p>
+  In progress...
+</br></br>
+  <a href="blank">dev...</a></p>
+</br>
+<h2>Backend</h2>
+<p>  
+  In progress...
+</br></br>
+  <a href="blank">dev...</a></p>  
 </div>
