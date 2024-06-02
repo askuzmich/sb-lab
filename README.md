@@ -6,11 +6,11 @@
 <p>
   In progress...
 </br></br>
-  <a href="blank">dev...</a></p>
+  <a href="https://github.com/askuzmich/sb-lab/tree/dev-front">dev...</a></p>
 </br>
 <h2>Backend</h2>
 <p>  
   In progress...
 </br></br>
-  <a href="blank">dev...</a></p>  
+  <a href="https://github.com/askuzmich/sb-lab/tree/dev-back">dev...</a></p>  
 </div>
