@@ -1,0 +1,31 @@
+:root {
+  --font-family-main: "Helvetica";
+
+  --font-size-m: 16px;
+  --font-line-m: 24px;
+  --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+
+  --font-size-l: 24px;
+  --font-line-l: 32px;
+  --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+}
+
+.btn {
+  --opacity: 1;
+  background-color: green;
+  padding: 10px 40px;
+  color: white;
+  border-radius: 6px;
+  transition: opacity 0.3s;
+  opacity: var(--opacity);
+  border: 0;
+  cursor: pointer;
+
+  &:hover {
+    --opacity: 0.7;
+  }
+
+  &:active {
+    --opacity: 0.9;
+  }
+}
