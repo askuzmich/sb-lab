@@ -2,11 +2,10 @@ import { Suspense } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./styles/index.scss";
 
-import { MainPageAsync } from "../pages/MainPage/MainPage.async";
-
-import { AuthPageAsync } from "../pages/AuthPage/AuthPage.async";
 import { useTheme } from "./providers/ThemeProvider";
 import { AboutPage } from "pages/AboutPage";
+import { AuthPage } from "pages/AuthPage";
+import { MainPage } from "pages/MainPage";
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
@@ -37,8 +36,8 @@ const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path={"/about"} element={<AboutPage />} />
-          <Route path={"/"} element={<MainPageAsync />} />
-          <Route path={"/auth"} element={<AuthPageAsync />} />
+          <Route path={"/"} element={<MainPage />} />
+          <Route path={"/auth"} element={<AuthPage />} />
         </Routes>
       </Suspense>
     </div>
