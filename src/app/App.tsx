@@ -6,12 +6,13 @@ import { useTheme } from "./providers/ThemeProvider";
 import { AboutPage } from "pages/AboutPage";
 import { AuthPage } from "pages/AuthPage";
 import { MainPage } from "pages/MainPage";
+import { classes } from "shared/lib/classNames/classes";
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className={`app ${theme}`}>
+    <div className={classes("app", {}, [theme])}>
       <button className="btn" onClick={toggleTheme}>
         Theme
       </button>
