@@ -1,5 +1,3 @@
-import { Key } from "@mui/icons-material";
-
 type Mods = Record<string, string | boolean>;
 
 export const classes = (mainClass:string, mods:Mods, additional:string[]):string => {
