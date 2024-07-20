@@ -10,6 +10,8 @@ Shared </br>
 
 ## fc-snippet
 
+vscode -> code -> settings -> snippets
+
 ```
 	"Typescript React Function Component": {
 		"prefix": "fc",
