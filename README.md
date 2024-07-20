@@ -3,10 +3,10 @@
 App </br>
 Process </br>
 Pages </br>
-Widgets </br>
+Widgets (Navbar)</br>
 Features </br>
 Entities </br>
-Shared </br>
+Shared (AppLink)</br>
 
 ## fc-snippet
 
