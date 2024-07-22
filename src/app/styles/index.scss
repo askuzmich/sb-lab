@@ -39,24 +39,3 @@ code {
   color: var(--link-color);
   text-decoration: none;
 }
-
-.btn {
-  --opacity: 1;
-  background-color: green;
-  padding: 10px 40px;
-  color: white;
-  font-weight: bold;
-  border-radius: 6px;
-  transition: opacity 0.3s;
-  opacity: var(--opacity);
-  border: 0;
-  cursor: pointer;
-
-  &:hover {
-    --opacity: 0.7;
-  }
-
-  &:active {
-    --opacity: 0.9;
-  }
-}

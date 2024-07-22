@@ -1,0 +1,30 @@
+.Button {
+  transition: opacity 0.3s;
+  opacity: var(--opacity);
+  border: 0;
+
+  &:hover {
+    --opacity: 0.7;
+  }
+
+  &:active {
+    --opacity: 0.9;
+  }
+  cursor: pointer;
+}
+
+.clear {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.green {
+  background-color: green;
+  padding: 10px 40px;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+}
