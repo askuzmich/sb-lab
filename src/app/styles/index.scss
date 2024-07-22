@@ -21,21 +21,24 @@ code {
   font: var(--font-m);
 
   background: var(--bg-color);
-
   color: var(--primary-color);
-
   min-height: 100vh;
-
   text-align: center;
-
   display: block;
-
   position: relative;
-
   padding-top: 10px;
 }
 
 .app-link {
   color: var(--link-color);
   text-decoration: none;
+}
+
+.content-page {
+  display: flex;
+}
+
+.page-wrapper {
+  flex-grow: 1;
+  padding: 20px;
 }

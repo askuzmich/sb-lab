@@ -1,0 +1,28 @@
+.Sidebar {
+  position: relative;
+  height: 300px;
+  width: var(--sidebar-width); // 300px;
+
+  margin: 12px auto;
+  padding: 20px;
+
+  box-shadow: 0px 0px 15px 1px rgba(6, 6, 6, 0.1);
+
+  border-radius: 12px;
+  background: #ffffff20;
+  backdrop-filter: blur(16px) saturate(120%);
+  transition: width 0.5s;
+}
+
+.collapsed {
+  width: var(--sidebar-width-collapsed); //80px;
+}
+
+.sidebarContent {
+  transition: opacity 0.1s;
+}
+
+.clear {
+  opacity: 0;
+  display: none;
+}
