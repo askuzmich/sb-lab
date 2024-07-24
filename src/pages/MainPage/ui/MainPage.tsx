@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 const MainPage = () => {
   const { theme } = useTheme();
 
-  const [t] = useTranslation();
+  const [t] = useTranslation("main");
 
   return (
     <div>

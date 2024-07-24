@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const AuthPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("auth");
 
   return (
     <div>

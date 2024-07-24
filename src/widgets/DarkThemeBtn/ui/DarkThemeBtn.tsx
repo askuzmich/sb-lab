@@ -2,6 +2,7 @@ import { classes } from "shared/lib/classNames/classes";
 import cls from "./DarkThemeBtn.module.scss";
 import { useTheme } from "app/providers/ThemeProvider";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { useTranslation } from "react-i18next";
 
 interface DarkThemeBtnProps {
   className?: string;
@@ -10,13 +11,15 @@ interface DarkThemeBtnProps {
 export const DarkThemeBtn = ({ className }: DarkThemeBtnProps) => {
   const { theme, toggleTheme } = useTheme();
 
+  const { t } = useTranslation();
+
   return (
     <Button
       theme={ButtonTheme.GREEN}
       className={classes(cls.DarkThemeBtn, {}, [className])}
       onClick={toggleTheme}
     >
-      Theme
+      {t("тема")}
     </Button>
   );
 };
