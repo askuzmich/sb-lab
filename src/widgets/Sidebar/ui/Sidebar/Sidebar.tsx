@@ -1,7 +1,7 @@
 import { classes } from "shared/lib/classNames/classes";
 import cls from "./Sidebar.module.scss";
 import { useState } from "react";
-import { DarkThemeBtn } from "shared/ui/DarkThemeBtn";
+import { DarkThemeBtn } from "widgets/DarkThemeBtn";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 
 import SettingsLogo from "shared/assets/images/settings-dark.png";
