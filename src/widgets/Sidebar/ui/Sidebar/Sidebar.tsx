@@ -5,6 +5,7 @@ import { DarkThemeBtn } from "widgets/DarkThemeBtn";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 
 import SettingsLogo from "shared/assets/images/settings-dark.png";
+import { ChangeLangBtn } from "widgets/ChangeLangBtn";
 
 interface SidebarProps {
   className?: string;
@@ -31,12 +32,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
         <DarkThemeBtn />
         <br />
         <br />
-        <Button
-          theme={ButtonTheme.GREEN}
-          className={classes(cls.DarkThemeBtn, {}, [className])}
-        >
-          lang
-        </Button>
+        <ChangeLangBtn />
       </div>
     </div>
   );
