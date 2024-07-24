@@ -2,7 +2,6 @@ import { classes } from "shared/lib/classNames/classes";
 import cls from "./Sidebar.module.scss";
 import { useState } from "react";
 import { DarkThemeBtn } from "widgets/DarkThemeBtn";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
 
 import SettingsLogo from "shared/assets/images/settings-dark.png";
 import { ChangeLangBtn } from "widgets/ChangeLangBtn";
@@ -29,6 +28,8 @@ export const Sidebar = ({ className }: SidebarProps) => {
       <div
         className={classes(cls.sidebarContent, { [cls.clear]: collapsed }, [])}
       >
+        <br />
+        <br />
         <DarkThemeBtn />
         <br />
         <br />
