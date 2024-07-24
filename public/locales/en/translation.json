@@ -1,5 +1,9 @@
 {
   "тест": "test",
   "язык": "lang",
-  "главная страница": "main page"
+  "Главная": "Main",
+  "О проекте": "About Project",
+  "Регистрация": "Registration",
+  "главная страница": "main page",
+  "страница регистрации": "registration page"
 }
