@@ -1,8 +1,8 @@
 import { classes } from "shared/lib/classNames/classes";
-import cls from "./DarkThemeBtn.module.scss";
 import { useTheme } from "app/providers/ThemeProvider";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { useTranslation } from "react-i18next";
+import cls from "./DarkThemeBtn.module.scss";
 
 interface DarkThemeBtnProps {
   className?: string;

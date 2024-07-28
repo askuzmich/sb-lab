@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack serve --env port=3000",
     "build:prod": "webpack --env mode=production",
-    "build:dev": "webpack --env mode=development"
+    "build:dev": "webpack --env mode=development",
+    "lint": "npx eslint \"**/*.{ts,tsx}\"",
+    "lint: fix": "npx eslint \"**/*.{ts,tsx}\" --fix"
   },
   "keywords": [],
   "author": "",
@@ -31,7 +33,16 @@
     "@types/webpack-dev-server": "^4.7.2",
     "webpack-dev-server": "^4.15.2",
     "@svgr/webpack": "^6.2.1",
-    "file-loader": "^6.2.0"
+    "file-loader": "^6.2.0",
+    "eslint": "^8.10.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-i18next": "^5.1.2",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.2",
+    "eslint-plugin-react-hooks": "^4.3.0"
   },
   "dependencies": {
     "react": "^17.0.2",

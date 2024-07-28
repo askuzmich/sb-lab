@@ -5,6 +5,7 @@ import {
   ThemeContext,
 } from "../lib/ThemeContext";
 
+// eslint-disable-next-line operator-linebreak
 const defaultTheme =
   (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT;
 
@@ -13,8 +14,8 @@ export const ThemeProvider: FC = ({ children }) => {
 
   const defaultProps = useMemo(
     () => ({
-      theme: theme,
-      setTheme: setTheme,
+      theme,
+      setTheme,
     }),
     [theme]
   );

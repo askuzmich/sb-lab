@@ -30,3 +30,9 @@ vscode -> code -> settings -> snippets
 		"description": "Typescript React Function Component"
 	},
 ```
+
+## eslint
+
+```
+$ npx eslint "**/*.{ts,tsx}"
+```

@@ -14,7 +14,7 @@ const MainPage = () => {
     <div>
       <h2 className="App-link">{t("главная страница")}</h2>
 
-      <Logo width={"300px"} />
+      <Logo width="300px" />
       <br />
 
       <br />
