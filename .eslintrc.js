@@ -1,6 +1,6 @@
 module.exports = {
   env: {},
-  extends: ["plugin:react/recommended", "airbnb"],
+  extends: ["plugin:react/recommended", "airbnb", "plugin:i18next/recommended"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
@@ -9,7 +9,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "i18next"],
   rules: {
     "react/jsx-indent": [2, 2],
     quotes: [2, "double"], // "quotes": [2, "single"],
@@ -31,6 +31,7 @@ module.exports = {
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off",
+    "i18next/no-literal-string": ["error", { markupOnly: true }]
   },
   globals: { __IS_DEV__: true },
 };

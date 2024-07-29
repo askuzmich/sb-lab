@@ -6,6 +6,7 @@ import SettingsLogo from "shared/assets/images/settings-dark.png";
 import { ChangeLangBtn } from "widgets/ChangeLangBtn";
 
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { useTranslation } from "react-i18next";
 import cls from "./Sidebar.module.scss";
 
 interface SidebarProps {
@@ -14,6 +15,8 @@ interface SidebarProps {
 
 export const Sidebar = ({ className }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(false);
+
+  const [t] = useTranslation();
 
   const onToggle = () => {
     setCollapsed((prev) => !prev);
@@ -26,7 +29,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
       ])}
     >
       <Button theme={ButtonTheme.CLEAR} type="button" onClick={onToggle}>
-        <img alt="settsLogo" src={SettingsLogo} width={20} height={20} />
+        <img alt={t("логотип настроек")} src={SettingsLogo} width={20} height={20} />
       </Button>
 
       <div
