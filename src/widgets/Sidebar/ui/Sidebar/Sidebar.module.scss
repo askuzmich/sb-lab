@@ -1,5 +1,6 @@
 .Sidebar {
-  position: relative;
+  display: block;
+  position: absolute;
   height: 300px;
   width: var(--sidebar-width); // 300px;
   margin: 12px auto;

@@ -7,7 +7,19 @@ export const AppRouter = () => {
   const [t] = useTranslation();
 
   return (
-    <Suspense fallback={<div>{t("загрузка...")}</div>}>
+    <Suspense fallback={(
+      <div style={{
+        display: "flex",
+        position: "relative",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+      >
+        <div>{t("загрузка...")}</div>
+      </div>
+    )}
+    >
       <Routes>
         {Object.values(routeConfig).map(({ element, path }) => (
           <Route
