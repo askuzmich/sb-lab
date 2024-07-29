@@ -8,7 +8,7 @@ export const classes = (
   [
     mainClass,
     ...additional.filter(Boolean),
-    Object.entries(mods)
+    ...Object.entries(mods)
       .filter(([key, value]) => Boolean(value))
       .map(([key, value]) => key),
   ].join(" ");

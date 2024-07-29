@@ -1,3 +1,11 @@
+# ВАЖНО: перед тем как пушить, обязательно:
+
+```
+$ npm run eslint
+$ npm run stylelint
+$ npm run unit:test
+```
+
 # sb-lab Struct
 
 App </br>
