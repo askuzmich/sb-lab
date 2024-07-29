@@ -1,5 +1,5 @@
 {
-  "name": "production_project_code_course",
+  "name": "sb_lab",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,10 @@
     "start": "webpack serve --env port=3000",
     "build:prod": "webpack --env mode=production",
     "build:dev": "webpack --env mode=development",
-    "lint": "npx eslint \"**/*.{ts,tsx}\"",
-    "lint: fix": "npx eslint \"**/*.{ts,tsx}\" --fix"
+    "eslint": "npx eslint \"**/*.{ts,tsx}\"",
+    "eslint:fix": "npx eslint \"**/*.{ts,tsx}\" --fix",
+    "stylelint": "npx stylelint \"**/*.scss\"",
+    "stylelint:fix": "npx stylelint \"**/*.scss\" --fix"
   },
   "keywords": [],
   "author": "",
@@ -34,9 +36,11 @@
     "webpack-dev-server": "^4.15.2",
     "@svgr/webpack": "^6.2.1",
     "file-loader": "^6.2.0",
-    "eslint": "^8.10.0",
+    "stylelint": "^14.5.3",
+    "stylelint-config-standard-scss": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
+    "eslint": "^8.10.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-i18next": "^5.1.2",
     "eslint-plugin-import": "^2.25.4",
