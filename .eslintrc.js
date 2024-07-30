@@ -35,6 +35,7 @@ module.exports = {
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off",
+    "arrow-body-style": "off",
     "max-len": ["error", { ignoreComments: true, code: 100 }],
     "i18next/no-literal-string": ["error", { markupOnly: true, onlyAttribute: [""] }]
   },
