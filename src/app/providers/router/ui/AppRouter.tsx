@@ -12,6 +12,7 @@ export const AppRouter = () => {
         display: "flex",
         position: "relative",
         width: "100%",
+        height: "50vh",
         justifyContent: "center",
         alignItems: "center"
       }}
@@ -28,9 +29,6 @@ export const AppRouter = () => {
             path={path}
           />
         ))}
-        {/* <Route path={"/about"} element={<AboutPage />} />
-        <Route path={"/"} element={<MainPage />} />
-        <Route path={"/auth"} element={<AuthPage />} /> */}
       </Routes>
     </Suspense>
   );
