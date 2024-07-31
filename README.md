@@ -8,13 +8,13 @@ $ npm run unit:test
 
 # sb-lab Struct
 
-App </br>
+App (App.tsx,types,styes,providers(router,ThemeProvider))</br>
 Process </br>
 Pages </br>
-Widgets (Navbar)</br>
-Features </br>
-Entities </br>
-Shared (AppLink)</br>
+Widgets (Navbar,Sidebar)</br>
+Features (ChangeLangBtn,DarkThemeBtn)</br>
+Entities (PageLoader)</br>
+Shared (assets(icon,images), configs(i18n,route,lib,UI(AppLink,Button,Loader)))</br>
 
 ## fc-snippet
 
