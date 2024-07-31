@@ -6,15 +6,42 @@ $ npm run stylelint
 $ npm run unit:test
 ```
 
-# sb-lab Struct
+# sb-lab FSD Struct
 
-App (App.tsx,types,styes,providers(router,ThemeProvider))</br>
-Process </br>
-Pages </br>
-Widgets (Navbar,Sidebar)</br>
-Features (ChangeLangBtn,DarkThemeBtn)</br>
-Entities (PageLoader)</br>
-Shared (assets(icon,images), configs(i18n,route,lib,UI(AppLink,Button,Loader)))</br>
+```
+FSD
+|
+|-App
+|	|-App.tsx
+|	|-types
+|	|-styes
+|	|-providers
+|		|-router
+|		|-ThemeProvider
+|
+|-Process
+|
+|-Pages
+|
+|-Widgets
+|	|-Navbar
+|	|-Sidebar
+|
+|-Features
+|	|-ChangeLangBtn
+|	|-DarkThemeBtn
+|
+|-Entities
+|	|-PageLoader
+|
+|-Shared
+	|-assets(icon,images)
+	|-configs
+		|-i18n
+		|-route
+		|-lib
+		|-UI(AppLink,Button,Loader)
+```
 
 ## fc-snippet
 
