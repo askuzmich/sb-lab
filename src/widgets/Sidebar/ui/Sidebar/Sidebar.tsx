@@ -1,9 +1,9 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useState } from "react";
-import { DarkThemeBtn } from "widgets/DarkThemeBtn";
+import { DarkThemeBtn } from "features/DarkThemeBtn";
 
 import SettingsLogo from "shared/assets/images/settings-dark.png";
-import { ChangeLangBtn } from "widgets/ChangeLangBtn";
+import { ChangeLangBtn } from "features/ChangeLangBtn";
 
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { useTranslation } from "react-i18next";
