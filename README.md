@@ -65,3 +65,16 @@ vscode -> code -> settings -> snippets
 		"description": "Typescript React Function Component"
 	},
 ```
+
+## eslint on save
+
+File > Preferences > Settings (or Code > Preferences > Settings).
+
+```
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript"]
+ }
+```
