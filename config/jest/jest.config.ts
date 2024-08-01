@@ -1,3 +1,5 @@
+import path from "path";
+
 export default {
   rootDir: "../../",
   clearMocks: true,
@@ -17,6 +19,7 @@ export default {
   testMatch: ["<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)"],
   moduleNameMapper: {
     "\\.s?css$": "identity-obj-proxy",
+    "\\.png": path.resolve(__dirname, "JestEmptyComponent.tsx")
   }
   /*
   * For a detailed explanation regarding each configuration property and type check, visit:

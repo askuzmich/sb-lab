@@ -11,7 +11,7 @@ interface ChangeLangBtnProps {
 export const ChangeLangBtn = ({ className }: ChangeLangBtnProps) => {
   const { t, i18n } = useTranslation();
 
-  const changeLang = () => {
+  const changeLang = async () => {
     i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru");
   };
 

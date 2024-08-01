@@ -24,11 +24,17 @@ export const Sidebar = ({ className }: SidebarProps) => {
 
   return (
     <div
+      data-testid="sidebar"
       className={classes(cls.Sidebar, { [cls.collapsed]: collapsed }, [
         className,
       ])}
     >
-      <Button theme={ButtonTheme.CLEAR} type="button" onClick={onToggle}>
+      <Button
+        data-testid="toggle-sidebar-btn"
+        theme={ButtonTheme.CLEAR}
+        type="button"
+        onClick={onToggle}
+      >
         <img alt={t("логотип настроек")} src={SettingsLogo} width={20} height={20} />
       </Button>
 
