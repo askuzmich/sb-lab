@@ -1,4 +1,4 @@
-import { classes } from "./classes";
+import { classes } from "shared/lib/classNames/classes";
 
 describe("CSS classes handler fn test", () => {
   test("с 1 параметром", () => {
