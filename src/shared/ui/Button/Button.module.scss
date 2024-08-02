@@ -1,7 +1,10 @@
 .Button {
+  display: block;
+  height: 30px;
   transition: opacity 0.3s;
   opacity: var(--opacity);
   border: 0;
+  font-size: 14px;
 
   &:hover {
     --opacity: 0.7;
@@ -22,18 +25,23 @@
   outline: none;
 }
 
+.gray {
+  background-color: rgb(54 54 54);
+  padding: 3px 21px;
+  color: white;
+  border-radius: 6px;
+}
+
 .green {
   background-color: green;
-  padding: 10px 40px;
+  padding: 3px 21px;
   color: white;
-  font-weight: bold;
   border-radius: 6px;
 }
 
 .red {
   background-color: red;
-  padding: 10px 40px;
+  padding: 3px 21px;
   color: white;
-  font-weight: bold;
   border-radius: 6px;
 }
