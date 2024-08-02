@@ -31,22 +31,24 @@ export const Sidebar = ({ className }: SidebarProps) => {
     >
       <Button
         data-testid="toggle-sidebar-btn"
-        theme={ButtonTheme.CLEAR}
+        theme={ButtonTheme.GRAY}
         type="button"
         onClick={onToggle}
       >
-        <img alt={t("логотип настроек")} src={SettingsLogo} width={20} height={20} />
+        <img
+          alt={t("логотип настроек")}
+          className={cls.buttonImage}
+          src={SettingsLogo}
+          width={20}
+          height={20}
+        />
       </Button>
 
       <div
         className={classes(cls.sidebarContent, { [cls.clear]: collapsed }, [])}
       >
-        <br />
-        <br />
-        <DarkThemeBtn />
-        <br />
-        <br />
-        <ChangeLangBtn />
+        <DarkThemeBtn className={cls.sidebarSpacing} />
+        <ChangeLangBtn className={cls.sidebarSpacing} />
       </div>
     </div>
   );
