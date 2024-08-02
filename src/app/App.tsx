@@ -2,6 +2,7 @@ import "./styles/index.scss";
 
 import { classes } from "shared/lib/classNames/classes";
 import { Navbar } from "widgets/Navbar";
+import { Footer } from "widgets/Footer";
 
 import { Sidebar } from "widgets/Sidebar";
 import { Suspense } from "react";
@@ -19,6 +20,7 @@ const App = () => {
           <Sidebar />
           <AppRouter />
         </div>
+        <Footer />
       </Suspense>
     </div>
   );

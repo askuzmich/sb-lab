@@ -15,16 +15,6 @@ const MainPage = () => {
       <h2 className="App-link">{t("главная страница")}</h2>
 
       <Logo width="300px" />
-      <br />
-
-      <br />
-      <br />
-      <img
-        src={theme === Theme.DARK ? GitLogoLight : GitLogo}
-        alt=""
-        width={30}
-        height={30}
-      />
     </div>
   );
 };
