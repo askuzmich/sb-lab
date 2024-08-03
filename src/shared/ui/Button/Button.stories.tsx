@@ -27,15 +27,34 @@ Clear.args = {
   theme: ButtonTheme.CLEAR,
 };
 
+export const GrayOutline = Template.bind({});
+GrayOutline.args = {
+  children: "Text",
+  theme: ButtonTheme.GRAY_OUTLINE,
+};
+
 export const Gray = Template.bind({});
 Gray.args = {
   children: "Text",
   theme: ButtonTheme.GRAY,
 };
 
+export const GrayDark = Template.bind({});
+GrayDark.args = {
+  children: "Text",
+  theme: ButtonTheme.GRAY,
+};
+GrayDark.decorators = [ThemeDecorator(Theme.DARK)];
+
 export const Green = Template.bind({});
 Green.args = {
   children: "Text",
   theme: ButtonTheme.GREEN,
 };
-// Green.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const GreenDark = Template.bind({});
+GreenDark.args = {
+  children: "Text",
+  theme: ButtonTheme.GREEN,
+};
+GreenDark.decorators = [ThemeDecorator(Theme.DARK)];
