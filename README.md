@@ -3,7 +3,13 @@
 ```
 $ npm run eslint
 $ npm run stylelint
-$ npm run unit:test
+$ npm run unit
+```
+
+# ВАЖНО: перед тем как пушить, желательно:
+
+```
+$ npm run loki
 ```
 
 # sb-lab FSD Struct
