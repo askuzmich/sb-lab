@@ -58,6 +58,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
+    "loki": "^0.28.1",
     "mini-css-extract-plugin": "^2.5.3",
     "regenerator-runtime": "^0.13.9",
     "sass": "^1.49.9",
