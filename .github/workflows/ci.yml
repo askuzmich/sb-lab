@@ -1,5 +1,4 @@
 name: SB-lab CI
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
     branches: [dev-front]
