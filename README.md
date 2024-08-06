@@ -32,6 +32,8 @@ FSD
 |-Widgets
 |	|-Navbar
 |	|-Sidebar
+| |-Footer
+| |-Error
 |
 |-Features
 |	|-ChangeLangBtn
