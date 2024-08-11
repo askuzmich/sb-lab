@@ -5,8 +5,10 @@ import { DarkThemeBtn } from "features/DarkThemeBtn";
 import SettingsLogo from "shared/assets/images/settings-dark.png";
 import { ChangeLangBtn } from "features/ChangeLangBtn";
 
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { useTranslation } from "react-i18next";
+import { AppLink, AppLinkTheme } from "shared/ui/AppLink/AppLink";
+import { RoutePath } from "shared/config/routeConfig/routeConfig";
 import cls from "./Sidebar.module.scss";
 
 interface SidebarProps {
@@ -31,6 +33,8 @@ export const Sidebar = ({ className }: SidebarProps) => {
     >
       <Button
         data-testid="toggle-sidebar-btn"
+        className={classes(cls.sidebarBtn)}
+        size={ButtonSize.M}
         theme={ButtonTheme.GRAY}
         type="button"
         onClick={onToggle}
@@ -47,6 +51,15 @@ export const Sidebar = ({ className }: SidebarProps) => {
       <div
         className={classes(cls.sidebarContent, { [cls.clear]: collapsed }, [])}
       >
+        <div className={cls.links}>
+          <AppLink
+            theme={AppLinkTheme.SECONDARY}
+            className={cls.sideLink}
+            to={RoutePath.about}
+          >
+            {t("О проекте")}
+          </AppLink>
+        </div>
         <DarkThemeBtn className={cls.sidebarSpacing} />
         <ChangeLangBtn className={cls.sidebarSpacing} />
       </div>
