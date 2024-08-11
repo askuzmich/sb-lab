@@ -9,7 +9,8 @@ $ npm run unit
 # ВАЖНО: перед тем как пушить, желательно:
 
 ```
-$ npm run loki
+run Docker...
+$ sudo npm run loki
 ```
 
 # sb-lab FSD Struct
