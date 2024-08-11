@@ -10,6 +10,7 @@ $ npm run unit
 
 ```
 run Docker...
+$ npm run sb
 $ sudo npm run loki
 ```
 
