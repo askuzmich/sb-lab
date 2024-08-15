@@ -7,7 +7,8 @@ export enum ButtonTheme {
   GRAY = "gray",
   GREEN = "green",
   RED = "red",
-  GRAY_OUTLINE = "grayOutline"
+  GRAY_OUTLINE = "grayOutline",
+  WHITE_OUTLINE = "whiteOutline"
 }
 
 export enum ButtonSize {

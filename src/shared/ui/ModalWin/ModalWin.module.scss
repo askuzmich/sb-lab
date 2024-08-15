@@ -6,6 +6,8 @@
   left: 0;
   right: 0;
   z-index: var(--modal-z-ind);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .overlay {
@@ -23,4 +25,15 @@
   background: #fff;
   color: #333;
   width: 600px;
+  transition: 0.1s transform;
+  transform: scale(0.8);
+}
+
+.revealed {
+  pointer-events: auto;
+  opacity: 1;
+
+  .content {
+    transform: scale(1);
+  }
 }

@@ -33,6 +33,12 @@ GrayOutline.args = {
   theme: ButtonTheme.GRAY_OUTLINE,
 };
 
+export const WhiteOutline = Template.bind({});
+WhiteOutline.args = {
+  children: "Text",
+  theme: ButtonTheme.GRAY_OUTLINE,
+};
+
 export const Gray = Template.bind({});
 Gray.args = {
   children: "Text",
