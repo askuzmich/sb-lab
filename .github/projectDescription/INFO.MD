@@ -35,3 +35,11 @@ File > Preferences > Settings (or Code > Preferences > Settings).
   "eslint.validate": ["javascript"]
  }
 ```
+
+## Commit Message Format
+
+Simple Update: Fix typo in README <br>
+Feature Addition: Add user authentication module <br>
+Bug Fix: Resolve memory leak in data processing script <br>
+Refactoring Code: Refactor database connection logic <br>
+Updating Documentation: Update API documentation for new endpoints

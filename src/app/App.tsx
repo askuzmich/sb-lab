@@ -9,21 +9,24 @@ import { Suspense } from "react";
 
 import { AppRouter } from "./providers/router";
 import { useTheme } from "./providers/ThemeProvider";
+import { StoreProvider } from "./providers/StoreProvider";
 
 const App = () => {
   const { theme } = useTheme();
 
   return (
-    <div className={classes("app", {}, [theme])}>
-      <Suspense fallback="">
-        <Navbar />
-        <div className="content-page">
-          <Sidebar />
-          <AppRouter />
-        </div>
-        <Footer />
-      </Suspense>
-    </div>
+    <StoreProvider>
+      <div className={classes("app", {}, [theme])}>
+        <Suspense fallback="">
+          <Navbar />
+          <div className="content-page">
+            <Sidebar />
+            <AppRouter />
+          </div>
+          <Footer />
+        </Suspense>
+      </div>
+    </StoreProvider>
   );
 };
 

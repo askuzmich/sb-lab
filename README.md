@@ -17,6 +17,8 @@ $ sudo npm run loki:ok
 
 # sb-lab FSD Struct
 
+https://feature-sliced.design/
+
 ```
 FSD
 |
