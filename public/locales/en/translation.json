@@ -1,12 +1,12 @@
 {
-  "язык": "lang",
+  "404": "404",
+  "lorem": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est.",
   "Главная": "Main",
   "О проекте": "About Project",
   "Регистрация": "Registration",
-  "тема": "theme",
   "логотип настроек": "settings logo",
-  "404": "404",
-  "перезагрузить": "reload",
   "ошибка загркузки": "load error",
-  "lorem": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perspiciatis id doloremque quisquam expedita optio rem? Voluptatem mollitia animi facere necessitatibus impedit dolorum optio. Veniam, blanditiis! Ipsum unde ducimus est."
+  "перезагрузить": "reload",
+  "тема": "theme",
+  "язык": "lang"
 }
