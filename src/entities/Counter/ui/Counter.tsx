@@ -20,14 +20,24 @@ export const Counter = () => {
   };
 
   return (
-    <div>
-      <h4>
-        {t("Счётчик")}
-        {count}
-      </h4>
+    <div data-testid="counter">
+      <h3>{t("Счётчик")}</h3>
+      <h4 data-testid="counter-value">{count}</h4>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Button theme={ButtonTheme.GREEN} onClick={incHandler}>{t("Добавить")}</Button>
-        <Button theme={ButtonTheme.RED} onClick={decHandler}>{t("Уменьшить")}</Button>
+        <Button
+          data-testid="counter-inc-button"
+          theme={ButtonTheme.GREEN}
+          onClick={incHandler}
+        >
+          {t("Добавить")}
+        </Button>
+        <Button
+          data-testid="counter-dec-button"
+          theme={ButtonTheme.RED}
+          onClick={decHandler}
+        >
+          {t("Уменьшить")}
+        </Button>
       </div>
 
     </div>
