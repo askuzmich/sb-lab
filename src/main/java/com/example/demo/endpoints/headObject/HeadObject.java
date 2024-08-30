@@ -1,12 +1,10 @@
 package com.example.demo.endpoints.headObject;
 
 import com.example.demo.endpoints.subEntity.SubEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +18,7 @@ public class HeadObject implements Serializable {
             cascade = { CascadeType.PERSIST, CascadeType.MERGE },
             mappedBy = "owner"
     )
-    private List<SubEntity> subEntities;
+    private List<SubEntity> subEntities = new ArrayList<>();
 
 
     public HeadObject() {
@@ -49,5 +47,10 @@ public class HeadObject implements Serializable {
 
     public void setSubEntities(List<SubEntity> subEntities) {
         this.subEntities = subEntities;
+    }
+
+    public void addSubEntity(SubEntity subEntity) {
+        subEntity.setOwner(this);
+        this.subEntities.add(subEntity);
     }
 }
