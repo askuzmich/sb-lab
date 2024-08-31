@@ -1,6 +1,6 @@
 package com.example.demo.axceptionHandler;
 
-import com.example.demo.endpoints.subEntity.SubEntityNotFoundException;
+import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
 import com.example.demo.returnDataObject.CustomReturnData;
 import com.example.demo.returnDataObject.CustomStatusCode;
 import org.springframework.http.HttpStatus;
