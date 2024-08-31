@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 public class SubEntityController {
     private final SubEntityService subEntityService;
@@ -30,6 +33,25 @@ public class SubEntityController {
                 CustomStatusCode.SUCCESS,
                 "Transaction is Ok",
                 subEntityDto
+        );
+    }
+
+    @GetMapping("/api/v1/subEntities")
+    public CustomReturnData getAll() {
+        List<SubEntity> subEntities = subEntityService.getAll();
+
+        List<SubEntityDto> subEntityToDTOS = subEntities
+                .stream()
+                .map((subEntity) -> {
+                    return this.subEntityToDTO.convert(subEntity);
+                })
+                .collect(Collectors.toList());
+
+        return new CustomReturnData(
+                true,
+                CustomStatusCode.SUCCESS,
+                "Transaction is Ok",
+                subEntityToDTOS
         );
     }
 }

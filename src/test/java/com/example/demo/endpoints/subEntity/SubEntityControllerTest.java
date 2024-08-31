@@ -1,6 +1,8 @@
 package com.example.demo.endpoints.subEntity;
 
+import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
 import com.example.demo.returnDataObject.CustomStatusCode;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +17,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -92,5 +93,21 @@ class SubEntityControllerTest {
                 .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.NOT_FOUND))
                 .andExpect(jsonPath("$.message").value("Not find subEntity with ID: 110044"))
                 .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void findAll() throws Exception {
+        given(this.subEntityService.getAll())
+                .willReturn(this.subEntities);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.get("/api/v1/subEntities")
+                        .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(jsonPath("$.isSuccess").value(true))
+                .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+                .andExpect(jsonPath("$.data", Matchers.hasSize(this.subEntities.size())))
+                .andExpect(jsonPath("$.data[0].id").value("110022"));
     }
 }

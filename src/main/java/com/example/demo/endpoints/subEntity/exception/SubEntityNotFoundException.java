@@ -1,4 +1,4 @@
-package com.example.demo.endpoints.subEntity;
+package com.example.demo.endpoints.subEntity.exception;
 
 public class SubEntityNotFoundException extends RuntimeException {
     public SubEntityNotFoundException(String id) {
