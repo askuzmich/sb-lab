@@ -53,4 +53,8 @@ public class HeadObject implements Serializable {
         subEntity.setOwner(this);
         this.subEntities.add(subEntity);
     }
+
+    public Integer getNumberOfSE() {
+        return this.subEntities.size();
+    }
 }
