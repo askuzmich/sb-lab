@@ -1,12 +1,11 @@
 package com.example.demo.endpoints.subEntity;
 
 import com.example.demo.endpoints.subEntity.DTO.SubEntityDto;
+import com.example.demo.endpoints.subEntity.converter.DtoToSubEntity;
 import com.example.demo.endpoints.subEntity.converter.SubEntityToDTO;
 import com.example.demo.returnDataObject.CustomReturnData;
 import com.example.demo.returnDataObject.CustomStatusCode;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,9 +16,17 @@ public class SubEntityController {
 
     private final SubEntityToDTO subEntityToDTO;
 
-    public SubEntityController(SubEntityService subEntityService, SubEntityToDTO subEntityToDTO) {
+    private final DtoToSubEntity dtoToSubEntity;
+
+
+    public SubEntityController(
+            SubEntityService subEntityService,
+            SubEntityToDTO subEntityToDTO,
+            DtoToSubEntity dtoToSubEntity
+    ) {
         this.subEntityService = subEntityService;
         this.subEntityToDTO = subEntityToDTO;
+        this.dtoToSubEntity = dtoToSubEntity;
     }
 
     @GetMapping("/api/v1/subEntities/{id}")
@@ -52,6 +59,21 @@ public class SubEntityController {
                 CustomStatusCode.SUCCESS,
                 "Transaction is Ok",
                 subEntityToDTOS
+        );
+    }
+
+    @PostMapping("/api/v1/subEntities")
+    public CustomReturnData add(@RequestBody SubEntityDto subEntityDto) {
+        SubEntity convert = this.dtoToSubEntity.convert(subEntityDto);
+        SubEntity add = this.subEntityService.add(convert);
+
+        SubEntityDto convertedDto = this.subEntityToDTO.convert(add);
+
+        return new CustomReturnData(
+                true,
+                CustomStatusCode.SUCCESS,
+                "Transaction is Ok",
+                convertedDto
         );
     }
 }

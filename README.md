@@ -82,3 +82,46 @@ SHOULD RETURN:
     ]
 }
 ```
+
+
+
+
+## POST add subEntity
+POST /api/v1/subEntities </br>
+EXAMPLE: localhost:8080/api/v1/subEntities </br>
+REQUEST BODY:
+```
+{
+    "name": "se10",
+    "description": "woo-hoo se10",
+    "imgUrl": "https://fakeImageUrl.com/se10"
+}
+```
+SHOULD RETURN:
+```
+{
+    "isSuccess": true,
+    "statusCode": 200,
+    "message": "Transaction is Ok",
+    "body": {
+        "id": "110099",
+        "name": "se10",
+        "description": "woo-hoo se10",
+        "imgUrl": "https://fakeImageUrl.com/se10",
+        "owner": null
+    }
+}
+```
+400 FAIL:
+```
+{
+    "isSuccess": false,
+    "statusCode": 400,
+    "message": "Data is wrong",
+    "body": {
+        "name": "is required",
+        "description": "is required",
+        "imgUrl": "is required"
+    }
+}
+```

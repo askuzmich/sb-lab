@@ -1,11 +1,15 @@
 package com.example.demo.endpoints.subEntity;
 
+import com.example.demo.endpoints.subEntity.DTO.SubEntityDto;
 import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
 import com.example.demo.returnDataObject.CustomStatusCode;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +32,9 @@ class SubEntityControllerTest {
 
     @MockBean
     SubEntityService subEntityService;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     List<SubEntity> subEntities;
 
@@ -109,5 +116,43 @@ class SubEntityControllerTest {
                 .andExpect(jsonPath("$.message").value("Transaction is Ok"))
                 .andExpect(jsonPath("$.data", Matchers.hasSize(this.subEntities.size())))
                 .andExpect(jsonPath("$.data[0].id").value("110022"));
+    }
+
+    @Test
+    void testAdd() throws Exception {
+        SubEntityDto subEntityDto = new SubEntityDto(
+                null,
+                "se10",
+                "woo-hoo se10",
+                "https://fakeImageUrl.com/se10",
+                null
+        );
+
+        String jsonString = this.objectMapper.writeValueAsString(subEntityDto);
+
+        SubEntity se1 = new SubEntity();
+        se1.setId("110022");
+        se1.setName("se10");
+        se1.setDescription("woo-hoo se10");
+        se1.setImgUrl("https://fakeImageUrl.com/se10");
+
+        given(this.subEntityService.add(Mockito.any(SubEntity.class)))
+                .willReturn(se1);
+
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders.post("/api/v1/subEntities")
+                                // send
+                                .contentType(MediaType.APPLICATION_JSON).content(jsonString)
+                                    // receive
+                                    .accept(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(jsonPath("$.isSuccess").value(true))
+                .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+                .andExpect(jsonPath("$.data.id").isNotEmpty())
+                .andExpect(jsonPath("$.data.id").value("110022"))
+                .andExpect(jsonPath("$.data.name").value(se1.getName()));
+
+
     }
 }

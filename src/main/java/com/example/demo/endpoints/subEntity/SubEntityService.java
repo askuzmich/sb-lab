@@ -24,4 +24,9 @@ public class SubEntityService {
     public List<SubEntity> getAll() {
         return this.subEntityRepository.findAll();
     }
+
+    public SubEntity add(SubEntity subEntity) {
+        subEntity.setId("11111");
+        return this.subEntityRepository.save(subEntity);
+    }
 }

@@ -98,11 +98,17 @@ class SubEntityServiceTest {
         SubEntity resultOfMockTransaction = subEntityService.findById("12234");
 
         // Compare
-        assertThat(resultOfMockTransaction.getId()).isEqualTo(subEntity.getId());
-        assertThat(resultOfMockTransaction.getName()).isEqualTo(subEntity.getName());
-        assertThat(resultOfMockTransaction.getDescription()).isEqualTo(subEntity.getDescription());
-        assertThat(resultOfMockTransaction.getImgUrl()).isEqualTo(subEntity.getImgUrl());
-        verify(subEntityRepository, times(1)).findById("12234");
+        assertThat(resultOfMockTransaction.getId())
+                .isEqualTo(subEntity.getId());
+        assertThat(resultOfMockTransaction.getName())
+                .isEqualTo(subEntity.getName());
+        assertThat(resultOfMockTransaction.getDescription())
+                .isEqualTo(subEntity.getDescription());
+        assertThat(resultOfMockTransaction.getImgUrl())
+                .isEqualTo(subEntity.getImgUrl());
+
+        verify(subEntityRepository, times(1))
+                .findById("12234");
     }
 
     @Test
@@ -139,5 +145,31 @@ class SubEntityServiceTest {
 
         // called once
         verify(subEntityRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testAdd() {
+        SubEntity subEntity = new SubEntity();
+        subEntity.setName("entity1");
+        subEntity.setDescription("entity of the head");
+        subEntity.setImgUrl("http://fakeurl.com");
+
+        given(subEntityRepository.save(subEntity))
+                .willReturn(subEntity);
+
+        SubEntity candidate = subEntityService.add(subEntity);
+
+        // Compare
+        assertThat(candidate.getId())
+                .isEqualTo("11111");
+        assertThat(candidate.getName())
+                .isEqualTo(subEntity.getName());
+        assertThat(candidate.getDescription())
+                .isEqualTo(subEntity.getDescription());
+        assertThat(candidate.getImgUrl())
+                .isEqualTo(subEntity.getImgUrl());
+
+        verify(subEntityRepository, times(1))
+                .save(subEntity);
     }
 }
