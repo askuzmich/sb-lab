@@ -2,6 +2,7 @@ package com.example.demo.endpoints.subEntity;
 
 import com.example.demo.endpoints.headObject.HeadObject;
 import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
+import com.example.demo.utis.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,14 +19,16 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SubEntityServiceTest {
 
     @Mock
     SubEntityRepository subEntityRepository;
+
+    @Mock
+    UUID uuid;
 
     @InjectMocks
     SubEntityService subEntityService;
@@ -112,7 +115,7 @@ class SubEntityServiceTest {
     }
 
     @Test
-    void testFindBiIdNotFound() {
+    void testFindByIdNotFound() {
         // Behavior itself
         given(subEntityRepository.findById(Mockito.any(String.class)))
                 .willReturn(Optional.empty());
@@ -150,18 +153,25 @@ class SubEntityServiceTest {
     @Test
     void testAdd() {
         SubEntity subEntity = new SubEntity();
-        subEntity.setName("entity1");
+        subEntity.setName("entity");
         subEntity.setDescription("entity of the head");
         subEntity.setImgUrl("http://fakeurl.com");
 
+
+
+        given(uuid.getId())
+                .willReturn(12234L);
+
         given(subEntityRepository.save(subEntity))
                 .willReturn(subEntity);
+
+
 
         SubEntity candidate = subEntityService.add(subEntity);
 
         // Compare
         assertThat(candidate.getId())
-                .isEqualTo("11111");
+                .isEqualTo("12234");
         assertThat(candidate.getName())
                 .isEqualTo(subEntity.getName());
         assertThat(candidate.getDescription())

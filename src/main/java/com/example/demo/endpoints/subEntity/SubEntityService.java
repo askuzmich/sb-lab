@@ -1,6 +1,7 @@
 package com.example.demo.endpoints.subEntity;
 
 import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
+import com.example.demo.utis.UUID;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,11 @@ import java.util.List;
 public class SubEntityService {
     private final SubEntityRepository subEntityRepository;
 
-    public SubEntityService(SubEntityRepository subEntityRepository) {
+    private final UUID uuid;
+
+    public SubEntityService(SubEntityRepository subEntityRepository, UUID uuid) {
         this.subEntityRepository = subEntityRepository;
+        this.uuid = uuid;
     }
 
     public SubEntity findById(String id) {
@@ -26,7 +30,8 @@ public class SubEntityService {
     }
 
     public SubEntity add(SubEntity subEntity) {
-        subEntity.setId("11111");
+        subEntity.setId(this.uuid.getId().toString());
+
         return this.subEntityRepository.save(subEntity);
     }
 }
