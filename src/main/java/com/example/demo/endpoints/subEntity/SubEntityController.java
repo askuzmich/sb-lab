@@ -5,6 +5,7 @@ import com.example.demo.endpoints.subEntity.converter.DtoToSubEntity;
 import com.example.demo.endpoints.subEntity.converter.SubEntityToDTO;
 import com.example.demo.returnDataObject.CustomReturnData;
 import com.example.demo.returnDataObject.CustomStatusCode;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,8 +64,9 @@ public class SubEntityController {
     }
 
     @PostMapping("/api/v1/subEntities")
-    public CustomReturnData add(@RequestBody SubEntityDto subEntityDto) {
+    public CustomReturnData add(@Valid @RequestBody SubEntityDto subEntityDto) {
         SubEntity convert = this.dtoToSubEntity.convert(subEntityDto);
+
         SubEntity add = this.subEntityService.add(convert);
 
         SubEntityDto convertedDto = this.subEntityToDTO.convert(add);

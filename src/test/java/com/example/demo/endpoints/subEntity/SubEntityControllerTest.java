@@ -140,11 +140,11 @@ class SubEntityControllerTest {
                 .willReturn(se1);
 
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.post("/api/v1/subEntities")
-                                // send
-                                .contentType(MediaType.APPLICATION_JSON).content(jsonString)
-                                    // receive
-                                    .accept(MediaType.APPLICATION_JSON)
+                    MockMvcRequestBuilders.post("/api/v1/subEntities")
+                    // send
+                    .contentType(MediaType.APPLICATION_JSON).content(jsonString)
+                    // receive
+                    .accept(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(jsonPath("$.isSuccess").value(true))
                 .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
