@@ -160,7 +160,7 @@ class SubEntityServiceTest {
 
 
         given(uuid.getId())
-                .willReturn(12234L);
+                .willReturn("12234");
 
         given(subEntityRepository.save(subEntity))
                 .willReturn(subEntity);

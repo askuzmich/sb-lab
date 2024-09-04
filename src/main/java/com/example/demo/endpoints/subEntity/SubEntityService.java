@@ -30,7 +30,7 @@ public class SubEntityService {
     }
 
     public SubEntity add(SubEntity subEntity) {
-        subEntity.setId(this.uuid.getId().toString());
+        subEntity.setId(this.uuid.getId());
 
         return this.subEntityRepository.save(subEntity);
     }
