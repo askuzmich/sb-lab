@@ -3,7 +3,7 @@
 ## GET subEntity by ID
 GET: /api/v1/subEntities/{id}  </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
-SHOULD RETURN:
+200: SHOULD RETURN:
 ```
 {
     "isSuccess": true,
@@ -23,9 +23,9 @@ SHOULD RETURN:
 }
 ```
 
-### getById NOT_SUCCESS: </br>
+### getById Not Found: </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110067 </br>
-SHOULD RETURN:
+404:
 ```
 {
     "isSuccess": false,
@@ -36,10 +36,10 @@ SHOULD RETURN:
 ```
 
 
-## GET all subEntity
+## GET ALL subEntity
 GET /api/v1/subEntities </br>
 EXAMPLE: localhost:8080/api/v1/subEntities </br>
-SHOULD RETURN:
+200: SHOULD RETURN:
 ```
 {
     "isSuccess": true,
@@ -86,7 +86,7 @@ SHOULD RETURN:
 
 
 
-## POST add subEntity
+## POST ADD subEntity
 POST /api/v1/subEntities </br>
 EXAMPLE: localhost:8080/api/v1/subEntities </br>
 REQUEST BODY:
@@ -97,7 +97,7 @@ REQUEST BODY:
     "imgUrl": "https://fakeImageUrl.com/se10"
 }
 ```
-SHOULD RETURN:
+200: SHOULD RETURN:
 ```
 {
     "isSuccess": true,
@@ -112,7 +112,7 @@ SHOULD RETURN:
     }
 }
 ```
-400 FAIL:
+400: FAIL:
 ```
 {
     "isSuccess": false,
@@ -123,5 +123,43 @@ SHOULD RETURN:
         "description": "is required",
         "imgUrl": "is required"
     }
+}
+```
+
+
+
+## POST UPDATE subEntity
+POST /api/v1/subEntities/{id} </br>
+EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
+REQUEST BODY:
+```
+{
+    "name": "se10",
+    "description": "woo-hoo se10",
+    "imgUrl": "https://fakeImageUrl.com/se10"
+}
+```
+200: SHOULD RETURN:
+```
+{
+    "isSuccess": true,
+    "statusCode": 200,
+    "message": "Transaction is Ok",
+    "body": {
+        "id": "110066",
+        "name": "se10",
+        "description": "woo-hoo se10",
+        "imgUrl": "https://fakeImageUrl.com/se10",
+        "owner": null
+    }
+}
+```
+404: NOT FOUND EL WITH ID
+```
+{
+    "isSuccess": false,
+    "statusCode": 404,
+    "message": "Not find subEntity with ID: 110069",
+    "data": null
 }
 ```
