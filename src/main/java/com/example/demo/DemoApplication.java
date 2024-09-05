@@ -11,8 +11,11 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-
+		System.out.println("");
+		System.out.println("H2 DB:");
 		System.out.println("http://localhost:8080/h2-console");
+		System.out.println("");
+		System.out.println("API:");
 		System.out.println("http://localhost:8080/api/v1/subEntities/110022");
 		System.out.println("http://localhost:8080/api/v1/subEntities/110033");
 		System.out.println("http://localhost:8080/api/v1/subEntities/110044");
