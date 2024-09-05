@@ -72,10 +72,29 @@ public class SubEntityController {
         SubEntityDto convertedDto = this.subEntityToDTO.convert(add);
 
         return new CustomReturnData(
-                true,
-                CustomStatusCode.SUCCESS,
-                "Transaction is Ok",
-                convertedDto
+            true,
+            CustomStatusCode.SUCCESS,
+            "Transaction is Ok",
+            convertedDto
+        );
+    }
+
+    @PutMapping("/api/v1/subEntities/{id}")
+    public CustomReturnData update(
+        @PathVariable String id,
+        @Valid @RequestBody SubEntityDto dto
+    ) {
+        SubEntity convertedEntity = this.dtoToSubEntity.convert(dto);
+
+        SubEntity updated = this.subEntityService.update(id, convertedEntity);
+
+        SubEntityDto retDto = this.subEntityToDTO.convert(updated);
+
+        return new CustomReturnData(
+            true,
+            CustomStatusCode.SUCCESS,
+            "Transaction is Ok",
+            retDto
         );
     }
 }

@@ -34,4 +34,20 @@ public class SubEntityService {
 
         return this.subEntityRepository.save(subEntity);
     }
+
+    public SubEntity update(String id, SubEntity candidateToUpdate) {
+        return subEntityRepository
+                .findById(id)
+
+                .map((existingSubEntity) -> {
+                    existingSubEntity.setName(candidateToUpdate.getName());
+                    existingSubEntity.setDescription(candidateToUpdate.getDescription());
+                    existingSubEntity.setImgUrl(candidateToUpdate.getImgUrl());
+
+                    return subEntityRepository.save(existingSubEntity);
+                })
+
+                .orElseThrow(() -> new SubEntityNotFoundException(id));
+    }
+
 }

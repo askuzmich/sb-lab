@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -75,31 +76,31 @@ class SubEntityControllerTest {
                 .willReturn(this.subEntities.get(2));
 
         this.mockMvc.perform(
-                MockMvcRequestBuilders.get("/api/v1/subEntities/110044")
-                        .accept(MediaType.APPLICATION_JSON)
+            MockMvcRequestBuilders.get("/api/v1/subEntities/110044")
+                .accept(MediaType.APPLICATION_JSON)
         )
-                .andExpect(jsonPath("$.isSuccess").value(true))
-                .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
-                .andExpect(jsonPath("$.message").value("Transaction is Ok"))
-                .andExpect(jsonPath("$.data.id").value("110044"))
-                .andExpect(jsonPath("$.data.name").value("se3"))
-                .andExpect(jsonPath("$.data.description").value("woo-hoo se3"))
-                .andExpect(jsonPath("$.data.imgUrl").value("https://fakeImageUrl.com/se3"));
+            .andExpect(jsonPath("$.isSuccess").value(true))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+            .andExpect(jsonPath("$.data.id").value("110044"))
+            .andExpect(jsonPath("$.data.name").value("se3"))
+            .andExpect(jsonPath("$.data.description").value("woo-hoo se3"))
+            .andExpect(jsonPath("$.data.imgUrl").value("https://fakeImageUrl.com/se3"));
     }
 
     @Test
     void findSubEntityByIdNotFound() throws Exception {
         given(this.subEntityService.findById("110044"))
-                .willThrow(new SubEntityNotFoundException("110044"));
+            .willThrow(new SubEntityNotFoundException("110044"));
 
         this.mockMvc.perform(
-                MockMvcRequestBuilders.get("/api/v1/subEntities/110044")
-                        .accept(MediaType.APPLICATION_JSON)
+            MockMvcRequestBuilders.get("/api/v1/subEntities/110044")
+                .accept(MediaType.APPLICATION_JSON)
         )
-                .andExpect(jsonPath("$.isSuccess").value(false))
-                .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.NOT_FOUND))
-                .andExpect(jsonPath("$.message").value("Not find subEntity with ID: 110044"))
-                .andExpect(jsonPath("$.data").isEmpty());
+            .andExpect(jsonPath("$.isSuccess").value(false))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.NOT_FOUND))
+            .andExpect(jsonPath("$.message").value("Not find subEntity with ID: 110044"))
+            .andExpect(jsonPath("$.data").isEmpty());
     }
 
     @Test
@@ -108,24 +109,24 @@ class SubEntityControllerTest {
                 .willReturn(this.subEntities);
 
         this.mockMvc.perform(
-                MockMvcRequestBuilders.get("/api/v1/subEntities")
-                        .accept(MediaType.APPLICATION_JSON)
+            MockMvcRequestBuilders.get("/api/v1/subEntities")
+                .accept(MediaType.APPLICATION_JSON)
         )
-                .andExpect(jsonPath("$.isSuccess").value(true))
-                .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
-                .andExpect(jsonPath("$.message").value("Transaction is Ok"))
-                .andExpect(jsonPath("$.data", Matchers.hasSize(this.subEntities.size())))
-                .andExpect(jsonPath("$.data[0].id").value("110022"));
+            .andExpect(jsonPath("$.isSuccess").value(true))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+            .andExpect(jsonPath("$.data", Matchers.hasSize(this.subEntities.size())))
+            .andExpect(jsonPath("$.data[0].id").value("110022"));
     }
 
     @Test
     void testAdd() throws Exception {
         SubEntityDto subEntityDto = new SubEntityDto(
-                null,
-                "se10",
-                "woo-hoo se10",
-                "https://fakeImageUrl.com/se10",
-                null
+            null,
+            "se10",
+            "woo-hoo se10",
+            "https://fakeImageUrl.com/se10",
+            null
         );
 
         String jsonString = this.objectMapper.writeValueAsString(subEntityDto);
@@ -140,19 +141,87 @@ class SubEntityControllerTest {
                 .willReturn(se1);
 
         this.mockMvc.perform(
-                    MockMvcRequestBuilders.post("/api/v1/subEntities")
+                MockMvcRequestBuilders.post("/api/v1/subEntities")
+                // send
+                .contentType(MediaType.APPLICATION_JSON).content(jsonString)
+                // receive
+                .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(jsonPath("$.isSuccess").value(true))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+            .andExpect(jsonPath("$.data.id").isNotEmpty())
+            .andExpect(jsonPath("$.data.id").value("110022"))
+            .andExpect(jsonPath("$.data.name").value(se1.getName()));
+    }
+
+    @Test
+    void testUpdate() throws Exception {
+        SubEntityDto dto = new SubEntityDto(
+                "110022",
+                "se10",
+                "woo-hoo se10",
+                "https://fakeImageUrl.com/se10",
+                null
+        );
+
+        String jsonString = this.objectMapper.writeValueAsString(dto);
+
+        SubEntity shouldBeReturnedSE = new SubEntity();
+        shouldBeReturnedSE.setId("110022");
+        shouldBeReturnedSE.setName("shouldBeReturnedSE0");
+        shouldBeReturnedSE.setDescription("woo-hoo shouldBeReturnedSE0");
+        shouldBeReturnedSE.setImgUrl("https://fakeImageUrl.com/se10");
+
+        given(this.subEntityService.update(eq("110022"), Mockito.any(SubEntity.class)))
+                .willReturn(shouldBeReturnedSE);
+
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.put("/api/v1/subEntities/110022")
                     // send
                     .contentType(MediaType.APPLICATION_JSON).content(jsonString)
                     // receive
                     .accept(MediaType.APPLICATION_JSON)
-                )
-                .andExpect(jsonPath("$.isSuccess").value(true))
-                .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
-                .andExpect(jsonPath("$.message").value("Transaction is Ok"))
-                .andExpect(jsonPath("$.data.id").isNotEmpty())
-                .andExpect(jsonPath("$.data.id").value("110022"))
-                .andExpect(jsonPath("$.data.name").value(se1.getName()));
+            )
+            .andExpect(jsonPath("$.isSuccess").value(true))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+            .andExpect(jsonPath("$.data.id").isNotEmpty())
+            .andExpect(jsonPath("$.data.id").value("110022"))
+            .andExpect(jsonPath("$.data.name").value(shouldBeReturnedSE.getName()))
+            .andExpect(jsonPath("$.data.description").value(shouldBeReturnedSE.getDescription()))
+            .andExpect(jsonPath("$.data.imgUrl").value(shouldBeReturnedSE.getImgUrl()));
+    }
 
 
+    @Test
+    void testUpdateWithNotFoundID() throws Exception {
+
+        SubEntityDto dto = new SubEntityDto(
+                "110022",
+                "se10",
+                "woo-hoo se10",
+                "https://fakeImageUrl.com/se10",
+                null
+        );
+
+        String jsonString = this.objectMapper.writeValueAsString(dto);
+
+        given(this.subEntityService.update(eq("110022"), Mockito.any(SubEntity.class)))
+                .willThrow(new SubEntityNotFoundException("110022"));
+
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.put("/api/v1/subEntities/110022")
+                    // send
+                    .contentType(MediaType.APPLICATION_JSON).content(jsonString)
+                    // receive
+                    .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(jsonPath("$.isSuccess").value(false))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.NOT_FOUND))
+            .andExpect(jsonPath("$.message").value("Not find subEntity with ID: 110022"))
+            .andExpect(jsonPath("$.data").isEmpty());
     }
 }

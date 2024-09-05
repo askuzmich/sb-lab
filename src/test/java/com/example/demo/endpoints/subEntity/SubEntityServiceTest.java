@@ -18,6 +18,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -181,5 +182,66 @@ class SubEntityServiceTest {
 
         verify(subEntityRepository, times(1))
                 .save(subEntity);
+    }
+
+    @Test
+    void testUpdate() {
+        SubEntity mockExistingSubEntity = new SubEntity();
+        mockExistingSubEntity.setId("110066");
+        mockExistingSubEntity.setName("MockExistingSubEntity");
+        mockExistingSubEntity.setDescription("woo-hoo mockExistingSubEntity");
+        mockExistingSubEntity.setImgUrl("https://fakeImageUrl.com/se5");
+
+        SubEntity candidateToUpdate = new SubEntity();
+        candidateToUpdate.setId("110066");
+        candidateToUpdate.setName("MockExistingSubEntity");
+        candidateToUpdate.setDescription("updating... candidateToUpdate");
+        candidateToUpdate.setImgUrl("https://fakeImageUrl.com/se5");
+
+
+        given(subEntityRepository.findById("110066"))
+                .willReturn(Optional.of(mockExistingSubEntity));
+
+        given(subEntityRepository.save(mockExistingSubEntity))
+                .willReturn(mockExistingSubEntity);
+
+        SubEntity update = subEntityService.update("110066", candidateToUpdate);
+
+        assertThat(update.getId())
+                .isEqualTo(mockExistingSubEntity.getId());
+        assertThat(update.getName())
+                .isEqualTo(mockExistingSubEntity.getName());
+        assertThat(update.getDescription())
+                .isEqualTo(candidateToUpdate.getDescription());
+        assertThat(update.getImgUrl())
+                .isEqualTo(mockExistingSubEntity.getImgUrl());
+
+        verify(subEntityRepository, times(1))
+                .findById("110066");
+
+        verify(subEntityRepository, times(1))
+                .save(mockExistingSubEntity);
+    }
+
+    @Test
+    void testUpdateNotFound() {
+        SubEntity mockExistingSubEntity = new SubEntity();
+//        mockExistingSubEntity.setId("110066");
+        mockExistingSubEntity.setName("MockExistingSubEntity");
+        mockExistingSubEntity.setDescription("woo-hoo mockExistingSubEntity");
+        mockExistingSubEntity.setImgUrl("https://fakeImageUrl.com/se5");
+
+        given(subEntityRepository.findById("110066"))
+                .willReturn(Optional.empty());
+
+        assertThrows(
+            SubEntityNotFoundException.class,
+            () -> {
+                subEntityService.update("110066", mockExistingSubEntity);
+            }
+        );
+
+        verify(subEntityRepository, times(1))
+                .findById("110066");
     }
 }
