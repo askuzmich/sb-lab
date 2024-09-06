@@ -244,4 +244,51 @@ class SubEntityServiceTest {
         verify(subEntityRepository, times(1))
                 .findById("110066");
     }
+
+    @Test
+    void testDelete() {
+        SubEntity mockExistingSubEntity = new SubEntity();
+        mockExistingSubEntity.setId("110066");
+        mockExistingSubEntity.setName("MockExistingSubEntity");
+        mockExistingSubEntity.setDescription("woo-hoo mockExistingSubEntity");
+        mockExistingSubEntity.setImgUrl("https://fakeImageUrl.com/se5");
+
+        // Mock behavior
+        given(subEntityRepository.findById("110066"))
+                .willReturn(Optional.of(mockExistingSubEntity));
+
+        doNothing().when(subEntityRepository).deleteById("110066");
+
+        // When...
+        subEntityService.delete("110066");
+
+        // Then... assertion part
+        verify(subEntityRepository, times(1))
+                .deleteById("110066");
+
+    }
+
+    @Test
+    void testDeleteNotSuccess() {
+        // Mock behavior
+        given(subEntityRepository.findById("110066"))
+                .willReturn(Optional.empty());
+
+
+
+        // When...
+        assertThrows(
+            SubEntityNotFoundException.class,
+            () -> {
+                subEntityService.delete("110066");
+            }
+        );
+
+
+        // Then... assertion part
+        verify(subEntityRepository, times(1))
+                .findById("110066");
+
+    }
+
 }

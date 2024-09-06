@@ -20,9 +20,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
@@ -71,7 +73,7 @@ class SubEntityControllerTest {
     }
 
     @Test
-    void findSubEntityById() throws Exception {
+    void testFindSubEntityById() throws Exception {
         given(this.subEntityService.findById("110044"))
                 .willReturn(this.subEntities.get(2));
 
@@ -89,7 +91,7 @@ class SubEntityControllerTest {
     }
 
     @Test
-    void findSubEntityByIdNotFound() throws Exception {
+    void testFindSubEntityByIdNotFound() throws Exception {
         given(this.subEntityService.findById("110044"))
             .willThrow(new SubEntityNotFoundException("110044"));
 
@@ -104,7 +106,7 @@ class SubEntityControllerTest {
     }
 
     @Test
-    void findAll() throws Exception {
+    void testFindAll() throws Exception {
         given(this.subEntityService.getAll())
                 .willReturn(this.subEntities);
 
@@ -196,7 +198,7 @@ class SubEntityControllerTest {
 
 
     @Test
-    void testUpdateWithNotFoundID() throws Exception {
+    void testUpdateNotFound() throws Exception {
 
         SubEntityDto dto = new SubEntityDto(
                 "110022",
@@ -222,6 +224,41 @@ class SubEntityControllerTest {
             .andExpect(jsonPath("$.isSuccess").value(false))
             .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.NOT_FOUND))
             .andExpect(jsonPath("$.message").value("Not find subEntity with ID: 110022"))
+            .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void testDelete() throws Exception {
+        doNothing().when(subEntityService).delete("110066");
+
+        // When... Then... assertion part
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.delete("/api/v1/subEntities/110066")
+                    // client send nothing
+                    // client receive
+                    .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(jsonPath("$.isSuccess").value(true))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+            .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void testDeleteNotSuccess() throws Exception {
+        doThrow(new SubEntityNotFoundException("110066"))
+                .when(subEntityService).delete("110066");
+
+        // When... Then... assertion part
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.delete("/api/v1/subEntities/110066")
+                    // client send nothing
+                    // client receive
+                    .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(jsonPath("$.isSuccess").value(false))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.NOT_FOUND))
+            .andExpect(jsonPath("$.message").value("Not find subEntity with ID: 110066"))
             .andExpect(jsonPath("$.data").isEmpty());
     }
 }

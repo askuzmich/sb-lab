@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api/v1/subEntities")
 public class SubEntityController {
     private final SubEntityService subEntityService;
 
@@ -30,7 +31,7 @@ public class SubEntityController {
         this.dtoToSubEntity = dtoToSubEntity;
     }
 
-    @GetMapping("/api/v1/subEntities/{id}")
+    @GetMapping("/{id}")
     public CustomReturnData findSubEntityById(@PathVariable String id) {
         SubEntity subEntity = this.subEntityService.findById(id);
 
@@ -44,7 +45,7 @@ public class SubEntityController {
         );
     }
 
-    @GetMapping("/api/v1/subEntities")
+    @GetMapping
     public CustomReturnData getAll() {
         List<SubEntity> subEntities = subEntityService.getAll();
 
@@ -63,7 +64,7 @@ public class SubEntityController {
         );
     }
 
-    @PostMapping("/api/v1/subEntities")
+    @PostMapping
     public CustomReturnData add(@Valid @RequestBody SubEntityDto subEntityDto) {
         SubEntity convert = this.dtoToSubEntity.convert(subEntityDto);
 
@@ -79,7 +80,7 @@ public class SubEntityController {
         );
     }
 
-    @PutMapping("/api/v1/subEntities/{id}")
+    @PutMapping("/{id}")
     public CustomReturnData update(
         @PathVariable String id,
         @Valid @RequestBody SubEntityDto dto
@@ -95,6 +96,17 @@ public class SubEntityController {
             CustomStatusCode.SUCCESS,
             "Transaction is Ok",
             retDto
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public CustomReturnData delete(@PathVariable String id) {
+        this.subEntityService.delete(id);
+
+        return new CustomReturnData(
+            true,
+            CustomStatusCode.SUCCESS,
+            "Transaction is Ok"
         );
     }
 }
