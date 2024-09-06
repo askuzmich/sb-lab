@@ -1,6 +1,6 @@
 # sb-lab DB_MODEL
 
-## GET subEntity by ID
+## GET (getByID) subEntity
 GET: /api/v1/subEntities/{id}  </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
 200: SHOULD RETURN:
@@ -23,7 +23,7 @@ EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
 }
 ```
 
-### getById Not Found: </br>
+### GET getById Not Found: </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110067 </br>
 404:
 ```
@@ -36,7 +36,7 @@ EXAMPLE: localhost:8080/api/v1/subEntities/110067 </br>
 ```
 
 
-## GET ALL subEntity
+## GET (getALL) subEntity
 GET /api/v1/subEntities </br>
 EXAMPLE: localhost:8080/api/v1/subEntities </br>
 200: SHOULD RETURN:
@@ -86,7 +86,7 @@ EXAMPLE: localhost:8080/api/v1/subEntities </br>
 
 
 
-## POST ADD subEntity
+## POST (ADD) subEntity
 POST /api/v1/subEntities </br>
 EXAMPLE: localhost:8080/api/v1/subEntities </br>
 REQUEST BODY:
@@ -104,7 +104,7 @@ REQUEST BODY:
     "statusCode": 200,
     "message": "Transaction is Ok",
     "body": {
-        "id": "110099",
+        "id": "5873cf16-cef6-49f0-83d6-fc31a53d90c7",
         "name": "se10",
         "description": "woo-hoo se10",
         "imgUrl": "https://fakeImageUrl.com/se10",
@@ -128,8 +128,8 @@ REQUEST BODY:
 
 
 
-## POST UPDATE subEntity
-POST /api/v1/subEntities/{id} </br>
+## UPDATE (PUT) subEntity
+PUT /api/v1/subEntities/{id} </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
 REQUEST BODY:
 ```
@@ -145,7 +145,7 @@ REQUEST BODY:
     "isSuccess": true,
     "statusCode": 200,
     "message": "Transaction is Ok",
-    "body": {
+    "data": {
         "id": "110066",
         "name": "se10",
         "description": "woo-hoo se10",
@@ -160,6 +160,32 @@ REQUEST BODY:
     "isSuccess": false,
     "statusCode": 404,
     "message": "Not find subEntity with ID: 110069",
+    "data": null
+}
+```
+
+
+
+
+
+## DELETE subEntity
+DELETE /api/v1/subEntities/{id} </br>
+EXAMPLE: localhost:8080/api/v1/subEntities/110055 </br>
+200: SHOULD RETURN:
+```
+{
+    "isSuccess": true,
+    "statusCode": 200,
+    "message": "Transaction is Ok",
+    "data": null
+}
+```
+404: NOT FOUND EL WITH ID
+```
+{
+    "isSuccess": false,
+    "statusCode": 404,
+    "message": "Not find subEntity with ID: 110055",
     "data": null
 }
 ```
