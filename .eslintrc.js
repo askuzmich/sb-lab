@@ -44,8 +44,14 @@ module.exports = {
     "react-hooks/exhaustive-deps": "error"
   },
   globals: { __IS_DEV__: true },
-  overrides: [{
-    files: ["**/src/**/*.{test,stories}.{ts,tsx}"],
-    rules: { "i18next/no-literal-string": "off", "max-len": "off" }
-  }]
+  overrides: [
+    {
+      files: ["**/src/**/*.{test,stories}.{ts,tsx}"],
+      rules: { "i18next/no-literal-string": "off", "max-len": "off" }
+    },
+    {
+      files: ["**/src/**/*.slice.{ts,tsx}"],
+      rules: { "no-param-reassign": "off" }
+    }
+  ]
 };
