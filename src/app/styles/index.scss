@@ -4,25 +4,25 @@
 @import "themes/dark";
 
 body {
+  font: var(--font-m);
+  color: var(--primary-color);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
 .app {
-  font: var(--font-m);
   background: var(--bg-color);
-  color: var(--primary-color);
   min-height: 100vh;
   text-align: center;
   display: block;
   position: relative;
   padding-top: 10px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .app-link {
