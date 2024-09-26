@@ -3,11 +3,9 @@
 ## GET (getByID) subEntity
 GET: /api/v1/subEntities/{id}  </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
-200: SHOULD RETURN:
-```
+statusCode: 200; isSuccess: true;
+```json
 {
-    "isSuccess": true,
-    "statusCode": 200,
     "message": "Transaction is Ok",
     "data": {
         "id": "110066",
@@ -25,11 +23,9 @@ EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
 
 ### GET getById Not Found: </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110067 </br>
-404:
-```
+statusCode: 404; isSuccess: false;
+```json
 {
-    "isSuccess": false,
-    "statusCode": 404,
     "message": "Not find subEntity with ID: 110067",
     "data": null
 }
@@ -39,11 +35,9 @@ EXAMPLE: localhost:8080/api/v1/subEntities/110067 </br>
 ## GET (getALL) subEntity
 GET /api/v1/subEntities </br>
 EXAMPLE: localhost:8080/api/v1/subEntities </br>
-200: SHOULD RETURN:
-```
+statusCode: 200; isSuccess: true;
+```json
 {
-    "isSuccess": true,
-    "statusCode": 200,
     "message": "Transaction is Ok",
     "data": [
         {
@@ -90,18 +84,16 @@ EXAMPLE: localhost:8080/api/v1/subEntities </br>
 POST /api/v1/subEntities </br>
 EXAMPLE: localhost:8080/api/v1/subEntities </br>
 REQUEST BODY:
-```
+```json
 {
     "name": "se10",
     "description": "woo-hoo se10",
     "imgUrl": "https://fakeImageUrl.com/se10"
 }
 ```
-200: SHOULD RETURN:
-```
+statusCode: 200; isSuccess: true;
+```json
 {
-    "isSuccess": true,
-    "statusCode": 200,
     "message": "Transaction is Ok",
     "body": {
         "id": "5873cf16-cef6-49f0-83d6-fc31a53d90c7",
@@ -112,11 +104,10 @@ REQUEST BODY:
     }
 }
 ```
-400: FAIL:
-```
+
+statusCode: 400; isSuccess: false;
+```json
 {
-    "isSuccess": false,
-    "statusCode": 400,
     "message": "Data is wrong",
     "body": {
         "name": "is required",
@@ -132,18 +123,16 @@ REQUEST BODY:
 PUT /api/v1/subEntities/{id} </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
 REQUEST BODY:
-```
+```json
 {
     "name": "se10",
     "description": "woo-hoo se10",
     "imgUrl": "https://fakeImageUrl.com/se10"
 }
 ```
-200: SHOULD RETURN:
-```
+statusCode: 200; isSuccess: true;
+```json
 {
-    "isSuccess": true,
-    "statusCode": 200,
     "message": "Transaction is Ok",
     "data": {
         "id": "110066",
@@ -154,11 +143,9 @@ REQUEST BODY:
     }
 }
 ```
-404: NOT FOUND EL WITH ID
-```
+statusCode: 404; isSuccess: false;
+```json
 {
-    "isSuccess": false,
-    "statusCode": 404,
     "message": "Not find subEntity with ID: 110069",
     "data": null
 }
@@ -171,21 +158,169 @@ REQUEST BODY:
 ## DELETE subEntity
 DELETE /api/v1/subEntities/{id} </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110055 </br>
-200: SHOULD RETURN:
-```
+statusCode: 200; isSuccess: true;
+```json
 {
-    "isSuccess": true,
-    "statusCode": 200,
     "message": "Transaction is Ok",
     "data": null
 }
 ```
 404: NOT FOUND EL WITH ID
-```
+```json
 {
-    "isSuccess": false,
-    "statusCode": 404,
     "message": "Not find subEntity with ID: 110055",
     "data": null
 }
 ```
+
+
+
+
+
+# HEADOBJECT API CRUD
+
+
+## GET allHeadObjects
+GET /api/v1/headObjects </br>
+EXAMPLE: localhost:8080/api/v1/headObjects </br>
+statusCode: 200; isSuccess: true;
+```json
+{
+  "message": "Transaction is Ok",
+  "data": [
+    {
+      "id": 1,
+      "name": "HeadObject 1",
+      "hasSubEntities": 1
+    },
+    {
+      "id": 2,
+      "name": "HeadObject 2",
+      "hasSubEntities": 2
+    },
+    {
+      "id": 3,
+      "name": "HeadObject 3",
+      "hasSubEntities": 1
+    }
+  ]
+}
+```
+
+
+
+## GET getHeadObjectById
+GET /api/v1/headObjects/{1} </br>
+EXAMPLE: localhost:8080/api/v1/headObjects/1 </br>
+statusCode: 200; isSuccess: true;
+```json
+{
+  "message": "Transaction is Ok",
+  "data": {
+      "id": 1,
+      "name": "HeadObject 1",
+      "hasSubEntities": 1
+    }
+}
+```
+
+EXAMPLE: localhost:8080/api/v1/headObjects/4 </br>
+statusCode: 404; isSuccess: false;
+```json
+{
+  "message": "Not find Head Object with ID: 4",
+  "data": null
+}
+```
+
+
+## POST make new HeadObject
+POST /api/v1/headObjects </br>
+EXAMPLE: localhost:8080/api/v1/headObjects </br>
+REQUEST BODY:
+```json
+{
+  "name": "New Head Object"
+}
+```
+statusCode: 200; isSuccess: true;
+```json
+{
+  "message": "Transaction is Ok",
+  "data": {
+    "id": 4,
+    "name": "New Head Object",
+    "hasSubEntities": 0
+  }
+}
+```
+statusCode: 400; isSuccess: false;
+```json
+{
+  "message": "Provided arguments are invalid, see data for details.",
+  "data": {
+    "name": "name is required."
+  }
+}
+```
+
+
+
+## UPDATE HeadObject
+PUT /api/v1/headObjects/12 </br>
+EXAMPLE: localhost:8080/api/v1/headObjects/12 </br>
+REQUEST BODY:
+```json
+{
+  "name": "Head Object #12"
+}
+```
+statusCode: 200; isSuccess: true;
+```json
+{
+  "message": "Transaction is Ok",
+  "data": {
+    "id": 12,
+    "name": "Head Object #12",
+    "hasSubEntities": 0
+  }
+}
+```
+statusCode: 400; isSuccess: false;
+```json
+{
+  "message": "Provided arguments are invalid, see data for details.",
+  "data": {
+    "name": "name is required."
+  }
+}
+```
+"/api/v1/headObjects/12" </br>
+statusCode: 404; isSuccess: false;
+```json
+{
+  "message": "Not find Head Object with ID: 12",
+  "data": null
+}
+```
+
+
+
+## DELETE headObjectById
+DELETE /api/v1/headObjects/{id} </br>
+EXAMPLE: localhost:8080/api/v1/headObjects/1 </br>
+statusCode: 200; isSuccess: true;
+```json
+{
+    "message": "Transaction is Ok",
+    "data": null
+}
+```
+statusCode: 404; isSuccess: false;
+```json
+{
+    "message": "Not find Head Object with ID: 1",
+    "data": null
+}
+```
+

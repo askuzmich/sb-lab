@@ -14,6 +14,7 @@ public class HeadObjectToDTO implements Converter<HeadObject, HeadObjectDto> {
                 source.getName(),
                 source.getNumberOfSE()
         );
+
         return headObjectDto;
     }
 }

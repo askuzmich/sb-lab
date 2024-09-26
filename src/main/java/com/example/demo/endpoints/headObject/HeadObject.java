@@ -10,6 +10,9 @@ import java.util.List;
 @Entity
 public class HeadObject implements Serializable {
     @Id
+//    @SequenceGenerator(name = "head_object_sequence", sequenceName = "head_object_sequence", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "head_object_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String name;
@@ -56,5 +59,15 @@ public class HeadObject implements Serializable {
 
     public Integer getNumberOfSE() {
         return this.subEntities.size();
+    }
+
+    public void removeAllSubEntities() {
+        this.subEntities
+            .stream()
+            .forEach((subEntity) -> {
+                subEntity.setOwner(null);
+            });
+
+        this.subEntities = null;
     }
 }
