@@ -1,7 +1,8 @@
 package com.example.demo.endpoints.subEntity;
 
 import com.example.demo.endpoints.headObject.HeadObject;
-import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
+//import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
+import com.example.demo.exception.CustomNotFoundException;
 import com.example.demo.utis.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -97,7 +98,8 @@ class SubEntityServiceTest {
         subEntity.setOwner(headObject);
 
         // Behavior itself
-        given(subEntityRepository.findById("12234")).willReturn(Optional.of(subEntity));
+        given(subEntityRepository.findById("12234"))
+                .willReturn(Optional.of(subEntity));
 
         SubEntity resultOfMockTransaction = subEntityService.findById("12234");
 
@@ -126,7 +128,7 @@ class SubEntityServiceTest {
         });
 
         assertThat(thrown)
-                .isInstanceOf(SubEntityNotFoundException.class)
+                .isInstanceOf(CustomNotFoundException.class)
                 .hasMessage("Not find subEntity with ID: 12234");
 
         verify(subEntityRepository, times(1))
@@ -193,7 +195,6 @@ class SubEntityServiceTest {
         mockExistingSubEntity.setImgUrl("https://fakeImageUrl.com/se5");
 
         SubEntity candidateToUpdate = new SubEntity();
-        candidateToUpdate.setId("110066");
         candidateToUpdate.setName("MockExistingSubEntity");
         candidateToUpdate.setDescription("updating... candidateToUpdate");
         candidateToUpdate.setImgUrl("https://fakeImageUrl.com/se5");
@@ -208,13 +209,13 @@ class SubEntityServiceTest {
         SubEntity update = subEntityService.update("110066", candidateToUpdate);
 
         assertThat(update.getId())
-                .isEqualTo(mockExistingSubEntity.getId());
+                .isEqualTo("110066");
         assertThat(update.getName())
-                .isEqualTo(mockExistingSubEntity.getName());
+                .isEqualTo(candidateToUpdate.getName());
         assertThat(update.getDescription())
                 .isEqualTo(candidateToUpdate.getDescription());
         assertThat(update.getImgUrl())
-                .isEqualTo(mockExistingSubEntity.getImgUrl());
+                .isEqualTo(candidateToUpdate.getImgUrl());
 
         verify(subEntityRepository, times(1))
                 .findById("110066");
@@ -226,7 +227,6 @@ class SubEntityServiceTest {
     @Test
     void testUpdateNotFound() {
         SubEntity mockExistingSubEntity = new SubEntity();
-//        mockExistingSubEntity.setId("110066");
         mockExistingSubEntity.setName("MockExistingSubEntity");
         mockExistingSubEntity.setDescription("woo-hoo mockExistingSubEntity");
         mockExistingSubEntity.setImgUrl("https://fakeImageUrl.com/se5");
@@ -235,7 +235,7 @@ class SubEntityServiceTest {
                 .willReturn(Optional.empty());
 
         assertThrows(
-            SubEntityNotFoundException.class,
+            CustomNotFoundException.class,
             () -> {
                 subEntityService.update("110066", mockExistingSubEntity);
             }
@@ -278,7 +278,7 @@ class SubEntityServiceTest {
 
         // When...
         assertThrows(
-            SubEntityNotFoundException.class,
+            CustomNotFoundException.class,
             () -> {
                 subEntityService.delete("110066");
             }

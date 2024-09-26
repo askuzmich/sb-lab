@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/subEntities")
+@RequestMapping("${api.endpoint.base-url}/subEntities")
 public class SubEntityController {
     private final SubEntityService subEntityService;
 

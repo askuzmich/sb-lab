@@ -1,6 +1,7 @@
-package com.example.demo.axceptionHandler;
+package com.example.demo.exception;
 
-import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
+//import com.example.demo.endpoints.headObject.exc.HeadObjectNotFoundException;
+//import com.example.demo.endpoints.subEntity.exception.SubEntityNotFoundException;
 import com.example.demo.returnDataObject.CustomReturnData;
 import com.example.demo.returnDataObject.CustomStatusCode;
 import org.springframework.http.HttpStatus;
@@ -17,16 +18,37 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
+//
+//    @ExceptionHandler(SubEntityNotFoundException.class)
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    CustomReturnData subEntityNotFoundExc(SubEntityNotFoundException exc) {
+//        return new CustomReturnData(false, CustomStatusCode.NOT_FOUND, exc.getMessage());
+//    }
+//
+//    @ExceptionHandler(HeadObjectNotFoundException.class)
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    CustomReturnData headObjectNotFoundExc(HeadObjectNotFoundException exc) {
+//        return new CustomReturnData(false, CustomStatusCode.NOT_FOUND, exc.getMessage());
+//    }
 
-    @ExceptionHandler(SubEntityNotFoundException.class)
+//    @ExceptionHandler({
+//        HeadObjectNotFoundException.class,
+//        SubEntityNotFoundException.class
+//    })
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    CustomReturnData notFoundExc(Exception exc) {
+//        return new CustomReturnData(false, CustomStatusCode.NOT_FOUND, exc.getMessage());
+//    }
+
+    @ExceptionHandler(CustomNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    CustomReturnData subEntityNotFoundExc(SubEntityNotFoundException exc) {
+    CustomReturnData notFoundExc(CustomNotFoundException exc) {
         return new CustomReturnData(false, CustomStatusCode.NOT_FOUND, exc.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    CustomReturnData subEntityControllerAddValidation(MethodArgumentNotValidException exc) {
+    CustomReturnData controllerAddValidation(MethodArgumentNotValidException exc) {
         List<ObjectError> errors = exc.getBindingResult().getAllErrors();
 
         Map<String, String> map = new HashMap<>(errors.size());
