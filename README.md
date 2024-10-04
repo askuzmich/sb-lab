@@ -20,8 +20,6 @@ statusCode: 200; isSuccess: true;
     }
 }
 ```
-
-### GET getById Not Found: </br>
 EXAMPLE: localhost:8080/api/v1/subEntities/110067 </br>
 statusCode: 404; isSuccess: false;
 ```json
@@ -104,7 +102,6 @@ statusCode: 200; isSuccess: true;
     }
 }
 ```
-
 statusCode: 400; isSuccess: false;
 ```json
 {
@@ -150,8 +147,6 @@ statusCode: 404; isSuccess: false;
     "data": null
 }
 ```
-
-
 
 
 
@@ -223,7 +218,6 @@ statusCode: 200; isSuccess: true;
     }
 }
 ```
-
 EXAMPLE: localhost:8080/api/v1/headObjects/4 </br>
 statusCode: 404; isSuccess: false;
 ```json
@@ -266,8 +260,28 @@ statusCode: 400; isSuccess: false;
 
 
 
+## UPDATE assignment of SubEntity to HeadObject
+PUT /api/v1/headObjects/{hid}/subEntities/{sid} </br>
+EXAMPLE: localhost:8080/api/v1/headObjects/12/subEntities/1 </br>
+statusCode: 200; isSuccess: true;
+```json
+{
+  "message": "Assignment is Ok",
+  "data": null
+}
+```
+statusCode: 404; isSuccess: false;
+```json
+{
+  "message": "Not find {subEntity | Head Object | [BOTH]} with ID: 1",
+  "data": null
+}
+```
+
+
+
 ## UPDATE HeadObject
-PUT /api/v1/headObjects/12 </br>
+PUT /api/v1/headObjects/{id} </br>
 EXAMPLE: localhost:8080/api/v1/headObjects/12 </br>
 REQUEST BODY:
 ```json

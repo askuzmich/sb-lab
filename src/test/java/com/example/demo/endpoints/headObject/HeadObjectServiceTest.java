@@ -2,6 +2,8 @@ package com.example.demo.endpoints.headObject;
 
 //import com.example.demo.endpoints.headObject.exc.HeadObjectNotFoundException;
 
+import com.example.demo.endpoints.subEntity.SubEntity;
+import com.example.demo.endpoints.subEntity.SubEntityRepository;
 import com.example.demo.exception.CustomNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +30,9 @@ class HeadObjectServiceTest {
 
     @Mock
     HeadObjectRepository headObjectRepository;
+
+    @Mock
+    SubEntityRepository subEntityRepository;
 
     @InjectMocks
     HeadObjectService headObjectService;
@@ -218,5 +223,108 @@ class HeadObjectServiceTest {
 
         verify(headObjectRepository, times(1))
                 .findById(1);
+    }
+
+    @Test
+    void testAssignmentSubEntity() {
+        // data [code example]
+        SubEntity subEntity1 = new SubEntity();
+        subEntity1.setId("110022");
+        subEntity1.setName("Sub Entity 1");
+        subEntity1.setDescription("SE Description");
+        subEntity1.setImgUrl("https://very-fake-url.com/img/1.jpg");
+
+//        SubEntity subEntity2 = new SubEntity();
+//        subEntity2.setId("110033");
+//        subEntity2.setName("Sub Entity 2");
+//        subEntity2.setDescription("SE Description");
+//        subEntity2.setImgUrl("https://very-fake-url.com/img/2.jpg");
+//
+//        SubEntity subEntity3 = new SubEntity();
+//        subEntity3.setId("110044");
+//        subEntity3.setName("Sub Entity 3");
+//        subEntity3.setDescription("SE Description");
+//        subEntity3.setImgUrl("https://very-fake-url.com/img/3.jpg");
+//
+//        SubEntity subEntity4 = new SubEntity();
+//        subEntity4.setId("110055");
+//        subEntity4.setName("Sub Entity 4");
+//        subEntity4.setDescription("SE Description");
+//        subEntity4.setImgUrl("https://very-fake-url.com/img/4.jpg");
+//
+//        SubEntity subEntity5 = new SubEntity();
+//        subEntity5.setId("110066");
+//        subEntity5.setName("Sub Entity 5");
+//        subEntity5.setDescription("SE Description");
+//        subEntity5.setImgUrl("https://very-fake-url.com/img/5.jpg");
+
+        headObjects.get(2).addSubEntity(subEntity1);
+
+        // we should assign headObjects.get(3) to subEntity2
+        given(this.subEntityRepository.findById("110022"))
+                .willReturn(Optional.of(subEntity1));
+
+        given(this.headObjectRepository.findById(headObjects.get(3).getId()))
+                .willReturn(Optional.of(headObjects.get(3)));
+
+        // if
+        this.headObjectService.assignmentSubEntity(headObjects.get(3).getId(), "110022");
+
+        // then
+        assertThat(subEntity1.getOwner().getId())
+                .isEqualTo(headObjects.get(3).getId());
+
+        assertThat(headObjects.get(3).getSubEntities())
+                .contains(subEntity1);
+    }
+
+    @Test
+    void testAssignmentHeadObjectNotFound() {
+        // data
+        SubEntity subEntity1 = new SubEntity();
+        subEntity1.setId("110022");
+        subEntity1.setName("Sub Entity 1");
+        subEntity1.setDescription("SE Description");
+        subEntity1.setImgUrl("https://very-fake-url.com/img/1.jpg");
+
+        headObjects.get(2).addSubEntity(subEntity1);
+
+        // we should assign headObjects.get(3) to subEntity2
+        given(this.subEntityRepository.findById("110022"))
+                .willReturn(Optional.of(subEntity1));
+
+        given(this.headObjectRepository.findById(headObjects.get(3).getId()))
+                .willReturn(Optional.empty());
+
+        // if
+        Throwable thrown = assertThrows(CustomNotFoundException.class, () -> {
+            this.headObjectService.assignmentSubEntity(headObjects.get(3).getId(), "110022");
+        });
+
+        // then
+        assertThat(thrown)
+                .isInstanceOf(CustomNotFoundException.class)
+                        .hasMessage("Not find Head Object with ID: " + headObjects.get(3).getId());
+
+        // *** headObjects.get(2) instead of get(3) ***
+        assertThat(subEntity1.getOwner().getId())
+                .isEqualTo(headObjects.get(2).getId());
+    }
+
+    @Test
+    void testAssignmentSubEntityNotFound() {
+        // we should assign headObjects.get(3) to subEntity2
+        given(this.subEntityRepository.findById("110022"))
+                .willReturn(Optional.empty());
+
+        // if
+        Throwable thrown = assertThrows(CustomNotFoundException.class, () -> {
+            this.headObjectService.assignmentSubEntity(headObjects.get(3).getId(), "110022");
+        });
+
+        // then
+        assertThat(thrown)
+            .isInstanceOf(CustomNotFoundException.class)
+            .hasMessage("Not find SubEntity with ID: " + "110022");
     }
 }

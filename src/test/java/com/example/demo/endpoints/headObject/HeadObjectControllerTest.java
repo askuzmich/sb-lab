@@ -255,4 +255,58 @@ class HeadObjectControllerTest {
         .andExpect(jsonPath("$.message").value("Not find Head Object with ID: 1"))
         .andExpect(jsonPath("$.data").isEmpty());
     }
+
+    @Test
+    void testAssignSubEntity() throws Exception {
+        // data
+        doNothing()
+            .when(this.headObjectService)
+                .assignmentSubEntity(110022, "110022");
+
+        // if then
+        this.mockMvc.perform(
+            MockMvcRequestBuilders.put(baseUrl + "/headObjects/11022/subEntities/11022")
+                .accept(MediaType.APPLICATION_JSON)
+        )
+        .andExpect(jsonPath("$.isSuccess").value(true))
+        .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+        .andExpect(jsonPath("$.message").value("Assignment is Ok"))
+        .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void testAssignSubEntityNotFoundOfHeadObj() throws Exception {
+        // data
+        doThrow(new CustomNotFoundException("Head Object", 110022))
+            .when(this.headObjectService)
+                .assignmentSubEntity(110022, "110022");
+
+        // if then
+        this.mockMvc.perform(
+            MockMvcRequestBuilders.put(baseUrl + "/headObjects/110022/subEntities/110022")
+                .accept(MediaType.APPLICATION_JSON)
+        )
+        .andExpect(jsonPath("$.isSuccess").value(false))
+        .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.NOT_FOUND))
+        .andExpect(jsonPath("$.message").value("Not find Head Object with ID: " + 110022))
+        .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void testAssignSubEntityNotFoundOfSubEnt() throws Exception {
+        // data
+        doThrow(new CustomNotFoundException("Sub Entity", "110022"))
+            .when(this.headObjectService)
+                .assignmentSubEntity(110022, "110022");
+
+        // if then
+        this.mockMvc.perform(
+            MockMvcRequestBuilders.put(baseUrl + "/headObjects/110022/subEntities/110022")
+                .accept(MediaType.APPLICATION_JSON)
+        )
+        .andExpect(jsonPath("$.isSuccess").value(false))
+        .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.NOT_FOUND))
+        .andExpect(jsonPath("$.message").value("Not find Sub Entity with ID: " + "110022"))
+        .andExpect(jsonPath("$.data").isEmpty());
+    }
 }
