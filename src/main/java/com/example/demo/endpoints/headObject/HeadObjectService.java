@@ -1,6 +1,8 @@
 package com.example.demo.endpoints.headObject;
 
 //import com.example.demo.endpoints.headObject.exc.HeadObjectNotFoundException;
+import com.example.demo.endpoints.subEntity.SubEntity;
+import com.example.demo.endpoints.subEntity.SubEntityRepository;
 import com.example.demo.exception.CustomNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -12,8 +14,11 @@ import java.util.List;
 public class HeadObjectService {
     private final HeadObjectRepository headObjectRepository;
 
-    public HeadObjectService(HeadObjectRepository headObjectRepository) {
+    private final SubEntityRepository subEntityRepository;
+
+    public HeadObjectService(HeadObjectRepository headObjectRepository, SubEntityRepository subEntityRepository) {
         this.headObjectRepository = headObjectRepository;
+        this.subEntityRepository = subEntityRepository;
     }
 
     public HeadObject findById(Integer id) {
@@ -49,5 +54,25 @@ public class HeadObjectService {
         headObject.removeAllSubEntities();
 
         this.headObjectRepository.deleteById(id);
+    }
+
+    public void assignmentSubEntity(Integer hid, String sid) {
+        SubEntity subEntity = this.subEntityRepository
+                .findById(sid)
+                .orElseThrow(() -> {
+                    return new CustomNotFoundException("SubEntity", sid);
+                });
+
+        HeadObject headObject = this.headObjectRepository
+                .findById(hid)
+                .orElseThrow(() -> {
+                    return new CustomNotFoundException("Head Object", hid);
+                });
+
+        if (subEntity.getOwner() != null) {
+            subEntity.getOwner().removeSubEntity(subEntity);
+        }
+
+        headObject.addSubEntity(subEntity);
     }
 }

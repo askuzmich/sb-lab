@@ -70,4 +70,9 @@ public class HeadObject implements Serializable {
 
         this.subEntities = null;
     }
+
+    public void removeSubEntity(SubEntity subEntity) {
+        subEntity.setOwner(null);
+        this.subEntities.remove(subEntity);
+    }
 }

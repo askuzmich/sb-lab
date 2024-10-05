@@ -108,4 +108,15 @@ public class HeadObjectController {
             "Transaction is Ok"
         );
     }
+
+    @PutMapping("/{hid}/subEntities/{sid}")
+    public CustomReturnData assignSubEntity(@PathVariable Integer hid, @PathVariable String sid) {
+        this.headObjectService.assignmentSubEntity(hid, sid);
+
+        return new CustomReturnData(
+            true,
+            CustomStatusCode.SUCCESS,
+            "Assignment is Ok"
+        );
+    }
 }
