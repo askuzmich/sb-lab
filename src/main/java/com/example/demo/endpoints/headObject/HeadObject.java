@@ -2,6 +2,7 @@ package com.example.demo.endpoints.headObject;
 
 import com.example.demo.endpoints.subEntity.SubEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class HeadObject implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @NotEmpty(message = "name is required")
     private String name;
 
     @OneToMany(

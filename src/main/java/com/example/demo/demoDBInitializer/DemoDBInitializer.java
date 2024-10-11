@@ -2,6 +2,8 @@ package com.example.demo.demoDBInitializer;
 
 import com.example.demo.endpoints.headObject.HeadObject;
 import com.example.demo.endpoints.headObject.HeadObjectRepository;
+import com.example.demo.endpoints.sbUser.SbUser;
+import com.example.demo.endpoints.sbUser.UserRepository;
 import com.example.demo.endpoints.subEntity.SubEntity;
 import com.example.demo.endpoints.subEntity.SubEntityRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -13,9 +15,12 @@ public class DemoDBInitializer implements CommandLineRunner {
 
     private final HeadObjectRepository headObjectRepository;
 
-    public DemoDBInitializer(SubEntityRepository subEntityRepository, HeadObjectRepository headObjectRepository) {
+    private final UserRepository userRepository;
+
+    public DemoDBInitializer(SubEntityRepository subEntityRepository, HeadObjectRepository headObjectRepository, UserRepository userRepository) {
         this.subEntityRepository = subEntityRepository;
         this.headObjectRepository = headObjectRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -53,18 +58,18 @@ public class DemoDBInitializer implements CommandLineRunner {
 
         HeadObject ho1 = new HeadObject();
         ho1.setId(1);
-        ho1.setName("HeadObject 1");
+        ho1.setName("SbUser 1");
         ho1.addSubEntity(se1);
 
         HeadObject ho2 = new HeadObject();
         ho2.setId(2);
-        ho2.setName("HeadObject 2");
+        ho2.setName("SbUser 2");
         ho2.addSubEntity(se2);
         ho2.addSubEntity(se3);
 
         HeadObject ho3 = new HeadObject();
         ho3.setId(3);
-        ho3.setName("HeadObject 3");
+        ho3.setName("SbUser 3");
         ho3.addSubEntity(se4);
 
 
@@ -73,6 +78,31 @@ public class DemoDBInitializer implements CommandLineRunner {
         headObjectRepository.save(ho3);
 
         subEntityRepository.save(se5);
+
+        SbUser user1 = new SbUser();
+        user1.setId(1);
+        user1.setName("Alexander");
+        user1.setPassword("Alexander");
+        user1.setEnabled(true);
+        user1.setRoles("ADMIN");
+
+        SbUser user2 = new SbUser();
+        user2.setId(2);
+        user2.setName("Sergey");
+        user2.setPassword("Sergey");
+        user2.setEnabled(true);
+        user2.setRoles("USER");
+
+        SbUser user3 = new SbUser();
+        user3.setId(3);
+        user3.setName("Everybody");
+        user3.setPassword("Everybody");
+        user3.setEnabled(false);
+        user3.setRoles("USER");
+
+        this.userRepository.save(user1);
+        this.userRepository.save(user2);
+        this.userRepository.save(user3);
 
     }
 }

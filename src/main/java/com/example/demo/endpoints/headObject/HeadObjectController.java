@@ -5,6 +5,7 @@ import com.example.demo.endpoints.headObject.converter.DtoToHeadObject;
 import com.example.demo.endpoints.headObject.converter.HeadObjectToDTO;
 import com.example.demo.returnDataObject.CustomReturnData;
 import com.example.demo.returnDataObject.CustomStatusCode;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public class HeadObjectController {
     }
 
     @PostMapping
-    public CustomReturnData add(@RequestBody HeadObjectDto dto) {
+    public CustomReturnData add(@Valid @RequestBody HeadObjectDto dto) {
         HeadObject convert = this.dtoToHeadObject.convert(dto);
 
         HeadObject add = this.headObjectService.add(convert);
@@ -82,7 +83,7 @@ public class HeadObjectController {
     @PutMapping("/{id}")
     public CustomReturnData update(
         @PathVariable Integer id,
-        @RequestBody HeadObjectDto dto
+        @Valid @RequestBody HeadObjectDto dto
     ) {
         HeadObject convertedHO = this.dtoToHeadObject.convert(dto);
 

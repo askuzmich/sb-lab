@@ -163,11 +163,11 @@ class SubEntityControllerTest {
     @Test
     void testUpdate() throws Exception {
         SubEntityDto dto = new SubEntityDto(
-                "110022",
-                "se10",
-                "woo-hoo se10",
-                "https://fakeImageUrl.com/se10",
-                null
+            "110022",
+            "se10",
+            "woo-hoo se10",
+            "https://fakeImageUrl.com/se10",
+            null
         );
 
         String jsonString = this.objectMapper.writeValueAsString(dto);
