@@ -5,6 +5,8 @@ package com.example.demo.exception;
 import com.example.demo.returnDataObject.CustomReturnData;
 import com.example.demo.returnDataObject.CustomStatusCode;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -66,4 +68,20 @@ public class ExceptionHandlerAdvice {
                 map
         );
     }
+
+    @ExceptionHandler({
+        UsernameNotFoundException.class,
+        BadCredentialsException.class
+    })
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    CustomReturnData userOAuthExc(Exception exc) {
+        return new CustomReturnData(
+            false,
+            CustomStatusCode.UNAUTHORIZED,
+            "Wrong Username or Password",
+            exc.getMessage()
+        );
+    }
+
+
 }
