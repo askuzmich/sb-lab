@@ -2,17 +2,24 @@ package com.example.demo.endpoints.sbUser;
 
 import com.example.demo.exception.CustomNotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @Transactional
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+      this.passwordEncoder = passwordEncoder;
     }
 
     public SbUser findById(Integer id) {
@@ -26,7 +33,9 @@ public class UserService {
     }
 
     public SbUser add(SbUser user) {
-        // with encode pass!
+        // with encode pass! TODO
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+
         return this.userRepository.save(user);
     }
 
@@ -49,5 +58,19 @@ public class UserService {
         });
 
         this.userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return this.userRepository.findByName(username)
+            // if found user with this name -> wrap
+            .map((sbUser) -> {
+                return new SbUserPrincipal(sbUser);
+            })
+            .orElseThrow(() -> {
+                return new UsernameNotFoundException(
+                    "username" + username + "is not found"
+                );
+            });
     }
 }

@@ -3,7 +3,7 @@ package com.example.demo.demoDBInitializer;
 import com.example.demo.endpoints.headObject.HeadObject;
 import com.example.demo.endpoints.headObject.HeadObjectRepository;
 import com.example.demo.endpoints.sbUser.SbUser;
-import com.example.demo.endpoints.sbUser.UserRepository;
+import com.example.demo.endpoints.sbUser.UserService;
 import com.example.demo.endpoints.subEntity.SubEntity;
 import com.example.demo.endpoints.subEntity.SubEntityRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -15,12 +15,12 @@ public class DemoDBInitializer implements CommandLineRunner {
 
     private final HeadObjectRepository headObjectRepository;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public DemoDBInitializer(SubEntityRepository subEntityRepository, HeadObjectRepository headObjectRepository, UserRepository userRepository) {
+    public DemoDBInitializer(SubEntityRepository subEntityRepository, HeadObjectRepository headObjectRepository, UserService userService) {
         this.subEntityRepository = subEntityRepository;
         this.headObjectRepository = headObjectRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -100,9 +100,9 @@ public class DemoDBInitializer implements CommandLineRunner {
         user3.setEnabled(false);
         user3.setRoles("USER");
 
-        this.userRepository.save(user1);
-        this.userRepository.save(user2);
-        this.userRepository.save(user3);
+        this.userService.add(user1);
+        this.userService.add(user2);
+        this.userService.add(user3);
 
     }
 }

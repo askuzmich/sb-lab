@@ -15,9 +15,13 @@ public class DemoApplication {
 		System.out.println("H2 DB:");
 		System.out.println("http://localhost:8080/h2-console");
 		System.out.println("");
+		System.out.println("AUTHENTICATION");
+		System.out.println("http://localhost:8080/api/v1/users/login");
+		System.out.println("");
 		System.out.println("API:");
-		System.out.println("http://localhost:8080/api/v1/subEntities/110022");
-		System.out.println("http://localhost:8080/api/v1/subEntities/110033");
+		System.out.println("http://localhost:8080/api/v1/users");
+		System.out.println("http://localhost:8080/api/v1/headObjects");
+		System.out.println("http://localhost:8080/api/v1/subEntities");
 		System.out.println("http://localhost:8080/api/v1/subEntities/110044");
 	}
 
