@@ -1,5 +1,8 @@
 package com.example.demo.security;
 
+import com.example.demo.endpoints.auth.AuthBasicEntryPoint;
+import com.example.demo.endpoints.auth.AuthBearerTokenAccessDenied;
+import com.example.demo.endpoints.auth.AuthBearerTokenEntryPoint;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -40,7 +43,20 @@ public class SecurityConfig {
   @Value("${api.endpoint.base-url}")
   String baseUrl;
 
-  public SecurityConfig() throws NoSuchAlgorithmException {
+  private final AuthBasicEntryPoint authBasicEntryPoint;
+
+  private final AuthBearerTokenEntryPoint authBearerTokenEntryPoint;
+
+  private final AuthBearerTokenAccessDenied authBearerTokenAccessDenied;
+
+  public SecurityConfig(
+      AuthBasicEntryPoint authBasicEntryPoint,
+      AuthBearerTokenEntryPoint authBearerTokenEntryPoint,
+      AuthBearerTokenAccessDenied authBearerTokenAccessDenied
+  ) throws NoSuchAlgorithmException {
+    this.authBasicEntryPoint = authBasicEntryPoint;
+    this.authBearerTokenEntryPoint = authBearerTokenEntryPoint;
+    this.authBearerTokenAccessDenied = authBearerTokenAccessDenied;
     KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
     keyPairGenerator.initialize(2048); // size (bits)
     KeyPair keyPair = keyPairGenerator.generateKeyPair();
@@ -69,9 +85,15 @@ public class SecurityConfig {
           });
         })
         .csrf((csrf) -> csrf.disable()) // cross-site request forgery
-        .httpBasic(Customizer.withDefaults())
+        .httpBasic((httpBasic) -> {
+          httpBasic
+              .authenticationEntryPoint(this.authBasicEntryPoint);
+        })
         .oauth2ResourceServer((oauth2Server) -> {
-          oauth2Server.jwt(Customizer.withDefaults());
+          oauth2Server
+              .authenticationEntryPoint(this.authBasicEntryPoint)
+              .accessDeniedHandler(this.authBearerTokenAccessDenied)
+              .jwt(Customizer.withDefaults());
         })
         .sessionManagement((sm) -> {
           sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS);

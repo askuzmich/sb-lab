@@ -5,8 +5,11 @@ package com.example.demo.exception;
 import com.example.demo.returnDataObject.CustomReturnData;
 import com.example.demo.returnDataObject.CustomStatusCode;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -79,6 +82,55 @@ public class ExceptionHandlerAdvice {
             false,
             CustomStatusCode.UNAUTHORIZED,
             "Wrong Username or Password",
+            exc.getMessage()
+        );
+    }
+
+    @ExceptionHandler(AccountStatusException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    CustomReturnData accountStatusOAuthExc(AccountStatusException exc) {
+        return new CustomReturnData(
+            false,
+            CustomStatusCode.UNAUTHORIZED,
+            "Disabled or Blocked User Account (Account Status)",
+            exc.getMessage()
+        );
+    }
+
+    @ExceptionHandler(InvalidBearerTokenException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    CustomReturnData bearerTokenOAuthExc(InvalidBearerTokenException exc) {
+        return new CustomReturnData(
+            false,
+            CustomStatusCode.UNAUTHORIZED,
+            "Invalid Bearer Token (expired, revoked, malformed...)",
+            exc.getMessage()
+        );
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    CustomReturnData accessDeniedOAuthExc(AccessDeniedException exc) {
+        return new CustomReturnData(
+            false,
+            CustomStatusCode.FORBIDDEN,
+            "Access Denied. No permission",
+            exc.getMessage()
+        );
+    }
+
+    /**
+     * All Other Above Error was triggered
+     * @param exc
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    CustomReturnData allExc(Exception exc) {
+        return new CustomReturnData(
+            false,
+            CustomStatusCode.INTERNAL_SERVER_ERROR,
+            "Internal Server Error",
             exc.getMessage()
         );
     }
