@@ -83,9 +83,9 @@ public class SecurityConfig {
         })
 
         // for /h2-console/**
-        .headers((headerConfig) -> {
-          headerConfig.frameOptions((frameOptionsConfig) -> {
-            frameOptionsConfig.disable();
+        .headers((head) -> {
+          head.frameOptions((frameOptions) -> {
+            frameOptions.disable();
           });
         })
 

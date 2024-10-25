@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -63,6 +64,33 @@ class UserControllerIntegrationTest {
             .getString("token");
     }
 
+    @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
+    void testAdd() throws Exception {
+        SbUser user = new SbUser();
+        user.setName("Newman");
+        user.setRoles("USER");
+        user.setPassword("Newman");
+        user.setEnabled(true);
+
+        String body = this.objectMapper.writeValueAsString(user);
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders
+                    .post(baseUrl + "/users")
+                    .header("Authorization", this.token)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(body)
+                    .accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(jsonPath("$.isSuccess").value(true))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+            .andExpect(jsonPath("$.data.id").isNotEmpty())
+            .andExpect(jsonPath("$.data.name").value("Newman"));
+
+    }
+
 
     @Test
     void testFindUserById() throws Exception {
@@ -97,32 +125,6 @@ class UserControllerIntegrationTest {
             .andExpect(jsonPath("$.message").value("Transaction is Ok"))
             .andExpect(jsonPath("$.data", Matchers.hasSize(3)))
             .andExpect(jsonPath("$.data[0].id").value(1));
-    }
-
-    @Test
-    void testAdd() throws Exception {
-        SbUser user = new SbUser();
-        user.setName("Newman");
-        user.setRoles("USER");
-        user.setPassword("Newman");
-        user.setEnabled(true);
-
-        String body = this.objectMapper.writeValueAsString(user);
-
-        this.mockMvc.perform(
-                MockMvcRequestBuilders
-                    .post(baseUrl + "/users")
-                    .header("Authorization", this.token)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(body)
-                    .accept(MediaType.APPLICATION_JSON)
-            )
-            .andExpect(jsonPath("$.isSuccess").value(true))
-            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
-            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
-            .andExpect(jsonPath("$.data.id").isNotEmpty())
-            .andExpect(jsonPath("$.data.name").value("Newman"));
-
     }
 
     @Test

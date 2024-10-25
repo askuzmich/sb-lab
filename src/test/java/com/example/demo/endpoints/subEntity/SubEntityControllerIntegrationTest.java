@@ -63,24 +63,6 @@ class SubEntityControllerIntegrationTest {
     }
 
     @Test
-
-//    @Order(1)
-    void testFindAll() throws Exception {
-
-        this.mockMvc.perform(
-            MockMvcRequestBuilders
-                .get(baseUrl + "/subEntities")
-                .accept(MediaType.APPLICATION_JSON)
-        )
-            .andExpect(jsonPath("$.isSuccess").value(true))
-            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
-            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
-            .andExpect(jsonPath("$.data", Matchers.hasSize(6)));
-    }
-
-    @Test
-//    @Order(2)
-
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
     void testAdd() throws Exception {
 
@@ -123,6 +105,20 @@ class SubEntityControllerIntegrationTest {
     }
 
     @Test
+    void testFindAll() throws Exception {
+
+        this.mockMvc.perform(
+            MockMvcRequestBuilders
+                .get(baseUrl + "/subEntities")
+                .accept(MediaType.APPLICATION_JSON)
+        )
+            .andExpect(jsonPath("$.isSuccess").value(true))
+            .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+            .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+            .andExpect(jsonPath("$.data", Matchers.hasSize(6)));
+    }
+
+    @Test
 //    @Order(3)
     void testUpdate() throws Exception {
         SubEntityDto dto = new SubEntityDto(
@@ -156,7 +152,6 @@ class SubEntityControllerIntegrationTest {
 
 
     @Test
-//    @Order(4)
     void testDelete() throws Exception {
 
         this.mockMvc.perform(

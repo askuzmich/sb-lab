@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -64,25 +65,7 @@ class HeadObjectControllerIntegrationTest {
     }
 
     @Test
-    @Order(1)
-    void testFindAll() throws Exception {
-
-        this.mockMvc.perform(
-            MockMvcRequestBuilders
-                .get(baseUrl + "/headObjects")
-                .contentType(MediaType.APPLICATION_JSON)
-                .header("Authorization", this.token)
-                .accept(MediaType.APPLICATION_JSON) // should receive
-        )
-        .andExpect(jsonPath("$.isSuccess").value(true))
-        .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
-        .andExpect(jsonPath("$.message").value("Transaction is Ok"))
-        .andExpect(jsonPath("$.data", Matchers.hasSize(4)));
-
-    }
-
-    @Test
-    @Order(2)
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
     void testAdd() throws Exception {
 
         HeadObjectDto headObjectDto = new HeadObjectDto(
@@ -124,7 +107,23 @@ class HeadObjectControllerIntegrationTest {
     }
 
     @Test
-    @Order(3)
+    void testFindAll() throws Exception {
+
+        this.mockMvc.perform(
+            MockMvcRequestBuilders
+                .get(baseUrl + "/headObjects")
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", this.token)
+                .accept(MediaType.APPLICATION_JSON) // should receive
+        )
+        .andExpect(jsonPath("$.isSuccess").value(true))
+        .andExpect(jsonPath("$.statusCode").value(CustomStatusCode.SUCCESS))
+        .andExpect(jsonPath("$.message").value("Transaction is Ok"))
+        .andExpect(jsonPath("$.data", Matchers.hasSize(4)));
+
+    }
+
+    @Test
     void testUpdate() throws Exception {
         HeadObjectDto headObjectDto = new HeadObjectDto(
             null,
@@ -152,7 +151,6 @@ class HeadObjectControllerIntegrationTest {
 
 
     @Test
-    @Order(4)
     void testDelete() throws Exception {
 
         this.mockMvc.perform(
