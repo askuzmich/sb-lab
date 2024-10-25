@@ -542,11 +542,19 @@ statusCode: 401; isSuccess: false;
 }
 ```
 
-ROLE_ADMIN: login:Alexander; password:Alexander
+Credentials: ROLE_ADMIN <br />
+login:Alexander <br />
+password:Alexander <br />
+mac console:
+```bash
+curl -X POST http://localhost:8080/api/v1/users/login -u Alexander:Alexander -v
 ```
-$ curl -X POST http://localhost:8080/api/v1/users/login -u {LOGIN}:{PASSWORD} -v
+send Bearer Token and get All Users (for instance):
+```bash
+curl http://localhost:8080/api/v1/users -H "Authorization: Bearer {PUT_YOUR_TOKEN_HERE}" -v
 ```
 
-```
-$ curl http://localhost:8080/api/v1/users -H "Authorization: Bearer {PUT YOUR TOKEN HERE}" -v
+in win console:
+```console
+curl.exe --user Alexander:Alexander http://localhost:8080/api/v1/users/login
 ```

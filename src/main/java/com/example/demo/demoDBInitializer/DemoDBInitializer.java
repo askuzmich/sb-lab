@@ -77,7 +77,7 @@ public class DemoDBInitializer implements CommandLineRunner {
         headObjectRepository.save(ho2);
         headObjectRepository.save(ho3);
 
-        subEntityRepository.save(se5);
+        subEntityRepository.save(se5); // другие доб-ся автоматом с HO
 
         SbUser user1 = new SbUser();
         user1.setId(1);

@@ -57,6 +57,7 @@ public class SecurityConfig {
     this.authBasicEntryPoint = authBasicEntryPoint;
     this.authBearerTokenEntryPoint = authBearerTokenEntryPoint;
     this.authBearerTokenAccessDenied = authBearerTokenAccessDenied;
+
     KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
     keyPairGenerator.initialize(2048); // size (bits)
     KeyPair keyPair = keyPairGenerator.generateKeyPair();
@@ -74,30 +75,40 @@ public class SecurityConfig {
             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, this.baseUrl + "/users")).hasAuthority("ROLE_ADMIN")
             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, this.baseUrl + "/users/**")).hasAuthority("ROLE_ADMIN")
             .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, this.baseUrl + "/users/**")).hasAuthority("ROLE_ADMIN")
+
             .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+
             // All other need to be authenticated
             .anyRequest().authenticated();
         })
+
         // for /h2-console/**
         .headers((headerConfig) -> {
           headerConfig.frameOptions((frameOptionsConfig) -> {
             frameOptionsConfig.disable();
           });
         })
+
+        .cors(Customizer.withDefaults())
+
         .csrf((csrf) -> csrf.disable()) // cross-site request forgery
+
         .httpBasic((httpBasic) -> {
           httpBasic
               .authenticationEntryPoint(this.authBasicEntryPoint);
         })
+
         .oauth2ResourceServer((oauth2Server) -> {
           oauth2Server
-              .authenticationEntryPoint(this.authBasicEntryPoint)
+              .authenticationEntryPoint(this.authBearerTokenEntryPoint)
               .accessDeniedHandler(this.authBearerTokenAccessDenied)
               .jwt(Customizer.withDefaults());
         })
+
         .sessionManagement((sm) -> {
           sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         })
+
         .build();
   }
 

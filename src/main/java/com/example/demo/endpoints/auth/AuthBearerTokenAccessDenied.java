@@ -18,12 +18,18 @@ public class AuthBearerTokenAccessDenied implements AccessDeniedHandler {
 
   private final HandlerExceptionResolver resolver;
 
-  public AuthBearerTokenAccessDenied(@Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver) {
+  public AuthBearerTokenAccessDenied(
+      @Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver
+  ) {
     this.resolver = resolver;
   }
 
   @Override
-  public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+  public void handle(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      AccessDeniedException accessDeniedException
+  ) throws IOException, ServletException {
     this.resolver.resolveException(request, response, null, accessDeniedException);
   }
 }

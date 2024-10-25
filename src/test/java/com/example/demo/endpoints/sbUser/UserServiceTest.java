@@ -13,6 +13,7 @@ import com.example.demo.exception.CustomNotFoundException;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -26,6 +27,9 @@ import static org.mockito.Mockito.*;
 class UserServiceTest {
     @Mock
     UserRepository userRepository;
+
+    @Mock
+    PasswordEncoder passwordEncoder;
 
     @InjectMocks
     UserService userService;
@@ -126,6 +130,9 @@ class UserServiceTest {
     @Test
     void testAdd() {
 
+        given(this.passwordEncoder.encode(this.sbUsers.get(0).getPassword()))
+            .willReturn("sasdasd");
+
         given(userRepository.save(this.sbUsers.get(0)))
                 .willReturn(this.sbUsers.get(0));
 
@@ -138,7 +145,7 @@ class UserServiceTest {
         assertThat(candidate.getName())
                 .isEqualTo(this.sbUsers.get(0).getName());
         assertThat(candidate.getPassword())
-                .isEqualTo(this.sbUsers.get(0).getPassword());
+                .isEqualTo("sasdasd");
         assertThat(candidate.isEnabled())
                 .isEqualTo(this.sbUsers.get(0).isEnabled());
         assertThat(candidate.getRoles())

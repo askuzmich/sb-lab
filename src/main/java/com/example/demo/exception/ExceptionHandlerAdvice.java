@@ -23,27 +23,6 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
-//
-//    @ExceptionHandler(SubEntityNotFoundException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    CustomReturnData subEntityNotFoundExc(SubEntityNotFoundException exc) {
-//        return new CustomReturnData(false, CustomStatusCode.NOT_FOUND, exc.getMessage());
-//    }
-//
-//    @ExceptionHandler(HeadObjectNotFoundException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    CustomReturnData headObjectNotFoundExc(HeadObjectNotFoundException exc) {
-//        return new CustomReturnData(false, CustomStatusCode.NOT_FOUND, exc.getMessage());
-//    }
-
-//    @ExceptionHandler({
-//        HeadObjectNotFoundException.class,
-//        SubEntityNotFoundException.class
-//    })
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    CustomReturnData notFoundExc(Exception exc) {
-//        return new CustomReturnData(false, CustomStatusCode.NOT_FOUND, exc.getMessage());
-//    }
 
     @ExceptionHandler(CustomNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -120,7 +99,7 @@ public class ExceptionHandlerAdvice {
     }
 
     /**
-     * All Other Above Error was triggered
+     * All Other Above Error was not triggered
      * @param exc
      * @return
      */
