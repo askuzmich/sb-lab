@@ -1,0 +1,22 @@
+name: Java Backend CI Mvn
+
+on:
+  pull_request:
+    branches:
+      - prod-back
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build and Test...
+        run: mvn --batch-mode package
