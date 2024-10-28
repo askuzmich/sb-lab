@@ -542,6 +542,8 @@ statusCode: 401; isSuccess: false;
 }
 ```
 
+# Console Commands
+
 Credentials: ROLE_ADMIN <br />
 login:Alexander <br />
 password:Alexander <br />
@@ -557,4 +559,42 @@ curl http://localhost:8080/api/v1/users -H "Authorization: Bearer {PUT_YOUR_TOKE
 in win console:
 ```console
 curl.exe --user Alexander:Alexander http://localhost:8080/api/v1/users/login
+```
+
+# Making JAR file
+
+```bash
+./mvnw package -DskipTests
+```
+
+## Extracting layers from the Jar File in order to make a Docker Image
+```bash
+java -Djarmode=layertools -jar demo-0.0.1-SNAPSHOT.jar extract
+```
+
+# Docker
+
+## making | build a Docker Image
+```bash
+docker build -t alx/sb-lab:1.0 .
+```
+## просмотреть все images
+```bash
+docker images
+```
+## запустить Docker Image
+```bash
+docker run -d -p 8080:8080 alx/sb-lab:1.0
+```
+## просмотреть запущен ли наш Docker Container (смотреть поле STATUS: "Up.." или "Exited..")
+```bash
+docker ps -a
+```
+## остановить Docker Container (cd4fbea is Container ID)
+```bash
+docker stop cd4fbea
+```
+## запустить созданный Docker Container (cd4fbea is Container ID)
+```bash
+docker start cd4fbea
 ```
