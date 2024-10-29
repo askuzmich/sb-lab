@@ -13,16 +13,16 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 		System.out.println("");
 		System.out.println("H2 DB:");
-		System.out.println("http://localhost:8080/h2-console");
+		System.out.println("http://localhost:80/h2-console");
 		System.out.println("");
 		System.out.println("AUTHENTICATION");
-		System.out.println("http://localhost:8080/api/v1/users/login");
+		System.out.println("http://localhost:80/api/v1/users/login");
 		System.out.println("");
 		System.out.println("API:");
-		System.out.println("http://localhost:8080/api/v1/users");
-		System.out.println("http://localhost:8080/api/v1/headObjects");
-		System.out.println("http://localhost:8080/api/v1/subEntities");
-		System.out.println("http://localhost:8080/api/v1/subEntities/110044");
+		System.out.println("http://localhost:80/api/v1/users");
+		System.out.println("http://localhost:80/api/v1/headObjects");
+		System.out.println("http://localhost:80/api/v1/subEntities");
+		System.out.println("http://localhost:80/api/v1/subEntities/110044");
 	}
 
 	@Bean

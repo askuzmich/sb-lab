@@ -95,6 +95,8 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
+<!--					<reuseForks>false</reuseForks>-->
+<!--					<forkCount>1</forkCount>-->
 					<argLine>-XX:+EnableDynamicAgentLoading -Xshare:off</argLine>
 <!--					<argLine>-XX:+EnableDynamicAgentLoading</argLine>-->
 				</configuration>
