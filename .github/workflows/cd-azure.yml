@@ -6,7 +6,7 @@ env:
 on:
   push:
     branches:
-      - main
+      - prod-back
 
 permissions:
   contents: 'read'
@@ -56,6 +56,7 @@ jobs:
     steps:
       - name: Lowercase the repo name
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
