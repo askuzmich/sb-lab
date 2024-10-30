@@ -584,7 +584,7 @@ docker images
 ```
 ## запустить Docker Image
 ```bash
-docker run -d -p 8080:8080 alx/sb-lab:1.0
+docker run -d -p 80:80 alx/sb-lab:1.0
 ```
 ## просмотреть запущен ли наш Docker Container (смотреть поле STATUS: "Up.." или "Exited..")
 ```bash
@@ -592,9 +592,9 @@ docker ps -a
 ```
 ## остановить Docker Container (cd4fbea is Container ID)
 ```bash
-docker stop cd4fbea
+docker stop dff0021
 ```
 ## запустить созданный Docker Container (cd4fbea is Container ID)
 ```bash
-docker start cd4fbea
+docker start dff0021
 ```
