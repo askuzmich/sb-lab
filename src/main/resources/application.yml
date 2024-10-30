@@ -9,3 +9,4 @@ spring:
 api:
   endpoint:
     base-url: /api/v1
+
