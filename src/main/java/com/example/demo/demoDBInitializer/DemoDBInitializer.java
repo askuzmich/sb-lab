@@ -7,9 +7,11 @@ import com.example.demo.endpoints.sbUser.UserService;
 import com.example.demo.endpoints.subEntity.SubEntity;
 import com.example.demo.endpoints.subEntity.SubEntityRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("development")
 public class DemoDBInitializer implements CommandLineRunner {
     private final SubEntityRepository subEntityRepository;
 

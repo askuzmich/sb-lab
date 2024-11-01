@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: # url of Postgres/MySQL ${datasource-url}
+    username: # Username of Postgres/MySQL ${datasource-username}
+    password: # Pass of postgres/MySQL ${datasource-password}
+  jpa:
+    hibernate:
+      ddl-auto: none # Data definition language auto generation
