@@ -17,6 +17,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -106,6 +107,17 @@ public class ExceptionHandlerAdvice {
             false,
             CustomStatusCode.FORBIDDEN,
             "Access Denied. No permission",
+            exc.getMessage()
+        );
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    CustomReturnData notFoundExc(NoHandlerFoundException exc) {
+        return new CustomReturnData(
+            false,
+            CustomStatusCode.NOT_FOUND,
+            "Not Found",
             exc.getMessage()
         );
     }

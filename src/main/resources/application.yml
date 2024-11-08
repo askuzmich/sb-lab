@@ -1,12 +1,15 @@
 spring:
-  datasource:
-    url: jdbc:h2:mem:sa
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-#  jpa:
-#    show-sql: true
+  profiles:
+    active: development # ENV: SPRING_PROFILES_ACTIVE=production
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
 api:
   endpoint:
     base-url: /api/v1
 
+server:
+  port: 80
