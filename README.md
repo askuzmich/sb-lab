@@ -4,9 +4,12 @@
 
 # HEADOBJECT API CRUD
 
-## GET get subEntity by ID 
+## GET get subEntity by ID
 GET: /api/v1/subEntities/{id}  </br>
-EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
+```bash
+curl -X GET localhost:80/api/v1/subEntities/110066 -v
+```
+EXAMPLE: localhost:80/api/v1/subEntities/110066 </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -24,7 +27,11 @@ statusCode: 200; isSuccess: true;
     }
 }
 ```
-EXAMPLE: localhost:8080/api/v1/subEntities/110067 </br>
+### not success:
+EXAMPLE: localhost:80/api/v1/subEntities/110067 </br>
+```bash
+curl -X GET localhost:80/api/v1/subEntities/110067 -v
+```
 statusCode: 404; isSuccess: false;
 ```json
 {
@@ -36,7 +43,10 @@ statusCode: 404; isSuccess: false;
 
 ## GET get ALL subEntities
 GET /api/v1/subEntities </br>
-EXAMPLE: localhost:8080/api/v1/subEntities </br>
+```bash
+curl -X GET localhost:80/api/v1/subEntities -v
+```
+EXAMPLE: localhost:80/api/v1/subEntities </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -83,7 +93,10 @@ statusCode: 200; isSuccess: true;
 
 ## POST add subEntity
 POST /api/v1/subEntities </br>
-EXAMPLE: localhost:8080/api/v1/subEntities </br>
+```bash
+curl -X POST localhost:80/api/v1/subEntities/110067 -v
+```
+EXAMPLE: localhost:80/api/v1/subEntities </br>
 REQUEST BODY:
 ```json
 {
@@ -105,6 +118,7 @@ statusCode: 200; isSuccess: true;
     }
 }
 ```
+### not success:
 statusCode: 400; isSuccess: false;
 ```json
 {
@@ -121,7 +135,7 @@ statusCode: 400; isSuccess: false;
 
 ## UPDATE (PUT) subEntity
 PUT /api/v1/subEntities/{id} </br>
-EXAMPLE: localhost:8080/api/v1/subEntities/110066 </br>
+EXAMPLE: localhost:80/api/v1/subEntities/110066 </br>
 REQUEST BODY:
 ```json
 {
@@ -143,6 +157,7 @@ statusCode: 200; isSuccess: true;
     }
 }
 ```
+### not success:
 statusCode: 404; isSuccess: false;
 ```json
 {
@@ -154,7 +169,7 @@ statusCode: 404; isSuccess: false;
 
 ## DELETE subEntity
 DELETE /api/v1/subEntities/{id} </br>
-EXAMPLE: localhost:8080/api/v1/subEntities/110055 </br>
+EXAMPLE: localhost:80/api/v1/subEntities/110055 </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -162,6 +177,7 @@ statusCode: 200; isSuccess: true;
     "data": null
 }
 ```
+### not success:
 404: NOT FOUND EL WITH ID
 ```json
 {
@@ -179,7 +195,7 @@ statusCode: 200; isSuccess: true;
 
 ## GET all HeadObjects
 GET /api/v1/headObjects </br>
-EXAMPLE: localhost:8080/api/v1/headObjects </br>
+EXAMPLE: localhost:80/api/v1/headObjects </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -208,7 +224,7 @@ statusCode: 200; isSuccess: true;
 
 ## GET get HeadObject by ID
 GET /api/v1/headObjects/{1} </br>
-EXAMPLE: localhost:8080/api/v1/headObjects/1 </br>
+EXAMPLE: localhost:80/api/v1/headObjects/1 </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -220,7 +236,8 @@ statusCode: 200; isSuccess: true;
     }
 }
 ```
-EXAMPLE: localhost:8080/api/v1/headObjects/4 </br>
+### not success:
+EXAMPLE: localhost:80/api/v1/headObjects/4 </br>
 statusCode: 404; isSuccess: false;
 ```json
 {
@@ -232,7 +249,7 @@ statusCode: 404; isSuccess: false;
 
 ## POST (ADD) - make new HeadObject
 POST /api/v1/headObjects </br>
-EXAMPLE: localhost:8080/api/v1/headObjects </br>
+EXAMPLE: localhost:80/api/v1/headObjects </br>
 REQUEST BODY:
 ```json
 {
@@ -250,6 +267,7 @@ statusCode: 200; isSuccess: true;
   }
 }
 ```
+### not success:
 statusCode: 400; isSuccess: false;
 ```json
 {
@@ -264,7 +282,7 @@ statusCode: 400; isSuccess: false;
 
 ## UPDATE assignment of SubEntity to HeadObject
 PUT /api/v1/headObjects/{hid}/subEntities/{sid} </br>
-EXAMPLE: localhost:8080/api/v1/headObjects/12/subEntities/1 </br>
+EXAMPLE: localhost:80/api/v1/headObjects/12/subEntities/1 </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -272,6 +290,7 @@ statusCode: 200; isSuccess: true;
   "data": null
 }
 ```
+### not success:
 statusCode: 404; isSuccess: false;
 ```json
 {
@@ -284,7 +303,7 @@ statusCode: 404; isSuccess: false;
 
 ## UPDATE HeadObject
 PUT /api/v1/headObjects/{id} </br>
-EXAMPLE: localhost:8080/api/v1/headObjects/12 </br>
+EXAMPLE: localhost:80/api/v1/headObjects/12 </br>
 REQUEST BODY:
 ```json
 {
@@ -302,6 +321,7 @@ statusCode: 200; isSuccess: true;
   }
 }
 ```
+### not success:
 statusCode: 400; isSuccess: false;
 ```json
 {
@@ -324,7 +344,7 @@ statusCode: 404; isSuccess: false;
 
 ## DELETE headObject (by ID)
 DELETE /api/v1/headObjects/{id} </br>
-EXAMPLE: localhost:8080/api/v1/headObjects/1 </br>
+EXAMPLE: localhost:80/api/v1/headObjects/1 </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -332,8 +352,9 @@ statusCode: 200; isSuccess: true;
     "data": null
 }
 ```
+### not success:
 statusCode: 404; isSuccess: false;
-```
+```json
 {
     "message": "Not find Head Object with ID: 1",
     "data": null
@@ -350,7 +371,15 @@ statusCode: 404; isSuccess: false;
 
 ## GET all users
 GET /api/v1/users </br>
-EXAMPLE: localhost:8080/api/v1/users </br>
+если нет токена, регистрируемся:
+```bash
+curl -X POST http://localhost:80/api/v1/users/login -u Alexander:Alexander -v
+```
+...then send Bearer Token and get All Users:
+```bash
+curl http://localhost:80/api/v1/users -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiQWxleGFuZGVyIiwiZXhwIjoxNzMwNDQ0MzA3LCJpYXQiOjE3MzA0MzcxMDcsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.CM0uDzj5jwCifVM1p0VVTfjvBVKZN9N4gBuqTcwGm8aDUuACBbQhhtDo87BfA536grdyT1NLV18HFQW4dXEW87q6EUC-w3icPgRcaFHVyDj_fgc10HenUPhjnqkYpM61jqSX0CRj2JkeLA2HN_YYDlo7tdlVLtsCrbdqF_QiTgGy8QzIK6So2gbFyKwLRd9lLeHJOtcidihn29fXBt2MgEd7xGj-yod3vR0VfCODdmRfmi4_agTbyiGMDiHsdUJt6KUcUgzdz2hT474yg6b-kht6eG6YZapckRRrqEJkflTT3b8pjaTu2vYkdIdVIgiQwvWOtplbo9q17hYVBDZsyg" -v
+```
+EXAMPLE: localhost:80/api/v1/users </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -382,7 +411,15 @@ statusCode: 200; isSuccess: true;
 
 ## GET user by ID
 GET /api/v1/users/{1} </br>
-EXAMPLE: localhost:8080/api/v1/users/1 </br>
+если нет токена, регистрируемся:
+```bash
+curl -X POST http://localhost:80/api/v1/users/login -u Alexander:Alexander -v
+```
+...then send Bearer Token and get User By ID:
+```bash
+curl http://localhost:80/api/v1/users/1 -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiQWxleGFuZGVyIiwiZXhwIjoxNzMwNDQ0MzA3LCJpYXQiOjE3MzA0MzcxMDcsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.CM0uDzj5jwCifVM1p0VVTfjvBVKZN9N4gBuqTcwGm8aDUuACBbQhhtDo87BfA536grdyT1NLV18HFQW4dXEW87q6EUC-w3icPgRcaFHVyDj_fgc10HenUPhjnqkYpM61jqSX0CRj2JkeLA2HN_YYDlo7tdlVLtsCrbdqF_QiTgGy8QzIK6So2gbFyKwLRd9lLeHJOtcidihn29fXBt2MgEd7xGj-yod3vR0VfCODdmRfmi4_agTbyiGMDiHsdUJt6KUcUgzdz2hT474yg6b-kht6eG6YZapckRRrqEJkflTT3b8pjaTu2vYkdIdVIgiQwvWOtplbo9q17hYVBDZsyg" -v
+```
+EXAMPLE: localhost:80/api/v1/users/1 </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -395,7 +432,16 @@ statusCode: 200; isSuccess: true;
   }
 }
 ```
-EXAMPLE: localhost:8080/api/v1/users/5 </br>
+### not success:
+EXAMPLE: localhost:80/api/v1/users/5 </br>
+если нет токена, регистрируемся:
+```bash
+curl -X POST http://localhost:80/api/v1/users/login -u Alexander:Alexander -v
+```
+...then send a required data
+```bash
+curl http://localhost:80/api/v1/users/5 -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiQWxleGFuZGVyIiwiZXhwIjoxNzMwNDQ0MzA3LCJpYXQiOjE3MzA0MzcxMDcsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.CM0uDzj5jwCifVM1p0VVTfjvBVKZN9N4gBuqTcwGm8aDUuACBbQhhtDo87BfA536grdyT1NLV18HFQW4dXEW87q6EUC-w3icPgRcaFHVyDj_fgc10HenUPhjnqkYpM61jqSX0CRj2JkeLA2HN_YYDlo7tdlVLtsCrbdqF_QiTgGy8QzIK6So2gbFyKwLRd9lLeHJOtcidihn29fXBt2MgEd7xGj-yod3vR0VfCODdmRfmi4_agTbyiGMDiHsdUJt6KUcUgzdz2hT474yg6b-kht6eG6YZapckRRrqEJkflTT3b8pjaTu2vYkdIdVIgiQwvWOtplbo9q17hYVBDZsyg" -v
+```
 statusCode: 400; isSuccess: false;
 ```json
 {
@@ -407,7 +453,15 @@ statusCode: 400; isSuccess: false;
 
 ## POST make new user
 POST /api/v1/users </br>
-EXAMPLE: localhost:8080/api/v1/users </br>
+если нет токена, регистрируемся:
+```bash
+curl -X POST http://localhost:80/api/v1/users/login -u Alexander:Alexander -v
+```
+...then send a required data
+```bash
+curl -X POST http://localhost:80/api/v1/users -d '{"name": "newman", "password": "new-pass", "roles": "USER", "enabled": true}' -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiQWxleGFuZGVyIiwiZXhwIjoxNzMwNDQ0MzA3LCJpYXQiOjE3MzA0MzcxMDcsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.CM0uDzj5jwCifVM1p0VVTfjvBVKZN9N4gBuqTcwGm8aDUuACBbQhhtDo87BfA536grdyT1NLV18HFQW4dXEW87q6EUC-w3icPgRcaFHVyDj_fgc10HenUPhjnqkYpM61jqSX0CRj2JkeLA2HN_YYDlo7tdlVLtsCrbdqF_QiTgGy8QzIK6So2gbFyKwLRd9lLeHJOtcidihn29fXBt2MgEd7xGj-yod3vR0VfCODdmRfmi4_agTbyiGMDiHsdUJt6KUcUgzdz2hT474yg6b-kht6eG6YZapckRRrqEJkflTT3b8pjaTu2vYkdIdVIgiQwvWOtplbo9q17hYVBDZsyg" -v
+```
+EXAMPLE: localhost:80/api/v1/users </br>
 REQUEST BODY:
 ```json
 {
@@ -429,6 +483,7 @@ statusCode: 200; isSuccess: true;
   }
 }
 ```
+### not success:
 statusCode: 400; isSuccess: false;
 ```json
 {
@@ -445,7 +500,15 @@ statusCode: 400; isSuccess: false;
 
 ## UPDATE user
 PUT /api/v1/users/{id} </br>
-EXAMPLE: localhost:8080/api/v1/users/3 </br>
+если нет токена, регистрируемся:
+```bash
+curl -X POST http://localhost:80/api/v1/users/login -u Alexander:Alexander -v
+```
+...then send a required data
+```bash
+curl -X PUT http://localhost:80/api/v1/users/3 -d '{"name": "updated-name", "roles": "USER"}' -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiQWxleGFuZGVyIiwiZXhwIjoxNzMwNDQ0MzA3LCJpYXQiOjE3MzA0MzcxMDcsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.CM0uDzj5jwCifVM1p0VVTfjvBVKZN9N4gBuqTcwGm8aDUuACBbQhhtDo87BfA536grdyT1NLV18HFQW4dXEW87q6EUC-w3icPgRcaFHVyDj_fgc10HenUPhjnqkYpM61jqSX0CRj2JkeLA2HN_YYDlo7tdlVLtsCrbdqF_QiTgGy8QzIK6So2gbFyKwLRd9lLeHJOtcidihn29fXBt2MgEd7xGj-yod3vR0VfCODdmRfmi4_agTbyiGMDiHsdUJt6KUcUgzdz2hT474yg6b-kht6eG6YZapckRRrqEJkflTT3b8pjaTu2vYkdIdVIgiQwvWOtplbo9q17hYVBDZsyg" -v
+```
+EXAMPLE: localhost:80/api/v1/users/3 </br>
 REQUEST BODY:
 ```json
 {
@@ -465,6 +528,7 @@ statusCode: 200; isSuccess: true;
   }
 }
 ```
+### not success:
 statusCode: 400; isSuccess: false;
 ```json
 {
@@ -475,7 +539,7 @@ statusCode: 400; isSuccess: false;
   }
 }
 ```
-"/api/v1/users/5" </br>
+### not success: "/api/v1/users/5"
 statusCode: 404; isSuccess: false;
 ```json
 {
@@ -488,7 +552,16 @@ statusCode: 404; isSuccess: false;
 
 ## DELETE user (by ID)
 DELETE /api/v1/users/{id} </br>
-EXAMPLE: localhost:8080/api/v1/users/3 </br>
+Try: </br>
+Login:
+```bash
+curl -X POST http://localhost:80/api/v1/users/login -u Alexander:Alexander -v
+```
+...then send a required data
+```bash
+curl -X DELETE http://localhost:80/api/v1/users/3 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiQWxleGFuZGVyIiwiZXhwIjoxNzMwNDQ0MzA3LCJpYXQiOjE3MzA0MzcxMDcsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.CM0uDzj5jwCifVM1p0VVTfjvBVKZN9N4gBuqTcwGm8aDUuACBbQhhtDo87BfA536grdyT1NLV18HFQW4dXEW87q6EUC-w3icPgRcaFHVyDj_fgc10HenUPhjnqkYpM61jqSX0CRj2JkeLA2HN_YYDlo7tdlVLtsCrbdqF_QiTgGy8QzIK6So2gbFyKwLRd9lLeHJOtcidihn29fXBt2MgEd7xGj-yod3vR0VfCODdmRfmi4_agTbyiGMDiHsdUJt6KUcUgzdz2hT474yg6b-kht6eG6YZapckRRrqEJkflTT3b8pjaTu2vYkdIdVIgiQwvWOtplbo9q17hYVBDZsyg" -v
+```
+EXAMPLE: localhost:80/api/v1/users/3 </br>
 statusCode: 200; isSuccess: true;
 ```json
 {
@@ -496,6 +569,7 @@ statusCode: 200; isSuccess: true;
     "data": null
 }
 ```
+### not success:
 statusCode: 404; isSuccess: false;
 ```json
 {
@@ -511,55 +585,67 @@ statusCode: 404; isSuccess: false;
 
 
 
-# USERS OAUTH2 JWT API 
+# USERS OAUTH2 JWT API
 
 
 
-## Authentication of user by login and password
+## Authentication of user by login and password -> token
 POST /api/v1/users/login/ </br>
-EXAMPLE: localhost:8080/api/v1/users/login/ </br>
+как получить токен через консоль или приложение:
+```bash
+curl -X POST http://localhost:80/api/v1/users/login -u Sergey:Sergey -v
+```
+как получить токен через браузер:
+```html
+<script>
+    fetch(
+      'http://localhost:80/api/v1/users/login',
+      {
+          method: 'POST',
+          headers: {
+              Authorization: "Basic " + btoa('Sergey:Sergey')
+          }
+      }
+    )
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+</script>
+```
 statusCode: 200; isSuccess: true;
 ```json
 {
+  "isSuccess": true,
+  "statusCode": 200,
   "message": "Login user info and JWT",
   "data": {
     "user": {
-      "name": "Oleg",
-      "enabled": true,
-      "roles": "ADMIN USER",
-      "id": 1  
+      "id": 2,
+      "name": "Sergey",
+      "roles": "USER",
+      "enabled": true
     },
-    "token": "fdfgHjhbHJHJH^%#%$65456.........HGJhgDXcbLu89"
+    "token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiU2VyZ2V5IiwiZXhwIjoxNzMwNDQ1NzY2LCJpYXQiOjE3MzA0Mzg1NjYsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.L13KPSf2I_zahJXU3hfWSLDBBKVIG7OOVZ6NPkyMpPlxSDmYdiu9qAaYGif0nU5SnlwpcUeXbpxFZo_twXHw3yxXRqSdhwUYDaKST8NaxhxujLsLM3BEaxdxX-5Rp3GEyV0uxpygQ1saNGz4mpkA0bG0DrHWkwbKe9x5La6FCl1YYto3buJjeEPpRLuN40GyJSJRoO3NHAsnIa27PS4iwlGFbFhBk5HScx7s_HwXxNPjnUnoet5n4d9pWBZ3tBvMRA7a0Jis_pqUmqVJdzLSpnlmILyGaAVKz3hu4OOelu-3ZX7Z1YBc5hAHAhwgYodJQyjzKYuBSLMpEtcvyDwc3A"
   }
 }
 ```
+### not success: wrong username or password
+```bash
+curl -X POST http://localhost:80/api/v1/users/login -u Sergey:WrongPassword -v
+```
 statusCode: 401; isSuccess: false;
-
 ```json
 {
-  "message": "Username or password is wrong",
-  "data": "something goes wrong"
+  "message":"Wrong Username or Password",
+  "data":"Bad credentials"
 }
 ```
 
-# Console Commands
-
-Credentials: ROLE_ADMIN <br />
-login:Alexander <br />
-password:Alexander <br />
-mac console:
-```bash
-curl -X POST http://localhost:8080/api/v1/users/login -u Alexander:Alexander -v
-```
-send Bearer Token and get All Users (for instance):
-```bash
-curl http://localhost:8080/api/v1/users -H "Authorization: Bearer {PUT_YOUR_TOKEN_HERE}" -v
-```
-
-in win console:
-```console
-curl.exe --user Alexander:Alexander http://localhost:8080/api/v1/users/login
-```
+</br></br>
 
 # Making JAR file
 
@@ -571,6 +657,8 @@ curl.exe --user Alexander:Alexander http://localhost:8080/api/v1/users/login
 ```bash
 java -Djarmode=layertools -jar demo-0.0.1-SNAPSHOT.jar extract
 ```
+
+</br></br>
 
 # Docker
 
@@ -592,9 +680,9 @@ docker ps -a
 ```
 ## остановить Docker Container (cd4fbea is Container ID)
 ```bash
-docker stop dff0021
+docker stop cd4fbea
 ```
 ## запустить созданный Docker Container (cd4fbea is Container ID)
 ```bash
-docker start dff0021
+docker start cd4fbea
 ```
