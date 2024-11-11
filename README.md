@@ -1,18 +1,19 @@
-# ВАЖНО: перед тем как пушить, обязательно:
+# ВАЖНО: перед тем как комитить | пушить, обязательно:
 
-```
-$ npm run eslint
-$ npm run stylelint
-$ npm run unit
+```bash
+npm run eslint
+npm run stylelint
+npm run unit
 ```
 
 # ВАЖНО: перед тем как пушить, желательно:
 
-```
-run Docker...
-$ sudo npm run sb
-$ sudo npm run loki
-$ sudo npm run loki:ok
+### убедиться, что Docker запущен
+
+```bash
+sudo npm run sb
+sudo npm run loki
+sudo npm run loki:ok
 ```
 
 # sb-lab FSD Struct

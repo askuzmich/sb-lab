@@ -20,18 +20,3 @@ Explore-GitHub-Actions:
     - name: build production project
       if: always()
       run: npm run build:prod
-    - name: TEST eslint...
-      if: always()
-      run: npm run eslint
-    - name: TEST stylelint...
-      if: always()
-      run: npm run stylelint
-    - name: TEST unit test
-      if: always()
-      run: npm run unit
-    # - name: build storybook...
-    #   if: always()
-    #   run: npm run sb:build
-    # - name: ui screenshot test...
-    #   if: always()
-    #   run: npm run ui

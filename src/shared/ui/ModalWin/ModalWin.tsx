@@ -1,5 +1,5 @@
 import { classes } from "shared/lib/classNames/classes";
-import { ReactNode, useCallback, useEffect } from "react";
+import { lazy, ReactNode, useCallback, useEffect, useState } from "react";
 import cls from "./ModalWin.module.scss";
 import { Portal } from "../Portal/Portal";
 
@@ -7,11 +7,20 @@ interface ModalWinProps {
   className?: string;
   children?: ReactNode;
   isOpen?: boolean;
+  isLazy?: boolean;
   onClose?: () => void;
 }
 
 export const ModalWin = (props: ModalWinProps) => {
-  const { className, children, isOpen, onClose } = props;
+  const { className, children, isOpen, isLazy, onClose } = props;
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsMounted(true);
+    }
+  }, [isOpen]);
 
   const winCloseHandler = useCallback(() => {
     if (onClose) {
@@ -43,6 +52,10 @@ export const ModalWin = (props: ModalWinProps) => {
       window.removeEventListener("keydown", onWinCloseByESC);
     };
   }, [isOpen, onWinCloseByESC]);
+
+  if (lazy && !isMounted) {
+    return null;
+  }
 
   return (
     <Portal>

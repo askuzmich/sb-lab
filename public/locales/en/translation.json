@@ -4,8 +4,11 @@
   "Главная": "Main",
   "О проекте": "About Project",
   "Регистрация": "Registration",
+  "войти": "login",
+  "имя пользователя": "user name",
   "логотип настроек": "settings logo",
   "ошибка загркузки": "load error",
+  "пароль": "password",
   "перезагрузить": "reload",
   "тема": "theme",
   "язык": "lang"
