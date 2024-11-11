@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run eslint
+npm run stylelint
+npm run unit
+sudo npm run sb:build
+sudo npm run ui
