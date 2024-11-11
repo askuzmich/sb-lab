@@ -1,4 +1,4 @@
-# ВАЖНО: перед тем как комитить | пушить, обязательно:
+# ТEST:
 
 ```bash
 npm run eslint
@@ -6,11 +6,13 @@ npm run stylelint
 npm run unit
 ```
 
-# ВАЖНО: перед тем как пушить, желательно:
+# Storybook:
 
 ```bash
 sudo npm run sb
 ```
+
+# Loki (screenshot test)
 
 ### убедиться, что Docker и Storybook запущен и подключен инет
 
