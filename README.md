@@ -8,15 +8,25 @@ npm run unit
 
 # ВАЖНО: перед тем как пушить, желательно:
 
-### убедиться, что Docker запущен
-
 ```bash
 sudo npm run sb
+```
+
+### убедиться, что Docker и Storybook запущен и подключен инет
+
+```bash
 sudo npm run loki
+```
+
+### если всё устраивает
+
+```bash
 sudo npm run loki:ok
 ```
 
-# sb-lab FSD Struct
+<br><br>
+
+# SB-LAB FSD Struct
 
 https://feature-sliced.design/
 

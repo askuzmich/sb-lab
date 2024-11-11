@@ -1,6 +1,6 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { Button } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import cls from "./LoginForm.module.scss";
 
@@ -13,11 +13,9 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 
   return (
     <div className={classes(cls.LoginForm, {}, [className])}>
-      <div className="username">{t("имя пользователя")}</div>
-      <Input type="text" className={cls.input} />
-      <div className="pass">{t("пароль")}</div>
-      <Input type="text" className={cls.input} />
-      <Button className={cls.loginBtn}>{t("войти")}</Button>
+      <Input placeholder={t("имя пользователя")} className={cls.input} />
+      <Input placeholder={t("пароль")} type="password" />
+      <Button theme={ButtonTheme.GREEN} className={cls.loginBtn}>{t("войти")}</Button>
     </div>
   );
 };
