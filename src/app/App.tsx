@@ -5,17 +5,26 @@ import { Navbar } from "widgets/Navbar";
 import { Footer } from "widgets/Footer";
 
 import { Sidebar } from "widgets/Sidebar";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
+import { useDispatch } from "react-redux";
+import { userActions } from "entities/User";
+import { PageLoader } from "entities/PageLoader/PageLoader";
 import { AppRouter } from "./providers/router";
 import { useTheme } from "./providers/ThemeProvider";
 
 const App = () => {
   const { theme } = useTheme();
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userActions.initAuthData());
+  }, [dispatch]);
+
   return (
     <div className={classes("app", {}, [])}>
-      <Suspense fallback="">
+      <Suspense fallback={<PageLoader />}>
         <Navbar />
         <div className="content-page">
           <Sidebar />

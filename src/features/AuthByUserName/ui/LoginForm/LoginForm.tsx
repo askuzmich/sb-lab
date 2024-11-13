@@ -4,6 +4,8 @@ import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useCallback } from "react";
+import { Text, TextTheme } from "shared/ui/Text/Text";
+import { loginByUsername } from "../../model/service/loginByUsername/loginByUsername";
 import { loginActions } from "../../model/slice/loginSlice";
 import cls from "./LoginForm.module.scss";
 import { getLoginState } from "../../model/selectors/getLoginState/getLoginState";
@@ -17,7 +19,7 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
 
   const dispatch = useDispatch();
 
-  const loginForm = useSelector(getLoginState);
+  const { username, password, error, isLoading } = useSelector(getLoginState);
 
   const onChangeName = useCallback((val: string) => {
     dispatch(loginActions.setUsername(val));
@@ -28,26 +30,35 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
   }, [dispatch]);
 
   const onFormCommit = useCallback(() => {
-  }, []);
+    dispatch(loginByUsername({
+      username,
+      password
+    }));
+  }, [dispatch, password, username]);
 
   return (
     <div className={classes(cls.LoginForm, {}, [className])}>
+      <Text title={t("Регистрация")} theme={TextTheme.PRIMARY} />
+
+      {error && <Text text={t("ошибка загрузки")} theme={TextTheme.ERROR} />}
+
       <Input
         placeholder={t("имя пользователя")}
         onChange={onChangeName}
         className={cls.input}
-        value={loginForm.username}
+        value={username}
       />
       <Input
         placeholder={t("пароль")}
         onChange={onChangePass}
         type="password"
-        value={loginForm.password}
+        value={password}
       />
       <Button
         theme={ButtonTheme.GREEN}
         className={cls.loginBtn}
         onClick={onFormCommit}
+        disabled={isLoading}
       >
         {t("войти")}
       </Button>

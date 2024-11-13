@@ -36,7 +36,7 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off",
     "arrow-body-style": "off",
-    "max-len": ["error", { ignoreComments: true, code: 100 }],
+    "max-len": ["error", { ignoreComments: true, code: 120 }],
     "i18next/no-literal-string": ["error", { markupOnly: true, onlyAttribute: [""] }],
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
