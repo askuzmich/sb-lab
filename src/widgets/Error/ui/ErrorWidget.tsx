@@ -17,7 +17,7 @@ export const ErrorWidget = ({ className }: ErrorWidgetProps) => {
 
   return (
     <div className={classes(cls.ErrorWidget, {}, [className])}>
-      <h1>{t("ошибкa")}</h1>
+      <h1>{t("ошибка")}</h1>
       <Button theme={ButtonTheme.GREEN} onClick={reload}>{t("перезагрузить")}</Button>
     </div>
   );

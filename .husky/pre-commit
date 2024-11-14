@@ -4,5 +4,5 @@
 npm run eslint
 npm run stylelint
 npm run unit
-# sudo npm run sb:build
-# sudo npm run ui
+# npm run sb:build
+# npm run ui
