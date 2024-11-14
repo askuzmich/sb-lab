@@ -2,7 +2,7 @@ import { IStateSchema } from "app/providers/StoreProvider";
 import { DeepPartial } from "@reduxjs/toolkit";
 import { getCounterValue } from "./getCounterValue";
 
-describe("getCounterValue.test", () => {
+describe("getCounterValue Selector test", () => {
   test("should return simple value", () => {
     const state: DeepPartial<IStateSchema> = {
       counter: { value: 10 }

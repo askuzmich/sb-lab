@@ -1,21 +1,34 @@
-# ВАЖНО: перед тем как пушить, обязательно:
+# ТEST:
 
-```
-$ npm run eslint
-$ npm run stylelint
-$ npm run unit
-```
-
-# ВАЖНО: перед тем как пушить, желательно:
-
-```
-run Docker...
-$ sudo npm run sb
-$ sudo npm run loki
-$ sudo npm run loki:ok
+```bash
+npm run eslint
+npm run stylelint
+npm run unit
 ```
 
-# sb-lab FSD Struct
+# Storybook:
+
+```bash
+sudo npm run sb
+```
+
+# Loki (screenshot test)
+
+### убедиться, что Docker и Storybook запущен и подключен инет
+
+```bash
+sudo npm run loki
+```
+
+### если всё устраивает
+
+```bash
+sudo npm run loki:ok
+```
+
+<br><br>
+
+# SB-LAB FSD Struct
 
 https://feature-sliced.design/
 

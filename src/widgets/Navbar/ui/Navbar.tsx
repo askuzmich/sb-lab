@@ -6,6 +6,9 @@ import { RoutePath } from "shared/config/routeConfig/routeConfig";
 import { ModalWin } from "shared/ui/ModalWin/ModalWin";
 import { useCallback, useState } from "react";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { LoginModal } from "features/AuthByUserName";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAuthData, userActions } from "entities/User";
 import cls from "./Navbar.module.scss";
 
 interface NavbarProps {
@@ -15,11 +18,43 @@ interface NavbarProps {
 export const Navbar = ({ className }: NavbarProps) => {
   const { t } = useTranslation();
 
-  const [isAuthModalWinOpen, setAuthModalWinOpen] = useState(false);
+  const [isAuthModalWinOpen, setAuthModalWin] = useState(false);
 
-  const onAuthModalToggle = useCallback(() => {
-    setAuthModalWinOpen((prev) => !prev);
+  const authData = useSelector(getUserAuthData);
+
+  const dispatch = useDispatch();
+
+  const onAuthModalClose = useCallback(() => {
+    setAuthModalWin(false);
   }, []);
+
+  const onAuthModalOpen = useCallback(() => {
+    setAuthModalWin(true);
+  }, []);
+
+  const onLogout = useCallback(() => {
+    dispatch(userActions.logout());
+  }, [dispatch]);
+
+  if (authData) {
+    return (
+      <div className={classes(cls.Navbar, {}, [className])}>
+        <div className={cls.links}>
+          <AppLink theme={AppLinkTheme.SECONDARY} className={cls.appLink} to={RoutePath.main}>
+            {t("Главная")}
+          </AppLink>
+
+          <Button
+            theme={ButtonTheme.WHITE_OUTLINE}
+            className={classes(cls.DarkThemeBtn, {}, [className])}
+            onClick={onLogout}
+          >
+            {t("Выйти")}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={classes(cls.Navbar, {}, [className])}>
@@ -31,14 +66,11 @@ export const Navbar = ({ className }: NavbarProps) => {
         <Button
           theme={ButtonTheme.WHITE_OUTLINE}
           className={classes(cls.DarkThemeBtn, {}, [className])}
-          onClick={onAuthModalToggle}
+          onClick={onAuthModalOpen}
         >
           {t("Регистрация")}
         </Button>
-
-        <ModalWin isOpen={isAuthModalWinOpen} onClose={onAuthModalToggle}>
-          {t("lorem")}
-        </ModalWin>
+        <LoginModal isOpen={isAuthModalWinOpen} onClose={onAuthModalClose} />
       </div>
     </div>
   );

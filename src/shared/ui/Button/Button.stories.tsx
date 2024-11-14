@@ -64,3 +64,11 @@ GreenDark.args = {
   theme: ButtonTheme.GREEN,
 };
 GreenDark.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  children: "Disabled",
+  theme: ButtonTheme.GREEN,
+  disabled: true
+};
+Disabled.decorators = [ThemeDecorator(Theme.DARK)];

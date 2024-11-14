@@ -1,38 +1,37 @@
-# name: SB-lab CI
-# on:
-#   push:
-#     branches: [dev-front]
-#   pull_request:
-#     branches: [dev-front]
-# jobs:
-# Explore-GitHub-Actions:
-#   runs-on: ubuntu-latest
-#   strategy:
-#     matrix:
-#       node-version: [17.x]
-#   steps:
-#     - uses: actions/checkout@v2
-#     - name: Starting Node.js ${{ matrix.node-version }}
-#       uses: actions/setup-node@v1
-#       with:
-#         node-version: ${{ matrix.node-version }}
-#     - name: install modules
-#       run: npm install
-#     - name: build production project
-#       if: always()
-#       run: npm run build:prod
-#     - name: eslint...
-#       if: always()
-#       run: npm run eslint
-#     - name: stylelint...
-#       if: always()
-#       run: npm run stylelint
-#     - name: unit test
-#       if: always()
-#       run: npm run unit
-#     - name: build storybook...
-#       if: always()
-#       run: npm run sb:build
-#     - name: ui screenshot test...
-#       if: always()
-#       run: npm run ui
+name: SB-lab CI
+on:
+  push:
+    branches: [prod-front]
+jobs:
+Explore-GitHub-Actions:
+  runs-on: ubuntu-latest
+  strategy:
+    matrix:
+      node-version: [17.x]
+  steps:
+    - name: Check out the repo
+    - uses: actions/checkout@v2
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: install modules
+      run: npm install
+    - name: build production project
+      if: always()
+      run: npm run build:prod
+    - name: TEST eslint...
+      if: always()
+      run: npm run eslint
+    - name: TEST stylelint...
+      if: always()
+      run: npm run stylelint
+    - name: TEST unit test
+      if: always()
+      run: npm run unit
+    # - name: build storybook...
+    #   if: always()
+    #   run: npm run sb:build
+    # - name: ui screenshot test...
+    #   if: always()
+    #   run: npm run ui

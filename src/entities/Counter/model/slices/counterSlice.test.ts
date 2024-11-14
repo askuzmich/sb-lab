@@ -1,7 +1,7 @@
 import { ICounterSchema } from "../types/ICounterSchema";
-import { counterActions, counterReducer } from "./counter.slice";
+import { counterActions, counterReducer } from "./counterSlice";
 
-describe("counter.slice.test", () => {
+describe("counterSlice.test", () => {
   test("decrement", () => {
     const state:ICounterSchema = { value: 10 };
 
