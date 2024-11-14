@@ -40,7 +40,7 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
     <div className={classes(cls.LoginForm, {}, [className])}>
       <Text title={t("Регистрация")} theme={TextTheme.PRIMARY} />
 
-      {error && <Text text={t("ошибка загрузки")} theme={TextTheme.ERROR} />}
+      {error && <Text text={error} theme={TextTheme.ERROR} />}
 
       <Input
         placeholder={t("имя пользователя")}

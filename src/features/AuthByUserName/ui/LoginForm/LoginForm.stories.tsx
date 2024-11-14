@@ -22,7 +22,7 @@ Primary.decorators = [StoreDecorator({
 export const LoginFormWithError = Template.bind({});
 LoginFormWithError.args = {};
 LoginFormWithError.decorators = [StoreDecorator({
-  loginForm: { username: "NotExistUserName", password: "WrOnGPaSs", error: "error" }
+  loginForm: { username: "NotExistUserName", password: "WrOnGPaSs", error: "Server error" }
 })];
 
 export const LoginFormWithLoadingState = Template.bind({});
