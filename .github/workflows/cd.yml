@@ -3,20 +3,20 @@ on:
   push:
     branches: [prod-front]
 jobs:
-Explore-GitHub-Actions:
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      node-version: [17.x]
-  steps:
-    - name: Check out the repo
-    - uses: actions/checkout@v2
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: install modules
-      run: npm install
-    - name: build production project
-      if: always()
-      run: npm run build:prod
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [17.x]
+    steps:
+      - name: Check out the repo
+      - uses: actions/checkout@v2
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install modules
+        run: npm install
+      - name: build production project
+        if: always()
+        run: npm run build:prod
