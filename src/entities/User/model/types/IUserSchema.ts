@@ -5,6 +5,11 @@ export interface IUser {
   enabled: boolean;
 }
 
+export interface IUserData {
+    user: IUser;
+    token: string;
+}
+
 export interface IUserSchema {
-  authData?: IUser;
+  authData?: IUserData;
 }

@@ -23,7 +23,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div className={classes("app", {}, [])}>
+    <div className={classes("app", {}, [theme])}>
       <Suspense fallback={<PageLoader />}>
         <Navbar />
         <div className="content-page">
