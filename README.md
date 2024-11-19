@@ -9,7 +9,7 @@ npm run unit
 # Storybook:
 
 ```bash
-sudo npm run sb
+npm run sb
 ```
 
 # Loki (screenshot test)
@@ -17,13 +17,13 @@ sudo npm run sb
 ### убедиться, что Docker и Storybook запущен и подключен инет
 
 ```bash
-sudo npm run loki
+npm run loki
 ```
 
 ### если всё устраивает
 
 ```bash
-sudo npm run loki:ok
+npm run loki:ok
 ```
 
 <br><br>

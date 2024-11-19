@@ -5,7 +5,7 @@ import { Input } from "shared/ui/Input/Input";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { memo, useCallback, useEffect } from "react";
 import { Text, TextTheme } from "shared/ui/Text/Text";
-import { IStoreManager } from "app/providers/StoreProvider";
+import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
 import { getLoginUsername } from "../../model/selectors/getLoginUsername/getLoginUsername";
 import { getLoginPassword } from "../../model/selectors/getLoginPassword/getLoginPassword";
 import { getLoginError } from "../../model/selectors/getLoginError/getLoginError";
@@ -18,32 +18,19 @@ interface LoginFormProps {
   className?: string;
 }
 
+const reducerList: ReducerListT = {
+  loginForm: loginReducer
+};
+
 const LoginForm = memo(({ className }: LoginFormProps) => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
-  const store = useStore() as IStoreManager;
-
   const username = useSelector(getLoginUsername);
   const password = useSelector(getLoginPassword);
   const error = useSelector(getLoginError);
   const isLoading = useSelector(getLoginIsLoading);
-
-  useEffect(() => {
-    store.reducerManager.add("loginForm", loginReducer);
-    dispatch({ type: "@INIT loginform rdcr" });
-
-    return () => {
-      store.reducerManager.remove("loginForm");
-
-      dispatch({ type: "@INIT loginform rdcr" });
-
-      dispatch({ type: "@REM loginform rdcr" });
-    };
-
-    // eslint-disable-next-line
-  }, []);
 
   const onChangeName = useCallback((val: string) => {
     dispatch(loginActions.setUsername(val));
@@ -61,32 +48,34 @@ const LoginForm = memo(({ className }: LoginFormProps) => {
   }, [dispatch, password, username]);
 
   return (
-    <div className={classes(cls.LoginForm, {}, [className])}>
-      <Text title={t("Регистрация")} theme={TextTheme.PRIMARY} />
+    <AsyncModule reducers={reducerList}>
+      <div className={classes(cls.LoginForm, {}, [className])}>
+        <Text title={t("Регистрация")} theme={TextTheme.PRIMARY} />
 
-      {error && <Text text={error} theme={TextTheme.ERROR} />}
+        {error && <Text text={error} theme={TextTheme.ERROR} />}
 
-      <Input
-        placeholder={t("имя пользователя")}
-        onChange={onChangeName}
-        className={cls.input}
-        value={username}
-      />
-      <Input
-        placeholder={t("пароль")}
-        onChange={onChangePass}
-        type="password"
-        value={password}
-      />
-      <Button
-        theme={ButtonTheme.GREEN}
-        className={cls.loginBtn}
-        onClick={onFormCommit}
-        disabled={isLoading}
-      >
-        {t("войти")}
-      </Button>
-    </div>
+        <Input
+          placeholder={t("имя пользователя")}
+          onChange={onChangeName}
+          className={cls.input}
+          value={username}
+        />
+        <Input
+          placeholder={t("пароль")}
+          onChange={onChangePass}
+          type="password"
+          value={password}
+        />
+        <Button
+          theme={ButtonTheme.GREEN}
+          className={cls.loginBtn}
+          onClick={onFormCommit}
+          disabled={isLoading}
+        >
+          {t("войти")}
+        </Button>
+      </div>
+    </AsyncModule>
   );
 });
 
