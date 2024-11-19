@@ -4,10 +4,15 @@ import { userReducer } from "entities/User";
 import { IStateSchema } from "./IStateSchema";
 import { reducerManager } from "./reducerManager";
 
-export function createReduxStore(initialState?: IStateSchema) {
+export function createReduxStore(
+  initialState?: IStateSchema,
+
+  asyncReducers?: ReducersMapObject<IStateSchema>
+) {
   const rootReducers: ReducersMapObject<IStateSchema> = {
+    ...asyncReducers,
     counter: counterReducer,
-    user: userReducer
+    user: userReducer,
   };
 
   const rManager = reducerManager(rootReducers);
