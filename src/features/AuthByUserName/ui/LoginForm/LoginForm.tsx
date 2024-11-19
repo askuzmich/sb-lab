@@ -2,24 +2,48 @@ import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
-import { useDispatch, useSelector } from "react-redux";
-import { memo, useCallback } from "react";
+import { useDispatch, useSelector, useStore } from "react-redux";
+import { memo, useCallback, useEffect } from "react";
 import { Text, TextTheme } from "shared/ui/Text/Text";
+import { IStoreManager } from "app/providers/StoreProvider";
+import { getLoginUsername } from "../../model/selectors/getLoginUsername/getLoginUsername";
+import { getLoginPassword } from "../../model/selectors/getLoginPassword/getLoginPassword";
+import { getLoginError } from "../../model/selectors/getLoginError/getLoginError";
+import { getLoginIsLoading } from "../../model/selectors/getLoginIsLoading/getLoginIsLoading";
 import { loginByUsername } from "../../model/service/loginByUsername/loginByUsername";
-import { loginActions } from "../../model/slice/loginSlice";
+import { loginActions, loginReducer } from "../../model/slice/loginSlice";
 import cls from "./LoginForm.module.scss";
-import { getLoginState } from "../../model/selectors/getLoginState/getLoginState";
 
 interface LoginFormProps {
   className?: string;
 }
 
-export const LoginForm = memo(({ className }: LoginFormProps) => {
+const LoginForm = memo(({ className }: LoginFormProps) => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
-  const { username, password, error, isLoading } = useSelector(getLoginState);
+  const store = useStore() as IStoreManager;
+
+  const username = useSelector(getLoginUsername);
+  const password = useSelector(getLoginPassword);
+  const error = useSelector(getLoginError);
+  const isLoading = useSelector(getLoginIsLoading);
+
+  useEffect(() => {
+    store.reducerManager.add("loginForm", loginReducer);
+    dispatch({ type: "@INIT loginform rdcr" });
+
+    return () => {
+      store.reducerManager.remove("loginForm");
+
+      dispatch({ type: "@INIT loginform rdcr" });
+
+      dispatch({ type: "@REM loginform rdcr" });
+    };
+
+    // eslint-disable-next-line
+  }, []);
 
   const onChangeName = useCallback((val: string) => {
     dispatch(loginActions.setUsername(val));
@@ -65,3 +89,5 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
     </div>
   );
 });
+
+export default LoginForm;
