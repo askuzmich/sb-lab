@@ -3,6 +3,9 @@ import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { counterActions } from "entities/Counter/model/slices/counterSlice";
 import { useTranslation } from "react-i18next";
 
+import LikeSVG from "shared/assets/icons/like.svg";
+import DislikeSVG from "shared/assets/icons/dislike.svg";
+
 import { getCounterValue } from "../model/selectors/getCounterValue/getCounterValue";
 
 export const Counter = () => {
@@ -20,23 +23,22 @@ export const Counter = () => {
   };
 
   return (
-    <div data-testid="counter">
-      <h3>{t("Счётчик")}</h3>
-      <h4 data-testid="counter-value">{count}</h4>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+    <div data-testid="counter" style={{ display: "block", margin: "0 auto", width: 75, position: "relative" }}>
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <h4 data-testid="counter-value" style={{ color: "#777" }}>{count}</h4>
         <Button
           data-testid="counter-inc-button"
-          theme={ButtonTheme.GREEN}
+          theme={ButtonTheme.CLEAR}
           onClick={incHandler}
         >
-          {t("Добавить")}
+          <LikeSVG width={20} fill="#555" />
         </Button>
         <Button
           data-testid="counter-dec-button"
-          theme={ButtonTheme.RED}
+          theme={ButtonTheme.CLEAR}
           onClick={decHandler}
         >
-          {t("Уменьшить")}
+          <DislikeSVG width={20} fill="#555" />
         </Button>
       </div>
 
