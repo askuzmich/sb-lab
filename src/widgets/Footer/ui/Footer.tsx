@@ -1,8 +1,6 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { Theme, useTheme } from "app/providers/ThemeProvider";
-import GitLogo from "shared/assets/images/github-mark.png";
-import GitLogoLight from "shared/assets/images/github-mark-white.png";
+import GitSVG from "shared/assets/icons/git.svg";
 import cls from "./Footer.module.scss";
 
 interface FooterProps {
@@ -11,15 +9,19 @@ interface FooterProps {
 
 export const Footer = ({ className }: FooterProps) => {
   const { t } = useTranslation();
-  const { theme } = useTheme();
 
   return (
     <div className={classes(cls.Footer, {}, [className])}>
-      <img
-        src={theme === Theme.DARK ? GitLogoLight : GitLogo}
+      {/* <img
+        src={GitLogoLight}
         alt=""
-        width={30}
-        height={30}
+        width={15}
+        height={15}
+      /> */}
+      <GitSVG
+        width={20}
+        height={20}
+        fill="#777"
       />
     </div>
   );

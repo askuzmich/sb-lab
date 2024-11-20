@@ -2,8 +2,10 @@ import { classes } from "shared/lib/classNames/classes";
 import { useState } from "react";
 import { DarkThemeBtn } from "features/DarkThemeBtn";
 
-import SettingsLogo from "shared/assets/images/settings-dark.png";
 import { ChangeLangBtn } from "features/ChangeLangBtn";
+
+import SettingsSVG from "shared/assets/icons/settings.svg";
+// import SettingsLogo from "shared/assets/images/settings-dark.png";
 
 import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { useTranslation } from "react-i18next";
@@ -35,17 +37,22 @@ export const Sidebar = ({ className }: SidebarProps) => {
         data-testid="toggle-sidebar-btn"
         className={classes(cls.sidebarBtn)}
         size={ButtonSize.M}
-        theme={ButtonTheme.GRAY}
+        theme={ButtonTheme.CLEAR_PAD}
         type="button"
         onClick={onToggle}
       >
-        <img
+        <SettingsSVG
+          width={22}
+          height={22}
+          fill="#777"
+        />
+        {/* <img
           alt={t("логотип настроек")}
           className={cls.buttonImage}
           src={SettingsLogo}
           width={20}
           height={20}
-        />
+        /> */}
       </Button>
 
       <div

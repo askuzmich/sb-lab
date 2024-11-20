@@ -27,5 +27,15 @@
       "enabled": true
     }
   ],
-  "profile": { "name": "typicode" }
+  "userprofile": {
+    "owner": 1,
+    "firstname": "typicode",
+    "lastname": "typicode",
+    "age": 20,
+    "country": "Belarus",
+    "city": "Minsk",
+    "address": "Chyrlenisa 14-22",
+    "image": "http://fakeImg.com/1122.jpg",
+    "currency": "BYN"
+  }
 }
