@@ -14,44 +14,28 @@ interface ILoginByUsernameProps {
   password: string;
 }
 
-const basicAuth = async (username: string, password: string, postfix: string, body: any = {}) => {
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (!error.response) {
+      return Promise.resolve({ data: { isSuccess: false, message: "Please check your server/internet connection" } });
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export const basicAuth = async (username: string, password: string, postfix: string) => {
   const Authorization = `Basic ${encodeBase64(`${username}:${password}`)}`;
-  // const Authorization = `Bearer ${token}`;
+
   const url = `${API_ENDPOINT_HOST}:${API_ENDPOINT_HOST_PORT}${API_ENDPOINT_BASE_URL}${postfix}`;
 
-  const a = axios.create();
-
-  a.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      if (!error.response) {
-        return Promise.resolve({ data: { isSuccess: false, message: "Please check your server/internet connection" } });
-      }
-
-      return Promise.reject(error);
-    }
-  );
-
-  return a
-    .post(
-      url,
-      body,
-      { headers: { Authorization } }
-    )
+  return axios
+    .post(url, {}, { headers: { Authorization } })
     .catch((error) => {
       if (error.response.data.message) {
-        // The request was made and the server responded with a status code that falls out of the range of 2xx
-        console.log(error.response.data);
-        // console.log(error.response.status, error.response.headers);
         return error.response;
       }
-
-      // if (error.request) { // The request was made but no response was received
-      //   console.log(error.request);
-      // }
-
-      // Something happened in setting up the request that triggered an Error
-      // console.log(error.config, error.message);
 
       return { data: { isSuccess: false, statusCode: error.response.status, message: "Server error" } };
     });

@@ -1,4 +1,4 @@
-export { createReduxStore } from "./config/store";
-export { IStateSchema } from "./config/IStateSchema";
+export { createReduxStore, TypedDispatch } from "./config/store";
+export { IStateSchema, IStoreManager } from "./config/IStateSchema";
 
 export { StoreProvider } from "./ui/StoreProvider";

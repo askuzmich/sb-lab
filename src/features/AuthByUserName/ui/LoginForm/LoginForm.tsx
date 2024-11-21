@@ -2,24 +2,37 @@ import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { memo, useCallback } from "react";
 import { Text, TextTheme } from "shared/ui/Text/Text";
+import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { getLoginUsername } from "../../model/selectors/getLoginUsername/getLoginUsername";
+import { getLoginPassword } from "../../model/selectors/getLoginPassword/getLoginPassword";
+import { getLoginError } from "../../model/selectors/getLoginError/getLoginError";
+import { getLoginIsLoading } from "../../model/selectors/getLoginIsLoading/getLoginIsLoading";
 import { loginByUsername } from "../../model/service/loginByUsername/loginByUsername";
-import { loginActions } from "../../model/slice/loginSlice";
+import { loginActions, loginReducer } from "../../model/slice/loginSlice";
 import cls from "./LoginForm.module.scss";
-import { getLoginState } from "../../model/selectors/getLoginState/getLoginState";
 
 interface LoginFormProps {
   className?: string;
+  onSuccess: () => void;
 }
 
-export const LoginForm = memo(({ className }: LoginFormProps) => {
+const reducerList: ReducerListT = {
+  loginForm: loginReducer
+};
+
+const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { username, password, error, isLoading } = useSelector(getLoginState);
+  const username = useSelector(getLoginUsername);
+  const password = useSelector(getLoginPassword);
+  const error = useSelector(getLoginError);
+  const isLoading = useSelector(getLoginIsLoading);
 
   const onChangeName = useCallback((val: string) => {
     dispatch(loginActions.setUsername(val));
@@ -29,39 +42,44 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
     dispatch(loginActions.setPassword(val));
   }, [dispatch]);
 
-  const onFormCommit = useCallback(() => {
-    dispatch(loginByUsername({
-      username,
-      password
-    }));
-  }, [dispatch, password, username]);
+  const onFormCommit = useCallback(async () => {
+    const result = await dispatch(loginByUsername({ username, password }));
+
+    if (result.meta.requestStatus === "fulfilled") {
+      onSuccess();
+    }
+  }, [dispatch, onSuccess, password, username]);
 
   return (
-    <div className={classes(cls.LoginForm, {}, [className])}>
-      <Text title={t("Регистрация")} theme={TextTheme.PRIMARY} />
+    <AsyncModule reducers={reducerList}>
+      <div className={classes(cls.LoginForm, {}, [className])}>
+        <Text title={t("Регистрация")} theme={TextTheme.PRIMARY} />
 
-      {error && <Text text={error} theme={TextTheme.ERROR} />}
+        {error && <Text text={error} theme={TextTheme.ERROR} />}
 
-      <Input
-        placeholder={t("имя пользователя")}
-        onChange={onChangeName}
-        className={cls.input}
-        value={username}
-      />
-      <Input
-        placeholder={t("пароль")}
-        onChange={onChangePass}
-        type="password"
-        value={password}
-      />
-      <Button
-        theme={ButtonTheme.GREEN}
-        className={cls.loginBtn}
-        onClick={onFormCommit}
-        disabled={isLoading}
-      >
-        {t("войти")}
-      </Button>
-    </div>
+        <Input
+          placeholder={t("имя пользователя")}
+          onChange={onChangeName}
+          className={cls.input}
+          value={username}
+        />
+        <Input
+          placeholder={t("пароль")}
+          onChange={onChangePass}
+          type="password"
+          value={password}
+        />
+        <Button
+          theme={ButtonTheme.GREEN}
+          className={cls.loginBtn}
+          onClick={onFormCommit}
+          disabled={isLoading}
+        >
+          {t("войти")}
+        </Button>
+      </div>
+    </AsyncModule>
   );
 });
+
+export default LoginForm;

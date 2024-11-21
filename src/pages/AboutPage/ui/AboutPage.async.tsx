@@ -7,3 +7,4 @@ export const AboutPageAsync = lazy(
       setTimeout(() => resolve(import("./AboutPage")), 1500);
     })
 );
+// export const AboutPageAsync = lazy(() => import("./AboutPage"));
