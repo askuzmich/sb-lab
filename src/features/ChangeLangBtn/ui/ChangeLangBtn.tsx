@@ -2,13 +2,14 @@ import { useTranslation } from "react-i18next";
 import { classes } from "shared/lib/classNames/classes";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 
+import { memo } from "react";
 import cls from "./ChangeLangBtn.module.scss";
 
 interface ChangeLangBtnProps {
   className?: string;
 }
 
-export const ChangeLangBtn = ({ className }: ChangeLangBtnProps) => {
+export const ChangeLangBtn = memo(({ className }: ChangeLangBtnProps) => {
   const { t, i18n } = useTranslation();
 
   const changeLang = async () => {
@@ -24,4 +25,4 @@ export const ChangeLangBtn = ({ className }: ChangeLangBtnProps) => {
       {t("язык")}
     </Button>
   );
-};
+});

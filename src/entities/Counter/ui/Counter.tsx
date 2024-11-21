@@ -6,9 +6,10 @@ import { useTranslation } from "react-i18next";
 import LikeSVG from "shared/assets/icons/like.svg";
 import DislikeSVG from "shared/assets/icons/dislike.svg";
 
+import { memo } from "react";
 import { getCounterValue } from "../model/selectors/getCounterValue/getCounterValue";
 
-export const Counter = () => {
+export const Counter = memo(() => {
   const { t } = useTranslation("temp");
   const count = useSelector(getCounterValue);
 
@@ -44,4 +45,4 @@ export const Counter = () => {
 
     </div>
   );
-};
+});

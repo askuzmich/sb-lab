@@ -21,8 +21,8 @@
   "users": [
     {
       "id": 1,
-      "name": "John",
-      "password": "John",
+      "name": "john",
+      "password": "john",
       "roles": "ADMIN",
       "enabled": true
     }

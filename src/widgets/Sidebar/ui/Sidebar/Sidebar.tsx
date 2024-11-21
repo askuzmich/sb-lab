@@ -1,5 +1,5 @@
 import { classes } from "shared/lib/classNames/classes";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { DarkThemeBtn } from "features/DarkThemeBtn";
 
 import { ChangeLangBtn } from "features/ChangeLangBtn";
@@ -17,7 +17,7 @@ interface SidebarProps {
   className?: string;
 }
 
-export const Sidebar = ({ className }: SidebarProps) => {
+export const Sidebar = memo(({ className }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const [t] = useTranslation();
@@ -72,4 +72,4 @@ export const Sidebar = ({ className }: SidebarProps) => {
       </div>
     </div>
   );
-};
+});

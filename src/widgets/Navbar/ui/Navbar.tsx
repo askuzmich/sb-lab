@@ -4,7 +4,7 @@ import { AppLink, AppLinkTheme } from "shared/ui/AppLink/AppLink";
 import { useTranslation } from "react-i18next";
 import { RoutePath } from "shared/config/routeConfig/routeConfig";
 import { ModalWin } from "shared/ui/ModalWin/ModalWin";
-import { useCallback, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { LoginModal } from "features/AuthByUserName";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,7 @@ interface NavbarProps {
   className?: string;
 }
 
-export const Navbar = ({ className }: NavbarProps) => {
+export const Navbar = memo(({ className }: NavbarProps) => {
   const { t } = useTranslation();
 
   const { theme } = useTheme();
@@ -49,7 +49,7 @@ export const Navbar = ({ className }: NavbarProps) => {
             {t("Главная")}
           </AppLink>
           <Button
-            theme={ButtonTheme.WHITE_OUTLINE}
+            theme={theme === Theme.DARK ? ButtonTheme.WHITE_OUTLINE : ButtonTheme.GRAY_OUTLINE}
             className={classes(cls.DarkThemeBtn, {}, [className])}
             onClick={onLogout}
           >
@@ -92,4 +92,4 @@ export const Navbar = ({ className }: NavbarProps) => {
       </div>
     </div>
   );
-};
+});

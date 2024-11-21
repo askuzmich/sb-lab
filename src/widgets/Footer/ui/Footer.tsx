@@ -1,13 +1,14 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import GitSVG from "shared/assets/icons/git.svg";
+import { memo } from "react";
 import cls from "./Footer.module.scss";
 
 interface FooterProps {
   className?: string;
 }
 
-export const Footer = ({ className }: FooterProps) => {
+export const Footer = memo(({ className }: FooterProps) => {
   const { t } = useTranslation();
 
   return (
@@ -25,4 +26,4 @@ export const Footer = ({ className }: FooterProps) => {
       />
     </div>
   );
-};
+});
