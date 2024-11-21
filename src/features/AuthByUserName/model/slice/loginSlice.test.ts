@@ -17,14 +17,4 @@ describe("loginSlice.test", () => {
     expect(loginReducer(state as ILoginSchema, loginActions.setPassword("john")))
       .toEqual({ password: "john" });
   });
-
-  test("test isLoading", () => {
-    const state: DeepPartial<ILoginSchema> = { isLoading: true };
-    // expect(loginReducer(state as ILoginSchema, loginActions(true)))
-    //   .toBe({ password: "john" });
-  });
-
-  test("test error", () => {
-    expect("").toEqual("");
-  });
 });
