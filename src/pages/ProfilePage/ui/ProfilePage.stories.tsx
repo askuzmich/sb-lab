@@ -5,6 +5,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Theme } from "app/providers/ThemeProvider";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { StoreProvider } from "app/providers/StoreProvider";
+import { StoreDecorator } from "resources/config/storybook/StoreDecorator/StoreDecorator";
 import ProfilePage from "./ProfilePage";
 
 export default {
@@ -13,20 +14,21 @@ export default {
   argTypes: {
     backgroundColor: { control: "color" },
   },
-  decorators: [
-    (Story) => (
-      <StoreProvider>
-        <Story />
-      </StoreProvider>
-    ),
-  ],
+  // decorators: [
+  //   (Story) => (
+  //     <StoreProvider>
+  //       <Story />
+  //     </StoreProvider>
+  //   ),
+  // ],
 } as ComponentMeta<typeof ProfilePage>;
 
 const Template: ComponentStory<typeof ProfilePage> = (args: any) => <ProfilePage {...args} />;
 
 export const Light = Template.bind({});
 Light.args = {};
+Light.decorators = [StoreDecorator({})];
 
 export const Dark = Template.bind({});
 Dark.args = {};
-Dark.decorators = [ThemeDecorator(Theme.DARK)];
+Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({})];
