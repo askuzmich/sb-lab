@@ -17,6 +17,31 @@
   padding: 15px 4px;
 }
 
+@keyframes sidebar-animation-keyframes {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  70% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.sidebarContentAnimation {
+  animation-name: sidebar-animation-keyframes;
+  animation-duration: 0.3s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+}
+
 .sidebarContent {
   transition: opacity 0.1s;
   margin: 15px 0;

@@ -53,7 +53,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   return (
     <AsyncModule reducers={reducerList}>
       <div className={classes(cls.LoginForm, {}, [className])}>
-        <Text title={t("Регистрация")} theme={TextTheme.PRIMARY} />
+        <Text title={t("Аутентификация")} theme={TextTheme.PRIMARY} />
 
         {error && <Text text={error} theme={TextTheme.ERROR} />}
 

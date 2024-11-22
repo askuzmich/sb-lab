@@ -8,7 +8,7 @@
     {
       "id": 2,
       "title": "json-server",
-      "userId": 2
+      "userId": 1
     }
   ],
   "comments": [
@@ -21,8 +21,8 @@
   "users": [
     {
       "id": 1,
-      "name": "john",
-      "password": "john",
+      "name": "admin",
+      "password": "123",
       "roles": "ADMIN",
       "enabled": true
     }

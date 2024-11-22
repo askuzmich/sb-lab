@@ -49,7 +49,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         /> */}
       </Button>
 
-      <div className={classes(cls.sidebarContent, { [cls.clear]: collapsed }, [])}>
+      <div className={classes(cls.sidebarContent, { [cls.clear]: collapsed }, [cls.sidebarContentAnimation])}>
         <DarkThemeBtn className={cls.sidebarSpacing} />
         <ChangeLangBtn className={cls.sidebarSpacing} />
       </div>
