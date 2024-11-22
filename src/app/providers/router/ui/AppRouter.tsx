@@ -1,7 +1,7 @@
 import { PageLoader } from "entities/PageLoader/PageLoader";
 import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { routeConfig } from "shared/config/routeConfig/routeConfig";
+import { routeConfig } from "resources/config/routeConfig/routeConfig";
 
 export const AppRouter = () => (
   <Suspense fallback={<PageLoader />}>

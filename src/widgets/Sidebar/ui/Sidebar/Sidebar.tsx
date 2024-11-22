@@ -9,8 +9,6 @@ import SettingsSVG from "shared/assets/icons/settings.svg";
 
 import { Button, ButtonSize, ButtonTheme } from "shared/ui/Button/Button";
 import { useTranslation } from "react-i18next";
-import { AppLink, AppLinkTheme } from "shared/ui/AppLink/AppLink";
-import { RoutePath } from "shared/config/routeConfig/routeConfig";
 import cls from "./Sidebar.module.scss";
 
 interface SidebarProps {
@@ -41,11 +39,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         type="button"
         onClick={onToggle}
       >
-        <SettingsSVG
-          width={22}
-          height={22}
-          fill="#777"
-        />
+        <SettingsSVG width={22} height={22} fill="#777" />
         {/* <img
           alt={t("логотип настроек")}
           className={cls.buttonImage}
@@ -55,18 +49,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         /> */}
       </Button>
 
-      <div
-        className={classes(cls.sidebarContent, { [cls.clear]: collapsed }, [])}
-      >
-        <div className={cls.links}>
-          <AppLink
-            theme={AppLinkTheme.SECONDARY}
-            className={cls.sideLink}
-            to={RoutePath.about}
-          >
-            {t("О проекте")}
-          </AppLink>
-        </div>
+      <div className={classes(cls.sidebarContent, { [cls.clear]: collapsed }, [])}>
         <DarkThemeBtn className={cls.sidebarSpacing} />
         <ChangeLangBtn className={cls.sidebarSpacing} />
       </div>
