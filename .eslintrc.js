@@ -44,7 +44,10 @@ module.exports = {
     "react-hooks/exhaustive-deps": "error",
     "no-param-reassign": "off"
   },
-  globals: { __IS_DEV__: true },
+  globals: {
+    __IS_DEV__: true,
+    __REST_API__BASE_URL__: true
+  },
   overrides: [
     {
       files: ["**/src/**/*.{test,stories}.{ts,tsx}"],

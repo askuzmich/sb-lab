@@ -1,13 +1,19 @@
 import { configureStore, ReducersMapObject } from "@reduxjs/toolkit";
 import { counterReducer } from "entities/Counter";
 import { userReducer } from "entities/User";
+
+import { AXIOS } from "resources/restApi/AXIOS";
+
+import { NavigateOptions, To } from "react-router";
 import { IStateSchema } from "./IStateSchema";
 import { reducerManager } from "./reducerManager";
 
 export function createReduxStore(
   initialState?: IStateSchema,
 
-  asyncReducers?: ReducersMapObject<IStateSchema>
+  asyncReducers?: ReducersMapObject<IStateSchema>,
+
+  navigate?: (to: To, options?: NavigateOptions) => void
 ) {
   const rootReducers: ReducersMapObject<IStateSchema> = {
     ...asyncReducers,
@@ -17,10 +23,19 @@ export function createReduxStore(
 
   const rManager = reducerManager(rootReducers);
 
-  const store = configureStore<IStateSchema>({
+  const store = configureStore({
     reducer: rManager.reduce,
     preloadedState: initialState,
-    devTools: __IS_DEV__
+    devTools: __IS_DEV__,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+      thunk: {
+        extraArgument: {
+          axios: AXIOS,
+          navigate
+        },
+      },
+    }),
+
   });
 
   // @ts-ignore
