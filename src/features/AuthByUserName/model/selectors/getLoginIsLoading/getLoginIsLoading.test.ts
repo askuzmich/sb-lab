@@ -1,4 +1,3 @@
-
 import { IStateSchema } from "app/providers/StoreProvider";
 import { getLoginIsLoading } from "./getLoginIsLoading";
 
