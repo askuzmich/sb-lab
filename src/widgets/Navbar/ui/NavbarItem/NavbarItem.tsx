@@ -5,7 +5,7 @@ import cls from "./NavbarItem.module.scss";
 import { INavbarItem } from "./types/INavbarItem";
 
 interface NavbarItemProps {
-  item?: INavbarItem;
+  item: INavbarItem;
   collapsed?: boolean;
 }
 

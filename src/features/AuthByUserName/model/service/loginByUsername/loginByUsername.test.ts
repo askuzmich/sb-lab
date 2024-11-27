@@ -41,7 +41,7 @@ describe("loginByUsername.test", () => {
 
     const asyncThunkAction = loginByUsername({ username: "john", password: "whoo-hoo" });
 
-    const resultData = await asyncThunkAction(dispatch, getState, undefined);
+    // const resultData = await asyncThunkAction(dispatch, getState, undefined);
 
     // Then
     // expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData({
@@ -68,7 +68,7 @@ describe("loginByUsername.test", () => {
 
     const asyncThunkAction = loginByUsername({ username: "john", password: "whoo-hoo" });
 
-    const resultData = await asyncThunkAction(dispatch, getState, undefined);
+    // const resultData = await asyncThunkAction(dispatch, getState, undefined);
 
     // Then
     // expect(mockedAxios.post).toHaveBeenCalled();

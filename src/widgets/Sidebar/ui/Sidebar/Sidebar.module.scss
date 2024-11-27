@@ -1,6 +1,7 @@
 .Sidebar {
   display: block;
   position: absolute;
+  right: 0;
   height: 300px;
   width: var(--sidebar-width); // 300px;
   margin: 12px auto;
@@ -65,4 +66,8 @@
 
 .sidebarSpacing {
   margin-top: 5px;
+}
+
+.sidebarBtn {
+  margin: 0 auto;
 }

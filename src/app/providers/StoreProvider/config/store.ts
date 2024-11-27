@@ -1,11 +1,11 @@
-import { configureStore, ReducersMapObject } from "@reduxjs/toolkit";
+import { CombinedState, configureStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 import { counterReducer } from "entities/Counter";
 import { userReducer } from "entities/User";
 
 import { AXIOS } from "resources/restApi/AXIOS";
 
 import { NavigateOptions, To } from "react-router";
-import { IStateSchema } from "./IStateSchema";
+import { IStateSchema, IThunkExtra } from "./IStateSchema";
 import { reducerManager } from "./reducerManager";
 
 export function createReduxStore(
@@ -23,17 +23,17 @@ export function createReduxStore(
 
   const rManager = reducerManager(rootReducers);
 
+  const extraArgument: IThunkExtra = {
+    axios: AXIOS,
+    navigate,
+  };
+
   const store = configureStore({
-    reducer: rManager.reduce,
+    reducer: rManager.reduce as Reducer<CombinedState<IStateSchema>>,
     preloadedState: initialState,
     devTools: __IS_DEV__,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-      thunk: {
-        extraArgument: {
-          axios: AXIOS,
-          navigate
-        },
-      },
+      thunk: { extraArgument }
     }),
 
   });

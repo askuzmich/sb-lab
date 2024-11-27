@@ -27,7 +27,11 @@ AXIOS.interceptors.response.use(
   }
 );
 
-export const auth = async (Authorization: string) => {
+export const auth = async (Authorization: string | undefined) => {
+  if (!Authorization) {
+    return Promise.resolve({ data: { isSuccess: false, statusCode: "", message: "Client error" } });
+  }
+
   return AXIOS
     .post("/users/login", {}, { headers: { Authorization } })
     .catch((error) => {

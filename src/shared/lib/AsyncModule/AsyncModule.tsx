@@ -29,15 +29,15 @@ export const AsyncModule = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Object.entries(reducers).forEach(([reducerKey, reducer]: ReducerListNodeType) => {
-      store.reducerManager.add(reducerKey, reducer);
+    Object.entries(reducers).forEach(([reducerKey, reducer]) => {
+      store.reducerManager.add(reducerKey as IStateSchemaKey, reducer);
       dispatch({ type: `@INIT ${reducerKey} rdcr` });
     });
 
     return () => {
       if (isRemoveAfterUnmount) {
-        Object.keys(reducers).forEach((reducerKey: IStateSchemaKey) => {
-          store.reducerManager.remove(reducerKey);
+        Object.keys(reducers).forEach((reducerKey) => {
+          store.reducerManager.remove(reducerKey as IStateSchemaKey);
           dispatch({ type: `@REM ${reducerKey} rdcr` });
         });
       }

@@ -29,7 +29,7 @@ export function useTheme(): UseThemeResult {
   };
 
   return {
-    theme,
+    theme: theme || Theme.DARK,
     toggleTheme,
   };
 }

@@ -33,10 +33,10 @@ export interface IStoreManager extends EnhancedStore<IStateSchema> {
 
 export interface IThunkExtra {
   axios: AxiosInstance,
-  navigate: (to: To, options?: NavigateOptions) => void
+  navigate?: (to: To, options?: NavigateOptions) => void
 }
 
 export interface IThunkConf<T> {
   rejectValue: T;
-   extra: IThunkExtra;
+  extra: IThunkExtra;
 }

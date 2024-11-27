@@ -24,12 +24,25 @@ server.use(async (req, res, next) => {
   next();
 });
 
-// var header = req.headers.authorization || '';       // get the auth header
-// var token = header.split(/\s+/).pop() || '';        // and the encoded auth token
-// var auth = Buffer.from(token, 'base64').toString(); // convert from base64
-// var parts = auth.split(/:/);                        // split on colon
-// var username = parts.shift();                       // username is first
-// var password = parts.join(':');                     // everything else is the password
+const err500 = {
+  isSuccess: false,
+  statusCode: 500,
+  message: "Server Side Err" // e.message
+};
+
+const err403 = (unit) => ({
+  isSuccess: false,
+  statusCode: 403,
+  message: `${unit} not found`
+});
+
+const CustomReturnData = (message, data) => ({
+  isSuccess: true,
+  statusCode: 200,
+  message,
+  data
+});
+
 const authFilterByUsernameAndPassword = (req, res) => {
   try {
   // const u = req.body;
@@ -47,11 +60,33 @@ const authFilterByUsernameAndPassword = (req, res) => {
 
     return decode.split(":") || "";
   } catch (e) {
-    console.log(e);
-
     throw new Error(e.message);
   }
 };
+
+const getData = () => {
+  return JSON.parse(fs.readFileSync(path.resolve(__dirname, "db.json"), "UTF-8"));
+};
+
+//
+// GET /api/v1/profiles/{profileId}
+server.get("/api/v1/profiles/:profileId", (req, res) => {
+  try {
+    const { profiles = [] } = getData();
+
+    const candidate = profiles.find(
+      (profile) => profile.owner === Number(req.params.profileId)
+    );
+
+    if (candidate) {
+      return res.json(CustomReturnData("Profile info", candidate));
+    }
+
+    return res.status(403).json(err403("Profile"));
+  } catch (e) {
+    return res.status(500).json(err500);
+  }
+});
 
 // Authentication of user by login and password -> token
 // POST /api/v1/users/login
@@ -59,45 +94,27 @@ server.post("/api/v1/users/login", (req, res) => {
   try {
     const [username, password] = authFilterByUsernameAndPassword(req, res);
 
-    const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, "db.json"), "UTF-8"));
-
-    const { users = [] } = db;
+    const { users = [] } = getData();
 
     const candidate = users.find(
-      // password should be encoded in real API
       (user) => user.name === username && user.password === password,
     );
 
     if (candidate) {
-      const { id, name, roles, enabled } = candidate;
-
-      const CustomReturnData = {
-        isSuccess: true,
-        statusCode: 200,
-        message: "Login user info and JWT",
-        data: {
-          user: { id, name, roles, enabled },
-          // eslint-disable-next-line max-len
-          token: "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiU2VyZ2V5IiwiZXhwIjoxNzMwNDQ1NzY2LCJpYXQiOjE3MzA0Mzg1NjYsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.L13KPSf2I_zahJXU3hfWSLDBBKVIG7OOVZ6NPkyMpPlxSDmYdiu9qAaYGif0nU5SnlwpcUeXbpxFZo_twXHw3yxXRqSdhwUYDaKST8NaxhxujLsLM3BEaxdxX-5Rp3GEyV0uxpygQ1saNGz4mpkA0bG0DrHWkwbKe9x5La6FCl1YYto3buJjeEPpRLuN40GyJSJRoO3NHAsnIa27PS4iwlGFbFhBk5HScx7s_HwXxNPjnUnoet5n4d9pWBZ3tBvMRA7a0Jis_pqUmqVJdzLSpnlmILyGaAVKz3hu4OOelu-3ZX7Z1YBc5hAHAhwgYodJQyjzKYuBSLMpEtcvyDwc3A"
-        }
+      const data = {
+        user: candidate,
+        // eslint-disable-next-line max-len
+        token: "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiU2VyZ2V5IiwiZXhwIjoxNzMwNDQ1NzY2LCJpYXQiOjE3MzA0Mzg1NjYsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.L13KPSf2I_zahJXU3hfWSLDBBKVIG7OOVZ6NPkyMpPlxSDmYdiu9qAaYGif0nU5SnlwpcUeXbpxFZo_twXHw3yxXRqSdhwUYDaKST8NaxhxujLsLM3BEaxdxX-5Rp3GEyV0uxpygQ1saNGz4mpkA0bG0DrHWkwbKe9x5La6FCl1YYto3buJjeEPpRLuN40GyJSJRoO3NHAsnIa27PS4iwlGFbFhBk5HScx7s_HwXxNPjnUnoet5n4d9pWBZ3tBvMRA7a0Jis_pqUmqVJdzLSpnlmILyGaAVKz3hu4OOelu-3ZX7Z1YBc5hAHAhwgYodJQyjzKYuBSLMpEtcvyDwc3A"
       };
 
-      return res.json(CustomReturnData);
+      return res.json(CustomReturnData("Login user info and JWT", data));
     }
 
-    return res.status(403).json({
-      isSuccess: false,
-      statusCode: 403,
-      message: "User not found"
-    });
+    return res.status(403).json(err403("User"));
   } catch (e) {
     console.log(e);
 
-    return res.status(500).json({
-      isSuccess: false,
-      statusCode: 500,
-      message: e.message
-    });
+    return res.status(500).json(err500);
   }
 });
 
@@ -121,5 +138,6 @@ const API_SERVER_PORT = 8000;
 
 server.listen(API_SERVER_PORT, () => {
   console.log(`server is running on ${API_SERVER_PORT} port`);
-  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
+  // console.log(`http://localhost:${API_SERVER_PORT}/api/v1/users/login`);
+  console.log(`http://localhost:${API_SERVER_PORT}/api/v1/profiles/1`);
 });
