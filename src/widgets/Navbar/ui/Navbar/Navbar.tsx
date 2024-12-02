@@ -1,10 +1,8 @@
-/* eslint-disable max-len */
 import { classes } from "shared/lib/classNames/classes";
-import { AppLink, AppLinkTheme } from "shared/ui/AppLink/AppLink";
+
 import { useTranslation } from "react-i18next";
-import { RoutePath } from "resources/config/routeConfig/routeConfig";
-import { ModalWin } from "shared/ui/ModalWin/ModalWin";
-import { memo, useCallback, useMemo, useState } from "react";
+
+import { memo, useCallback, useState } from "react";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { LoginModal } from "features/AuthByUserName";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +42,12 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     dispatch(userActions.logout());
   }, [dispatch]);
 
-  const NavbarItemList = SidebarItemsList.map((item: INavbarItem) => <NavbarItem key={item.path} item={item} />);
+  const NavbarItemList = SidebarItemsList.map((item: INavbarItem) => (
+    <NavbarItem
+      key={item.path}
+      item={item}
+    />
+  ));
 
   if (authData) {
     return (

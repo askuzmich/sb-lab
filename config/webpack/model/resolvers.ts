@@ -1,7 +1,7 @@
 import { ResolveOptions } from "webpack";
-import { BuildOptions } from "./types/config";
+import { BuildOptions } from "../types/config";
 
-export function buildResolvers(options: BuildOptions): ResolveOptions {
+export function resolvers(options: BuildOptions): ResolveOptions {
   return {
     extensions: [".tsx", ".ts", ".js"],
     preferAbsolute: true,

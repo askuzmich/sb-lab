@@ -21,10 +21,20 @@ export const fetchProfile = createAsyncThunk<
   async ({ profileId }, thunkAPI) => {
     const { extra, dispatch, rejectWithValue, } = thunkAPI;
 
+    const getCredentials = () => {
+      const userData = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
+
+      if (userData) {
+        const user = JSON.parse(userData);
+        return user.token;
+      }
+
+      return false;
+    };
+
     const response = await extra.axios.get<ICustomReturnedData>(
       `/profiles/${profileId}`,
-      // {},
-      // { headers: { Authorization: `Basic ${encodeBase64(`${username}:${password}`)}` } }
+      { headers: { Authorization: `Bearer ${getCredentials()}` } }
     );
 
     if (!response.data) {

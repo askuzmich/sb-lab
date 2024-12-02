@@ -1,13 +1,22 @@
-import { classes } from "shared/lib/classNames/classes";
+import { classes, Mods } from "shared/lib/classNames/classes";
 import { InputHTMLAttributes, memo } from "react";
 import cls from "./Input.module.scss";
 
-type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange">
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "readonly">
+
+export enum InputTheme {
+  PRIMARY = "primary",
+  // INVERTED = "inverted",
+  LIGHT = "light",
+  // ERROR = "error",
+}
 
 interface IInputProps extends HTMLInputProps{
   className?: string;
-  value?: string;
+  value?: string | number;
+  theme?: InputTheme;
   onChange?: (val: string) => void;
+  readonly?: boolean;
 }
 
 export const Input = memo(({
@@ -16,14 +25,21 @@ export const Input = memo(({
   onChange,
   type = "text",
   placeholder,
+  readonly,
+  theme = InputTheme.PRIMARY,
   ...otherProps
 }: IInputProps) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
   };
 
+  const mods: Mods = {
+    [cls[theme]]: true,
+    // [cls.readOnly]: readonly,
+  };
+
   return (
-    <div className={classes(cls.Input, {}, [className])}>
+    <div className={classes(cls.Input, mods, [className])}>
       {placeholder && (
         <div className={cls.placeholder}>
           {placeholder}
@@ -32,8 +48,9 @@ export const Input = memo(({
       <input
         type={type}
         value={value}
+        readOnly={readonly}
         onChange={onChangeHandler}
-        className={cls.inputEntity}
+        className={classes(cls.inputEntity, { [cls.readOnly]: readonly }, [])}
         {...otherProps}
       />
     </div>

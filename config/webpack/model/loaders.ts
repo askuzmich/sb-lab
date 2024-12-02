@@ -1,15 +1,15 @@
 import webpack from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { BuildOptions } from "./types/config";
+import { BuildOptions } from "../types/config";
 
-export function buildSVGLoader() {
+export function svgLoader() {
   return {
     test: /\.svg$/,
     use: ["@svgr/webpack"]
   };
 }
 
-export function buildCssLoader(isDev: boolean) {
+export function cssLoader(isDev: boolean) {
   return {
     test: /\.s[ac]ss$/i,
     use: [
@@ -31,15 +31,15 @@ export function buildCssLoader(isDev: boolean) {
   };
 }
 
-export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
-  const svgLoader = buildSVGLoader();
+export function loaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
+  const svgLdr = svgLoader();
 
   const fileLoader = {
     test: /\.(png|jpe?g|gif|woff2|woff)$/i,
     use: [{ loader: "file-loader" }],
   };
 
-  const cssLoader = buildCssLoader(isDev);
+  const cssLdr = cssLoader(isDev);
 
   const typescriptLoader = {
     test: /\.tsx?$/,
@@ -47,5 +47,5 @@ export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
     exclude: /node_modules/,
   };
 
-  return [typescriptLoader, cssLoader, svgLoader, fileLoader];
+  return [typescriptLoader, cssLdr, svgLdr, fileLoader];
 }

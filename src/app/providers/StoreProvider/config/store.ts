@@ -13,7 +13,7 @@ export function createReduxStore(
 
   asyncReducers?: ReducersMapObject<IStateSchema>,
 
-  navigate?: (to: To, options?: NavigateOptions) => void
+  // navigate?: (to: To, options?: NavigateOptions) => void
 ) {
   const rootReducers: ReducersMapObject<IStateSchema> = {
     ...asyncReducers,
@@ -25,7 +25,7 @@ export function createReduxStore(
 
   const extraArgument: IThunkExtra = {
     axios: AXIOS,
-    navigate,
+    // navigate,
   };
 
   const store = configureStore({

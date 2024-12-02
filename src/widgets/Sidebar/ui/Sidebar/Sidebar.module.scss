@@ -6,7 +6,7 @@
   width: var(--sidebar-width); // 300px;
   margin: 12px auto;
   padding: 15px 24px;
-  box-shadow: 0 0 15px 1px rgba(6 6 6 / 10%);
+  box-shadow: var(--shadow);
   border-radius: 12px;
   background: #ffffff20;
   backdrop-filter: blur(16px) saturate(120%);

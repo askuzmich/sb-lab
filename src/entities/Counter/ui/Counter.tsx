@@ -1,27 +1,26 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { counterActions } from "entities/Counter/model/slices/counterSlice";
-import { useTranslation } from "react-i18next";
 
 import LikeSVG from "shared/assets/icons/like.svg";
 import DislikeSVG from "shared/assets/icons/dislike.svg";
 
-import { memo } from "react";
+import { memo, useCallback } from "react";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { getCounterValue } from "../model/selectors/getCounterValue/getCounterValue";
 
 export const Counter = memo(() => {
-  const { t } = useTranslation("temp");
   const count = useSelector(getCounterValue);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const incHandler = () => {
+  const incHandler = useCallback(() => {
     dispatch(counterActions.increment());
-  };
+  }, [dispatch]);
 
-  const decHandler = () => {
+  const decHandler = useCallback(() => {
     dispatch(counterActions.decrement());
-  };
+  }, [dispatch]);
 
   return (
     <div data-testid="counter" style={{ display: "block", margin: "0 auto", width: 75, position: "relative" }}>
@@ -32,14 +31,14 @@ export const Counter = memo(() => {
           theme={ButtonTheme.CLEAR}
           onClick={incHandler}
         >
-          <LikeSVG width={20} fill="#555" />
+          <LikeSVG width={12} fill="#555" />
         </Button>
         <Button
           data-testid="counter-dec-button"
           theme={ButtonTheme.CLEAR}
           onClick={decHandler}
         >
-          <DislikeSVG width={20} fill="#555" />
+          <DislikeSVG width={12} fill="#555" />
         </Button>
       </div>
 

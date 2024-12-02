@@ -5,10 +5,6 @@ import {
 } from "resources/application";
 import { encodeBase64 } from "shared/lib/encode/encode";
 
-// const url = __IS_DEV__
-//   ? `${API_ENDPOINT_HOST}:${API_ENDPOINT_HOST_PORT}`
-//   : "https://heroku.app";
-
 const baseURL = `${__REST_API__BASE_URL__}${API_ENDPOINT_BASE_URL}`;
 
 export const AXIOS = axios.create({

@@ -12,6 +12,7 @@ export const SidebarItemsList: INavbarItem[] = [
   },
   {
     path: RoutePath.profile,
-    text: "Профиль"
+    text: "Профиль",
+    authOnly: true
   }
 ];

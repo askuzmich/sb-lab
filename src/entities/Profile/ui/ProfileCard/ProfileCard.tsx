@@ -1,42 +1,114 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { getProfile } from "entities/Profile/model/selector/getProfile/getProfile";
-import { getProfileErr } from "entities/Profile/model/selector/getProfileErr/getProfileErr";
-import { getProfileIsLoading } from "entities/Profile/model/selector/getProfileIsLoading/getProfileIsLoading";
-import { Text } from "shared/ui/Text/Text";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
+
+import { Text, TextAlign, TextTheme } from "shared/ui/Text/Text";
 import { Input } from "shared/ui/Input/Input";
+import { IProfile } from "entities/Profile/model/type/IProfile";
+import { Loader } from "shared/ui/Loader/Loader";
+
+import { ImageJpg } from "shared/ui/ImageJpg/ImageJpg";
+import { Currency, ECurrency } from "entities/Currency/";
+import { Country, ECountry } from "entities/Country";
 import cls from "./ProfileCard.module.scss";
 
 interface ProfileCardProps {
   className?: string;
+  profileCardData?: IProfile;
+  error?: string;
+  isLoading?: boolean;
+  isReadOnly?: boolean;
+  onChangeFirstname?: (value: string) => void;
+  onChangeLastname?: (value: string) => void;
+  onChangeAge?: (value: string) => void;
+  onChangeCountry?: (value: ECountry) => void;
+  onChangeCurrency?: (value: ECurrency) => void;
+  onChangeCity?: (value: string) => void;
+  onChangeImage?: (value: string) => void;
 }
 
-export const ProfileCard = ({ className }: ProfileCardProps) => {
+export const ProfileCard = ({
+  className, profileCardData, isLoading, error, isReadOnly, onChangeLastname,
+  onChangeFirstname, onChangeAge, onChangeCountry, onChangeCurrency, onChangeCity, onChangeImage
+}: ProfileCardProps) => {
   const { t } = useTranslation("profile");
 
-  const data = useSelector(getProfile);
+  if (isLoading) {
+    return (
+      <div className={classes(cls.ProfileCard, {}, [className])}>
+        <Loader />
+      </div>
+    );
+  }
 
-  const isLoading = useSelector(getProfileIsLoading);
-
-  const error = useSelector(getProfileErr);
+  if (error) {
+    return (
+      <div className={classes(cls.ProfileCard, {}, [className])}>
+        <Text title={t("Ошибка")} text={error} theme={TextTheme.ERROR} textAlign={TextAlign.LEFT} />
+      </div>
+    );
+  }
 
   return (
     <div className={classes(cls.ProfileCard, {}, [className])}>
-      <Text title={t("Карточка профиля")} />
       <div className={cls.data}>
-        {/* <Input value={data?.image} placeholder={t("имя")} className={cls.input} /> */}
 
-        <Input value={data?.firstname} placeholder={t("Имя")} className={cls.input} />
-        <Input value={data?.lastname} placeholder={t("Фамилия")} className={cls.input} />
-        <Input value={String(data?.age || "")} placeholder={t("Лет")} className={cls.input} />
-        <Input value={data?.country} placeholder={t("Страна")} className={cls.input} />
-        <Input value={data?.city} placeholder={t("Город")} className={cls.input} />
-        <Input value={data?.address} placeholder={t("Адрес")} className={cls.input} />
-        <Input value={data?.currency} placeholder={t("Валюта")} className={cls.input} />
+        {profileCardData?.image && <ImageJpg src={profileCardData?.image} size={150} />}
 
-        <Button theme={ButtonTheme.GREEN}>{t("Редактировать")}</Button>
+        <Input
+          value={profileCardData?.image}
+          placeholder={t("Имага")}
+          className={cls.input}
+          readonly={isReadOnly}
+          onChange={onChangeImage}
+        />
+
+        <Input
+          value={profileCardData?.firstname}
+          placeholder={t("Имя")}
+          className={cls.input}
+          readonly={isReadOnly}
+          onChange={onChangeFirstname}
+        />
+        <Input
+          value={profileCardData?.lastname}
+          placeholder={t("Фамилия")}
+          className={cls.input}
+          readonly={isReadOnly}
+          onChange={onChangeLastname}
+        />
+        <Input
+          value={String(profileCardData?.age || "")}
+          placeholder={t("Лет")}
+          className={cls.input}
+          readonly={isReadOnly}
+          onChange={onChangeAge}
+        />
+        <Country
+          defaultValue={profileCardData?.country}
+          className={cls.input}
+          isReadOnly={isReadOnly}
+          onChange={onChangeCountry}
+        />
+        <Input
+          value={profileCardData?.city}
+          placeholder={t("Город")}
+          className={cls.input}
+          readonly={isReadOnly}
+          onChange={onChangeCity}
+        />
+        <Input
+          value={profileCardData?.address}
+          placeholder={t("Адрес")}
+          className={cls.input}
+          readonly={isReadOnly}
+          onChange={onChangeLastname}
+        />
+        <Currency
+          defaultValue={profileCardData?.currency}
+          className={cls.input}
+          isReadOnly={isReadOnly}
+          onChange={onChangeCurrency}
+        />
       </div>
     </div>
   );

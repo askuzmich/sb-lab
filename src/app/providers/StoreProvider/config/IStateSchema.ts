@@ -4,7 +4,7 @@ import { ICounterSchema } from "entities/Counter";
 import { IProfileStateSchema } from "entities/Profile";
 import { IUserSchema } from "entities/User";
 import { ILoginSchema } from "features/AuthByUserName";
-import { NavigateOptions, To } from "react-router";
+// import { NavigateOptions, To } from "react-router";
 
 export interface IStateSchema {
   counter: ICounterSchema;
@@ -33,10 +33,11 @@ export interface IStoreManager extends EnhancedStore<IStateSchema> {
 
 export interface IThunkExtra {
   axios: AxiosInstance,
-  navigate?: (to: To, options?: NavigateOptions) => void
+  // navigate?: (to: To, options?: NavigateOptions) => void
 }
 
 export interface IThunkConf<T> {
   rejectValue: T;
   extra: IThunkExtra;
+  state: IStateSchema;
 }
