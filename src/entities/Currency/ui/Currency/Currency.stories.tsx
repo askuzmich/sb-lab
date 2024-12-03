@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Currency } from "./Currency";
 
 export default {
-  title: "shared/Currency",
+  title: "entities/Currency",
   component: Currency,
   argTypes: {
     backgroundColor: { control: "color" },

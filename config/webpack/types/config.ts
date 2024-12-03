@@ -16,7 +16,8 @@ export interface BuildEnv {
 export interface BuildOptions {
   mode: BuildMode;
   paths: BuildPaths;
-  isDev: boolean;
   port: number;
+  isDev: boolean;
   restBaseUrl: string;
+  projectType: "frontend" | "storybook" | "jest";
 }

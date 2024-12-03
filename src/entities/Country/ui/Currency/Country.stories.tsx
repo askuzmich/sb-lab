@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Country } from "./Country";
 
 export default {
-  title: "shared/Country",
+  title: "entities/Country",
   component: Country,
   argTypes: {
     backgroundColor: { control: "color" },

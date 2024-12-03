@@ -43,6 +43,7 @@ const ProfilePage = () => {
     [EnumValidateProfileErrs.INCORRECT_USER_DATA]: t("Имя и фамилия"),
     [EnumValidateProfileErrs.INCORRECT_AGE]: t("Возраст"),
     [EnumValidateProfileErrs.INCORRECT_COUNTRY]: t("Название страны"),
+    [EnumValidateProfileErrs.INCORRECT_CURRENCY]: t("Название валюты"),
   };
 
   const onChangeFirstname = useCallback((firstname?: string) => {
@@ -74,7 +75,9 @@ const ProfilePage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchProfile({ profileId: 1 }));
+    if (__PROJECT_TYPE__ !== "storybook") {
+      dispatch(fetchProfile({ profileId: 1 }));
+    }
   }, [dispatch]);
 
   return (

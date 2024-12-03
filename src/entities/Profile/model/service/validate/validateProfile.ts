@@ -1,10 +1,10 @@
 import { EnumValidateProfileErrs, IProfile } from "../../type/IProfile";
 
-export const validate = (profile?: IProfile) => {
+export const validateProfile = (profile?: IProfile) => {
   if (!profile) {
     return [EnumValidateProfileErrs.NO_DATA];
   }
-  const { firstname, lastname, age, country } = profile;
+  const { firstname, lastname, age, country, currency } = profile;
 
   const errs: EnumValidateProfileErrs[] = [];
 
@@ -18,6 +18,10 @@ export const validate = (profile?: IProfile) => {
 
   if (!country) {
     errs.push(EnumValidateProfileErrs.INCORRECT_COUNTRY);
+  }
+
+  if (!currency) {
+    errs.push(EnumValidateProfileErrs.INCORRECT_CURRENCY);
   }
 
   return errs;

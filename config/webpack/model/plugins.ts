@@ -7,7 +7,8 @@ import { BuildOptions } from "../types/config";
 export function plugins({
   paths,
   isDev,
-  restBaseUrl
+  restBaseUrl,
+  projectType
 }: BuildOptions): webpack.WebpackPluginInstance[] {
   const plugins = [
     new HTMLWebpackPlugin({
@@ -24,6 +25,7 @@ export function plugins({
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
       __REST_API__BASE_URL__: JSON.stringify(restBaseUrl),
+      __PROJECT_TYPE__: JSON.stringify(projectType),
     })
   ];
 

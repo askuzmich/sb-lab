@@ -6,6 +6,8 @@ import { Theme } from "app/providers/ThemeProvider";
 import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { StoreProvider } from "app/providers/StoreProvider";
 import { StoreDecorator } from "resources/config/storybook/StoreDecorator/StoreDecorator";
+import { ECountry } from "entities/Country";
+import { ECurrency } from "entities/Currency";
 import ProfilePage from "./ProfilePage";
 
 export default {
@@ -27,8 +29,34 @@ const Template: ComponentStory<typeof ProfilePage> = () => <ProfilePage />;
 
 export const Light = Template.bind({});
 Light.args = {};
-Light.decorators = [StoreDecorator({})];
+Light.decorators = [StoreDecorator({
+  profile: {
+    editedData: {
+      firstname: "John",
+      lastname: "Dore",
+      age: 22,
+      country: ECountry.Armenia,
+      city: "Erevan",
+      address: "Mira, 1-23",
+      currency: ECurrency.USD,
+      // image
+    }
+  }
+})];
 
 export const Dark = Template.bind({});
 Dark.args = {};
-Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({})];
+Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
+  profile: {
+    editedData: {
+      firstname: "John",
+      lastname: "Dore",
+      age: 22,
+      country: ECountry.Armenia,
+      city: "Erevan",
+      address: "Mira, 1-23",
+      currency: ECurrency.USD,
+      // image
+    }
+  }
+})];
