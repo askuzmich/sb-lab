@@ -1,5 +1,5 @@
 import { classes } from "shared/lib/classNames/classes";
-import { lazy, ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import cls from "./ModalWin.module.scss";
 import { Portal } from "../Portal/Portal";
 
@@ -32,7 +32,7 @@ export const ModalWin = (props: ModalWinProps) => {
     e.stopPropagation();
   };
 
-  const mods: Record<string, boolean> = {
+  const mods: Record<string, boolean | undefined> = {
     [cls.revealed]: isOpen
   };
 
@@ -53,7 +53,7 @@ export const ModalWin = (props: ModalWinProps) => {
     };
   }, [isOpen, onWinCloseByESC]);
 
-  if (lazy && !isMounted) {
+  if (isLazy && !isMounted) {
     return null;
   }
 
@@ -61,10 +61,7 @@ export const ModalWin = (props: ModalWinProps) => {
     <Portal>
       <div className={classes(cls.ModalWin, mods, [className])}>
         <div className={cls.overlay} onClick={winCloseHandler}>
-          <div
-            className={cls.content}
-            onClick={contentHandler}
-          >
+          <div className={classes(cls.content, {}, [cls.modalContentAnimation])} onClick={contentHandler}>
             {children}
           </div>
         </div>

@@ -19,6 +19,31 @@
   background: rgba(0 0 0 / 70%);
 }
 
+@keyframes modal-animation-keyframes {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  70% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.modalContentAnimation {
+  animation-name: modal-animation-keyframes;
+  animation-duration: 0.25s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+}
+
 .content {
   padding: 20px;
   border-radius: 5px;

@@ -1,7 +1,7 @@
 import path from "path";
 import webpack from "webpack";
-import { buildWebpackConfig } from "./config/build/buildWebpackConfig";
-import { BuildEnv, BuildPaths } from "./config/build/types/config";
+import { build, BuildEnv, BuildPaths } from "./config/webpack";
+import { API_ENDPOINT_HOST, API_ENDPOINT_HOST_PORT } from "./src/resources/application";
 
 export default (env: BuildEnv) => {
   const paths: BuildPaths = {
@@ -14,12 +14,15 @@ export default (env: BuildEnv) => {
   const mode = env.mode || "development";
   const isDev = mode === "development";
   const PORT = env.port || 3000;
+  const restBaseUrl = env.restBaseUrl || `${API_ENDPOINT_HOST}:${API_ENDPOINT_HOST_PORT}`;
 
-  const config: webpack.Configuration = buildWebpackConfig({
+  const config: webpack.Configuration = build({
     mode,
     paths,
     isDev,
     port: PORT,
+    restBaseUrl,
+    projectType: "frontend"
   });
 
   return config;

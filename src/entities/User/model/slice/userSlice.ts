@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { USER_LOCAL_STORAGE_KEY } from "resources/application";
-import { IUser, IUserData, IUserSchema } from "../types/IUserSchema";
+import { getCredentials } from "shared/lib/auth/getCredentials";
+import { setCredentials } from "shared/lib/auth/setCredentials";
+import { IUserData, IUserSchema } from "../types/IUserSchema";
 
 const initialState: IUserSchema = {};
 
@@ -9,21 +10,16 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setAuthData: (state, action: PayloadAction<IUserData>) => {
+      setCredentials(action.payload);
       state.authData = action.payload;
     },
-    initAuthData: (state, action: PayloadAction<IUserData>) => {
-      if (localStorage.getItem(USER_LOCAL_STORAGE_KEY) === "undefined") {
-        localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
-      }
 
-      const userData = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
-
-      if (userData) {
-        state.authData = JSON.parse(userData);
-      }
+    initAuthData: (state) => {
+      state.authData = getCredentials();
     },
+
     logout: (state) => {
-      localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
+      setCredentials(undefined);
       state.authData = undefined;
     }
   },

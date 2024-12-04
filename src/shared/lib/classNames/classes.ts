@@ -1,13 +1,13 @@
-type Mods = Record<string, string | boolean>;
+export type Mods = Record<string, string | boolean | undefined>;
 
 export const classes = (
   mainClass: string,
   mods: Mods = {},
-  additional: string[] = []
+  otherClasses: Array<string | undefined> = []
 ): string =>
   [
     mainClass,
-    ...additional.filter(Boolean),
+    ...otherClasses.filter(Boolean),
     ...Object.entries(mods)
       .filter(([key, value]) => Boolean(value))
       .map(([key, value]) => key),

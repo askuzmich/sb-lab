@@ -1,4 +1,43 @@
-## silence is golden
+# SB-LAB FSD Struct
+
+https://feature-sliced.design/
+
+```
+FSD
+|
+|-App
+|	|-App.tsx
+|	|-types
+|	|-styes
+|	|-providers
+|		|-router
+|		|-ThemeProvider
+|
+|-Process
+|
+|-Pages
+|
+|-Widgets
+|	|-Navbar
+|	|-Sidebar
+|	|-Footer
+|	|-Error
+|
+|-Features
+|	|-ChangeLangBtn
+|	|-DarkThemeBtn
+|
+|-Entities
+|	|-PageLoader
+|
+|-Shared
+	|-assets(icon,images)
+	|-configs
+		|-i18n
+		|-route
+		|-lib
+		|-UI(AppLink,Button,Loader)
+```
 
 ## fc-snippet
 

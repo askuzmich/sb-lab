@@ -3,7 +3,9 @@ import path from "path";
 export default {
   // A set of global variables that need to be available in all test environments
   globals: {
-    __IS_DEV__: true
+    __IS_DEV__: true,
+    __REST_API__BASE_URL__: "",
+    __PROJECT_TYPE__: "jest"
   },
 
   rootDir: "../../",

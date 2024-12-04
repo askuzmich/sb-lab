@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// import { ThemeDecorator } from "shared/config/storybook/ThemeDecorator/ThemeDecorator";
+// import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { Theme } from "app/providers/ThemeProvider";
-import { ThemeDecorator } from "shared/config/storybook/ThemeDecorator/ThemeDecorator";
+import { ThemeDecorator } from "resources/config/storybook/ThemeDecorator/ThemeDecorator";
 import { StoreProvider } from "app/providers/StoreProvider";
 import MainPage from "./MainPage";
 
@@ -22,7 +22,7 @@ export default {
   ],
 } as ComponentMeta<typeof MainPage>;
 
-const Template: ComponentStory<typeof MainPage> = (args: any) => <MainPage {...args} />;
+const Template: ComponentStory<typeof MainPage> = () => <MainPage />;
 
 export const Light = Template.bind({});
 Light.args = {};

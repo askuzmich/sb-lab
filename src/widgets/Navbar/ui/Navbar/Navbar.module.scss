@@ -1,0 +1,15 @@
+.Navbar {
+  height: var(--navbar-height);
+  max-width: 800px;
+  margin: 12px auto;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  background: #ffffff20;
+  backdrop-filter: blur(16px) saturate(120%);
+}
+
+.links {
+  display: flex;
+  justify-content: space-around;
+}

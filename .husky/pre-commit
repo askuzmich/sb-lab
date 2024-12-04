@@ -3,6 +3,6 @@
 
 npm run eslint
 npm run stylelint
-npm run unit
+npm run test
 # npm run sb:build
 # npm run ui

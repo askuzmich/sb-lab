@@ -1,9 +1,9 @@
 import { classes } from "shared/lib/classNames/classes";
 import { useTranslation } from "react-i18next";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
-import { Input } from "shared/ui/Input/Input";
+import { Input, InputTheme } from "shared/ui/Input/Input";
 import { useSelector } from "react-redux";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useEffect } from "react";
 import { Text, TextTheme } from "shared/ui/Text/Text";
 import { AsyncModule, ReducerListT } from "shared/lib/AsyncModule/AsyncModule";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
@@ -42,6 +42,12 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     dispatch(loginActions.setPassword(val));
   }, [dispatch]);
 
+  /** Temp */
+  useEffect(() => {
+    onChangeName("admin");
+    onChangePass("123");
+  }, [onChangeName, onChangePass]);
+
   const onFormCommit = useCallback(async () => {
     const result = await dispatch(loginByUsername({ username, password }));
 
@@ -53,7 +59,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   return (
     <AsyncModule reducers={reducerList}>
       <div className={classes(cls.LoginForm, {}, [className])}>
-        <Text title={t("Регистрация")} theme={TextTheme.PRIMARY} />
+        <Text title={t("Аутентификация")} theme={TextTheme.LIGHT} />
 
         {error && <Text text={error} theme={TextTheme.ERROR} />}
 
@@ -62,12 +68,14 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
           onChange={onChangeName}
           className={cls.input}
           value={username}
+          theme={InputTheme.LIGHT}
         />
         <Input
           placeholder={t("пароль")}
           onChange={onChangePass}
           type="password"
           value={password}
+          theme={InputTheme.LIGHT}
         />
         <Button
           theme={ButtonTheme.GREEN}

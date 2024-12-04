@@ -2,20 +2,34 @@
   display: block;
 }
 
-.title {
-  font: var(--font-l);
-  color: var(--primary-color);
+.primary {
+  .title {
+    color: var(--primary-color);
+    font: var(--font-l);
+  }
+
+  .text {
+    color: var(--secondary-color);
+    font: var(--font-m);
+  }
 }
 
-.text {
-  font: var(--font-m);
-  color: var(--secondary-color);
+.light {
+  .title {
+    color: #444;
+    font: var(--font-l);
+  }
+
+  .text {
+    color: #555;
+    font: var(--font-m);
+  }
 }
 
 .error {
   .title {
-    font: var(--font-l);
     color: var(--error-prim);
+    font: var(--font-l);
   }
 
   .text {
@@ -24,14 +38,26 @@
   }
 }
 
-.lightBackground {
+.inverted {
   .title {
     font: var(--font-l);
-    color: #333;
+    color: var(--primary-color-inverted);
   }
 
   .text {
     font: var(--font-m);
-    color: #555;
+    color: var(--secondary-color-inverted);
   }
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
 }
