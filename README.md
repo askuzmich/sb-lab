@@ -1,18 +1,34 @@
-# ТEST:
+разрабатывалось с node version: v16.14.0
+
+# Запуск App:
 
 ```bash
-npm run eslint
-npm run stylelint
-npm run unit
+npm start
 ```
 
-# Storybook:
+# Запуск Mock-Server:
+
+#### и просматривать его изменения в папке ./mock-server/db.json
+
+```bash
+npm run server
+```
+
+# Запуск Storybook:
 
 ```bash
 npm run sb
 ```
 
-# Loki (screenshot test)
+# ТEST:
+
+```bash
+npm run eslint
+npm run stylelint
+npm run test
+```
+
+# Loki (screenshot test):
 
 ### убедиться, что Docker и Storybook запущен и подключен инет
 
@@ -20,51 +36,8 @@ npm run sb
 npm run loki
 ```
 
-### если всё устраивает
+### если всё устраивает:
 
 ```bash
 npm run loki:ok
-```
-
-<br><br>
-
-# SB-LAB FSD Struct
-
-https://feature-sliced.design/
-
-```
-FSD
-|
-|-App
-|	|-App.tsx
-|	|-types
-|	|-styes
-|	|-providers
-|		|-router
-|		|-ThemeProvider
-|
-|-Process
-|
-|-Pages
-|
-|-Widgets
-|	|-Navbar
-|	|-Sidebar
-|	|-Footer
-|	|-Error
-|
-|-Features
-|	|-ChangeLangBtn
-|	|-DarkThemeBtn
-|
-|-Entities
-|	|-PageLoader
-|
-|-Shared
-	|-assets(icon,images)
-	|-configs
-		|-i18n
-		|-route
-		|-lib
-		|-UI(AppLink,Button,Loader)
 ```

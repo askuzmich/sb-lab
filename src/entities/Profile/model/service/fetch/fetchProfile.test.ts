@@ -38,7 +38,7 @@ describe("fetchProfile.test", () => {
     api = mockedAxios;
   });
 
-  test("success", async () => {
+  test("test onSuccess", async () => {
     // When...
 
     mockedAxios.get.mockReturnValue(Promise.resolve({ data }));
@@ -53,7 +53,7 @@ describe("fetchProfile.test", () => {
     expect(resultData.payload).toEqual(data.data);
   });
 
-  test("failed with 403", async () => {
+  test("test onFailed with 403", async () => {
     // When...
 
     mockedAxios.get.mockReturnValue(
