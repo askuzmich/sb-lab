@@ -53,8 +53,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     return (
       <div className={classes(cls.Navbar, {}, [className])}>
         <div className={cls.links}>
-
-          { NavbarItemList }
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            { NavbarItemList }
+          </div>
 
           <Button
             theme={theme === Theme.DARK ? ButtonTheme.WHITE_OUTLINE : ButtonTheme.GRAY_OUTLINE}
@@ -72,8 +73,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
   return (
     <div className={classes(cls.Navbar, {}, [className])}>
       <div className={cls.links}>
-
-        { NavbarItemList }
+        <div style={{ display: "flex", justifyContent: "flex-start" }}>
+          { NavbarItemList }
+        </div>
 
         <Button
           data-testid="toggle-navbar-btn"

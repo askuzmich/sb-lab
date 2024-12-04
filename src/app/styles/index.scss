@@ -1,7 +1,9 @@
 @import "reset";
 @import "variables/global";
-@import "themes/normal";
+@import "themes/light";
 @import "themes/dark";
+@import "themes/darkBlue";
+@import "themes/lightBlue";
 
 body {
   font: var(--font-m);

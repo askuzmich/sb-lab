@@ -3,6 +3,7 @@ import { AppLink, AppLinkTheme } from "shared/ui/AppLink/AppLink";
 import { memo } from "react";
 import { useSelector } from "react-redux";
 import { getUserAuthData } from "entities/User";
+import { classes } from "shared/lib/classNames/classes";
 import { INavbarItem } from "./types/INavbarItem";
 import cls from "./NavbarItem.module.scss";
 
@@ -22,7 +23,7 @@ export const NavbarItem = memo(({ item, collapsed, authOnly }: INavbarItemProps)
   }
 
   return (
-    <AppLink theme={AppLinkTheme.SECONDARY} className={cls.appLink} to={item.path}>
+    <AppLink theme={AppLinkTheme.SECONDARY} className={classes(cls.NavbarItem, {}, [cls.appLink])} to={item.path}>
       {t(item.text)}
     </AppLink>
   );
