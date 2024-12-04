@@ -1,7 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  USER_LOCAL_STORAGE_KEY
-} from "resources/application";
 import { userActions } from "entities/User";
 import { encodeBase64 } from "shared/lib/encode/encode";
 import { IThunkConf } from "app/providers/StoreProvider";
@@ -36,12 +33,8 @@ export const loginByUsername = createAsyncThunk<
     }
 
     if (response.data.isSuccess === false) {
-      console.log(response.data);
-
       return rejectWithValue(`${response.data.message}`);
     }
-
-    localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(response.data.data));
 
     dispatch(userActions.setAuthData(response.data.data));
 

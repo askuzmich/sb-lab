@@ -1,9 +1,7 @@
 import axios from "axios";
 import {
-  API_ENDPOINT_BASE_URL,
-  USER_LOCAL_STORAGE_KEY
+  API_ENDPOINT_BASE_URL
 } from "resources/application";
-import { encodeBase64 } from "shared/lib/encode/encode";
 
 const baseURL = `${__REST_API__BASE_URL__}${API_ENDPOINT_BASE_URL}`;
 
@@ -23,38 +21,30 @@ AXIOS.interceptors.response.use(
   }
 );
 
-export const auth = async (Authorization: string | undefined) => {
-  if (!Authorization) {
-    return Promise.resolve({ data: { isSuccess: false, statusCode: "", message: "Client error" } });
-  }
+// export const auth = async (Authorization: string | undefined) => {
+//   if (!Authorization) {
+//     return Promise.resolve({ data: { isSuccess: false, statusCode: "", message: "Client error" } });
+//   }
 
-  return AXIOS
-    .post("/users/login", {}, { headers: { Authorization } })
-    .catch((error) => {
-      if (error.response.data.message) {
-        return error.response;
-      }
+//   return AXIOS
+//     .post("/users/login", {}, { headers: { Authorization } })
+//     .catch((error) => {
+//       if (error.response.data.message) {
+//         return error.response;
+//       }
 
-      return { data: { isSuccess: false, statusCode: error.response.status, message: "Server error" } };
-    });
-};
+//       return { data: { isSuccess: false, statusCode: error.response.status, message: "Server error" } };
+//     });
+// };
 
-export const basicAuth = async (username: string, password: string) => {
-  const Authorization = `Basic ${encodeBase64(`${username}:${password}`)}`;
+// export const basicAuth = async (username: string, password: string) => {
+//   const Authorization = `Basic ${encodeBase64(`${username}:${password}`)}`;
 
-  return auth(Authorization);
-};
+//   return auth(Authorization);
+// };
 
-const getToken = () => {
-  const userData = `${localStorage.getItem(USER_LOCAL_STORAGE_KEY)}`;
+// export const bearerTokenAuth = async () => {
+//   const Authorization = getCredentials()?.token;
 
-  if (userData === "undefined") return undefined;
-
-  return `Bearer ${JSON.parse(userData).token}`;
-};
-
-export const bearerTokenAuth = async () => {
-  const Authorization = getToken();
-
-  return auth(Authorization);
-};
+//   return auth(Authorization);
+// };

@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IThunkConf } from "app/providers/StoreProvider";
+import { getCredentials } from "shared/lib/auth/getCredentials";
 import { EnumValidateProfileErrs, IProfile } from "../../type/IProfile";
 import { getProfileEdited } from "../../selector/getProfileEdited/getProfileEdited";
 import { validateProfile } from "../validate/validateProfile";
-import { getCredentials } from "../getCredentials/getCredentials";
 
 interface IFetchProfileProps {
   profileId: number;
@@ -33,7 +33,7 @@ export const updateProfile = createAsyncThunk<
       const response = await extra.axios.put<ICustomReturnedData>(
         `/profiles/${profileId}`,
         editedData,
-        { headers: { Authorization: `Bearer ${getCredentials()}` } }
+        { headers: { Authorization: `Bearer ${getCredentials()?.token || ""}` } }
       );
 
       if (!response.data) {
@@ -41,11 +41,8 @@ export const updateProfile = createAsyncThunk<
       }
 
       if (response.data.isSuccess === false) {
-        console.log(response.data);
-
         return rejectWithValue([EnumValidateProfileErrs.SERVER_ERROR]); // `${response.data.message}`;
       }
-      // localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(response.data.data));
 
       // dispatch(profileActions.setProfileData(response.data.data));
 
@@ -53,8 +50,6 @@ export const updateProfile = createAsyncThunk<
 
       return response.data.data;
     } catch (e) {
-      console.log(e);
-
       return rejectWithValue([EnumValidateProfileErrs.SERVER_ERROR]);
     }
   }

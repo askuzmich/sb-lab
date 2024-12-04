@@ -236,7 +236,6 @@ server.put("/api/v1/profiles/:profileId", (req, res) => {
     );
 
     if (userCandidate && profileCandidate) {
-      // console.log("index: ", profiles.indexOf(profileCandidate));
       const json = { ...data };
       const clientData = req.body;
       const newData = { ...profileCandidate, ...clientData };

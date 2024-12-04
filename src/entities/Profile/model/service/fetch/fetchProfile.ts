@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IThunkConf } from "app/providers/StoreProvider";
+import { getCredentials } from "shared/lib/auth/getCredentials";
 import { IProfile } from "../../type/IProfile";
 import { profileActions } from "../../slice/profileSlice";
-import { getCredentials } from "../getCredentials/getCredentials";
 
 interface IFetchProfileProps {
   profileId: number;
@@ -23,7 +23,7 @@ export const fetchProfile = createAsyncThunk<
 
     const response = await extra.axios.get<ICustomReturnedData>(
       `/profiles/${profileId}`,
-      { headers: { Authorization: `Bearer ${getCredentials()}` } }
+      { headers: { Authorization: `Bearer ${getCredentials()?.token || ""}` } }
     );
 
     if (!response.data) {
@@ -31,12 +31,8 @@ export const fetchProfile = createAsyncThunk<
     }
 
     if (response.data.isSuccess === false) {
-      console.log(response.data);
-
       return rejectWithValue(`${response.data.message}`);
     }
-
-    // localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(response.data.data));
 
     // dispatch(profileActions.setProfileData(response.data.data));
 
