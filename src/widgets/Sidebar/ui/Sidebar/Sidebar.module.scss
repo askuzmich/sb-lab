@@ -13,6 +13,10 @@
   transition: width 0.5s;
 }
 
+.svgIcon {
+  fill: var(--primary-color);
+}
+
 .collapsed {
   width: var(--sidebar-width-collapsed); // 80px;
   padding: 15px 4px;

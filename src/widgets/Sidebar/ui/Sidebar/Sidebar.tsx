@@ -39,7 +39,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         type="button"
         onClick={onToggle}
       >
-        <SettingsSVG width={22} height={22} fill="#777" />
+        <SettingsSVG width={22} height={22} className={cls.svgIcon} />
         {/* <img
           alt={t("логотип настроек")}
           className={cls.buttonImage}

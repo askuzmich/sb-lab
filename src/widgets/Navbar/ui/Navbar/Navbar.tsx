@@ -53,11 +53,13 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     return (
       <div className={classes(cls.Navbar, {}, [className])}>
         <div className={cls.links}>
-
-          { NavbarItemList }
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            { NavbarItemList }
+          </div>
 
           <Button
-            theme={theme === Theme.DARK ? ButtonTheme.WHITE_OUTLINE : ButtonTheme.GRAY_OUTLINE}
+            // theme={theme === Theme.DARK ? ButtonTheme.WHITE_OUTLINE : ButtonTheme.GRAY_OUTLINE}
+            theme={ButtonTheme.ACCENT_OUTLINE}
             className={classes(cls.DarkThemeBtn, {}, [className])}
             onClick={onLogout}
           >
@@ -72,8 +74,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
   return (
     <div className={classes(cls.Navbar, {}, [className])}>
       <div className={cls.links}>
-
-        { NavbarItemList }
+        <div style={{ display: "flex", justifyContent: "flex-start" }}>
+          { NavbarItemList }
+        </div>
 
         <Button
           data-testid="toggle-navbar-btn"
@@ -85,7 +88,8 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           <UserProfileSVG
             width={22}
             height={22}
-            fill={theme === Theme.DARK ? "#fff" : "#000"}
+            className={cls.loginSVG}
+            // fill={theme === Theme.DARK ? "#fff" : "#000"}
           />
         </Button>
 

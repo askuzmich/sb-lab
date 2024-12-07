@@ -8,6 +8,7 @@ import DislikeSVG from "shared/assets/icons/dislike.svg";
 import { memo, useCallback } from "react";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { getCounterValue } from "../model/selectors/getCounterValue/getCounterValue";
+import cls from "./Counter.module.scss";
 
 export const Counter = memo(() => {
   const count = useSelector(getCounterValue);
@@ -23,22 +24,22 @@ export const Counter = memo(() => {
   }, [dispatch]);
 
   return (
-    <div data-testid="counter" style={{ display: "block", margin: "0 auto", width: 75, position: "relative" }}>
+    <div data-testid="counter" className={cls.Counter}>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <h4 data-testid="counter-value" style={{ color: "#777" }}>{count}</h4>
+        <h4 data-testid="counter-value">{count}</h4>
         <Button
           data-testid="counter-inc-button"
           theme={ButtonTheme.CLEAR}
           onClick={incHandler}
         >
-          <LikeSVG width={12} fill="#555" />
+          <LikeSVG width={12} className={cls.svgFill} />
         </Button>
         <Button
           data-testid="counter-dec-button"
           theme={ButtonTheme.CLEAR}
           onClick={decHandler}
         >
-          <DislikeSVG width={12} fill="#555" />
+          <DislikeSVG width={12} className={cls.svgFill} />
         </Button>
       </div>
 

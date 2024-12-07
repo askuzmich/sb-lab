@@ -3,6 +3,8 @@ import { classes, Mods } from "shared/lib/classNames/classes";
 import cls from "./Button.module.scss";
 
 export enum ButtonTheme {
+  ACCENT = "accentTheme",
+  ACCENT_OUTLINE = "accentThemeOutline",
   CLEAR = "clear",
   CLEAR_PAD = "clearPad",
   GRAY = "gray",
@@ -27,7 +29,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = memo((props: ButtonProps) => {
-  const { className, children, theme = ButtonTheme.GRAY_OUTLINE, disabled, size = ButtonSize.M, ...otherProps } = props;
+  const {
+    className,
+    theme = ButtonTheme.ACCENT_OUTLINE,
+    size = ButtonSize.M,
+    disabled,
+    children,
+    ...otherProps
+  } = props;
 
   const mods: Mods = {
     [cls[size]]: true,

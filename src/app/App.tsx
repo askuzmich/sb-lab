@@ -7,8 +7,8 @@ import { Footer } from "widgets/Footer";
 import { Sidebar } from "widgets/Sidebar";
 import { Suspense, useEffect } from "react";
 
-import { useDispatch } from "react-redux";
-import { userActions } from "entities/User";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAuthDataMounted, userActions } from "entities/User";
 import { PageLoader } from "entities/PageLoader/PageLoader";
 import { AppRouter } from "./providers/router";
 import { useTheme } from "./providers/ThemeProvider";
@@ -17,6 +17,8 @@ const App = () => {
   const { theme } = useTheme();
 
   const dispatch = useDispatch();
+
+  const isAuthDataMounted = useSelector(getUserAuthDataMounted);
 
   useEffect(() => {
     dispatch(userActions.initAuthData());
@@ -28,7 +30,7 @@ const App = () => {
         <Navbar />
         <div className="content-page">
           <Sidebar />
-          <AppRouter />
+          {isAuthDataMounted && <AppRouter />}
         </div>
         <Footer />
       </Suspense>

@@ -28,7 +28,7 @@ jobs:
         run: npm run stylelint
       - name: TEST unit test
         if: always()
-        run: npm run unit
+        run: npm run test
       # - name: build storybook...
       #   if: always()
       #   run: npm run sb:build
