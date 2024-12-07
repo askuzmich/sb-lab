@@ -1,13 +1,16 @@
+/**
+ *
+ *    WebPack Config Builder
+ *
+ */
 import webpack from "webpack";
-import { BuildOptions } from "../types/config";
+import { IOptions } from "../types";
 import { plugins } from "./plugins";
 import { loaders } from "./loaders";
 import { resolvers } from "./resolvers";
 import { devServer } from "./devServer";
 
-export function build(
-  options: BuildOptions
-): webpack.Configuration {
+export const build = (options: IOptions): webpack.Configuration => {
   const { paths, mode, isDev } = options;
 
   return {
@@ -19,13 +22,12 @@ export function build(
       filename: "[name].[contenthash].js",
       path: paths.build,
       clean: true,
+      publicPath: "/"
     },
 
     plugins: plugins(options),
 
-    module: {
-      rules: loaders(options),
-    },
+    module: { rules: loaders(options) },
 
     resolve: resolvers(options),
 
@@ -33,4 +35,4 @@ export function build(
 
     devServer: isDev ? devServer(options) : undefined,
   };
-}
+};

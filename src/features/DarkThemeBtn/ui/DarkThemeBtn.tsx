@@ -16,7 +16,7 @@ export const DarkThemeBtn = memo(({ className }: DarkThemeBtnProps) => {
 
   return (
     <Button
-      theme={ButtonTheme.GREEN}
+      theme={ButtonTheme.ACCENT}
       className={classes(cls.DarkThemeBtn, {}, [className])}
       onClick={toggleTheme}
     >

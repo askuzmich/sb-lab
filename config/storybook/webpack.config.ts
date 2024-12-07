@@ -1,13 +1,13 @@
 import webpack, { DefinePlugin, RuleSetRule } from "webpack";
 import path from "path";
-import { BuildPaths, cssLoader, svgLoader } from "../webpack";
+import { IPaths, cssLoader, svgLoader } from "../webpack";
 
 export default ({ config }: {config: webpack.Configuration}): webpack.Configuration => {
   if (!config.resolve?.modules || !config.resolve?.extensions || !config.module?.rules) {
     return config;
   }
 
-  const paths: BuildPaths = {
+  const paths: IPaths = {
     build: "",
     html: "",
     entry: "",

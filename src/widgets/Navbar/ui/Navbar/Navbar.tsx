@@ -58,7 +58,8 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           </div>
 
           <Button
-            theme={theme === Theme.DARK ? ButtonTheme.WHITE_OUTLINE : ButtonTheme.GRAY_OUTLINE}
+            // theme={theme === Theme.DARK ? ButtonTheme.WHITE_OUTLINE : ButtonTheme.GRAY_OUTLINE}
+            theme={ButtonTheme.ACCENT_OUTLINE}
             className={classes(cls.DarkThemeBtn, {}, [className])}
             onClick={onLogout}
           >
@@ -87,7 +88,8 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           <UserProfileSVG
             width={22}
             height={22}
-            fill={theme === Theme.DARK ? "#fff" : "#000"}
+            className={cls.loginSVG}
+            // fill={theme === Theme.DARK ? "#fff" : "#000"}
           />
         </Button>
 

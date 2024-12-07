@@ -5,7 +5,7 @@ import { Page404 } from "pages/Page404";
 import { ProfilePage } from "pages/ProfilePage";
 import { RouteProps } from "react-router-dom";
 
-type AppRoutesPropsT = RouteProps & {
+export type AppRoutesPropsT = RouteProps & {
   authOnly?: boolean;
 }
 
@@ -29,6 +29,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesPropsT> = {
   [AppRoutes.MAIN]: { path: RoutePath.main, element: <MainPage /> },
   [AppRoutes.AUTH]: { path: RoutePath.auth, element: <AuthPage /> },
   [AppRoutes.ABOUT]: { path: RoutePath.about, element: <AboutPage /> },
-  [AppRoutes.PROFILE]: { path: RoutePath.profile, element: <ProfilePage />, authOnly: true },
+  [AppRoutes.PROFILE]: { path: RoutePath.profile, authOnly: true, element: <ProfilePage /> },
   [AppRoutes.PAGE_404]: { path: RoutePath["404"], element: <Page404 /> },
 };

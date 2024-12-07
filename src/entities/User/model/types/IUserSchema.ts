@@ -6,10 +6,12 @@ export interface IUser {
 }
 
 export interface IUserData {
-    user: IUser;
-    token: string;
+  user: IUser;
+  token: string;
 }
 
 export interface IUserSchema {
   authData?: IUserData;
+
+  isAuthDataMounted?: boolean;
 }

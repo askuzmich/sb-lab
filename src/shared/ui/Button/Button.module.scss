@@ -5,6 +5,7 @@
   opacity: var(--opacity);
   border: 0;
   font-size: 14px;
+  font-weight: bold;
 
   &:hover {
     --opacity: 0.7;
@@ -27,6 +28,21 @@
   border: none;
   background: none;
   outline: none;
+}
+
+.accentTheme {
+  background-color: var(--accent-color);
+  padding: 3px 21px;
+  color: white;
+  border-radius: 5px;
+}
+
+.accentThemeOutline {
+  background: none;
+  padding: 0 21px;
+  color: var(--accent-color);
+  border-radius: 5px;
+  border: 2px solid var(--accent-color);
 }
 
 .clearPad {

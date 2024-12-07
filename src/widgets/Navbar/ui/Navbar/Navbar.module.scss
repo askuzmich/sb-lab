@@ -9,6 +9,10 @@
   backdrop-filter: blur(16px) saturate(120%);
 }
 
+.loginSVG {
+  fill: var(--primary-color);
+}
+
 .links {
   display: flex;
   justify-content: space-around;
